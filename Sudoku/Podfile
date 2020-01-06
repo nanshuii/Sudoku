@@ -1,0 +1,10 @@
+platform :ios, '9.0'
+ target 'Sudoku' do
+ pod 'Masonry'
+ pod 'AFNetworking' 
+ pod 'MJExtension'
+ pod 'MJRefresh'
+ pod 'FMDB'
+ pod 'IQKeyboardManager'
+end
+    
