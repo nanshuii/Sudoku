@@ -12,6 +12,11 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface LENSudokuViewController : LENBaseViewController
 
+@property (nonatomic, strong) LENSudokuModel *model;
+
+@property (weak, nonatomic) IBOutlet UIView *contentView;
+
+
 @end
 
 NS_ASSUME_NONNULL_END

@@ -12,6 +12,13 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface LENSudokuModel : NSObject
 
+@property (nonatomic, assign) LENSudokuType type; // 难度
+
+@property (nonatomic, assign) LENSudokuStyle style; // 样式
+
+@property (nonatomic, copy) NSMutableArray <LENSudokuSingleModel *> *singles;
+
+
 @end
 
 NS_ASSUME_NONNULL_END

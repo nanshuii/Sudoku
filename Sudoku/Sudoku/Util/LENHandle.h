@@ -10,7 +10,14 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+
 @interface LENHandle : NSObject
+
+# pragma mark -- sudoku创建
+/// sudoku创建
+/// @param type type description
+/// @param style style description
++ (LENSudokuModel *)sudoKuCreateWithType:(LENSudokuType)type style:(LENSudokuStyle)style;
 
 @end
 

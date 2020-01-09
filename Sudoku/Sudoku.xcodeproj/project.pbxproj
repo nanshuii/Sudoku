@@ -24,6 +24,9 @@
 		D3EA346023C3108800FD9D7B /* LENSudokuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D3EA345E23C3108800FD9D7B /* LENSudokuViewController.m */; };
 		D3EA346123C3108800FD9D7B /* LENSudokuViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D3EA345F23C3108800FD9D7B /* LENSudokuViewController.xib */; };
 		D3EA346423C310BD00FD9D7B /* LENSudokuModel.m in Sources */ = {isa = PBXBuildFile; fileRef = D3EA346323C310BD00FD9D7B /* LENSudokuModel.m */; };
+		D3EA346823C3139700FD9D7B /* LENSudokuView.m in Sources */ = {isa = PBXBuildFile; fileRef = D3EA346723C3139700FD9D7B /* LENSudokuView.m */; };
+		D3EA346B23C314C200FD9D7B /* LENSudokuSingleModel.m in Sources */ = {isa = PBXBuildFile; fileRef = D3EA346A23C314C200FD9D7B /* LENSudokuSingleModel.m */; };
+		D3EA346F23C31ECF00FD9D7B /* LENSudokuSingleView.m in Sources */ = {isa = PBXBuildFile; fileRef = D3EA346E23C31ECF00FD9D7B /* LENSudokuSingleView.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -78,6 +81,13 @@
 		D3EA345F23C3108800FD9D7B /* LENSudokuViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LENSudokuViewController.xib; sourceTree = "<group>"; };
 		D3EA346223C310BD00FD9D7B /* LENSudokuModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LENSudokuModel.h; sourceTree = "<group>"; };
 		D3EA346323C310BD00FD9D7B /* LENSudokuModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LENSudokuModel.m; sourceTree = "<group>"; };
+		D3EA346623C3139700FD9D7B /* LENSudokuView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LENSudokuView.h; sourceTree = "<group>"; };
+		D3EA346723C3139700FD9D7B /* LENSudokuView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LENSudokuView.m; sourceTree = "<group>"; };
+		D3EA346923C314C200FD9D7B /* LENSudokuSingleModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LENSudokuSingleModel.h; sourceTree = "<group>"; };
+		D3EA346A23C314C200FD9D7B /* LENSudokuSingleModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LENSudokuSingleModel.m; sourceTree = "<group>"; };
+		D3EA346C23C3154400FD9D7B /* LENEnumHeader.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LENEnumHeader.h; sourceTree = "<group>"; };
+		D3EA346D23C31ECF00FD9D7B /* LENSudokuSingleView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LENSudokuSingleView.h; sourceTree = "<group>"; };
+		D3EA346E23C31ECF00FD9D7B /* LENSudokuSingleView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LENSudokuSingleView.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -195,8 +205,11 @@
 			children = (
 				D3EA344923C30A8000FD9D7B /* PrefixHeader.pch */,
 				D3EA345B23C30BE300FD9D7B /* LENCommonHeader.h */,
+				D3EA346C23C3154400FD9D7B /* LENEnumHeader.h */,
 				D3EA346223C310BD00FD9D7B /* LENSudokuModel.h */,
 				D3EA346323C310BD00FD9D7B /* LENSudokuModel.m */,
+				D3EA346923C314C200FD9D7B /* LENSudokuSingleModel.h */,
+				D3EA346A23C314C200FD9D7B /* LENSudokuSingleModel.m */,
 				D3EA345C23C30BF300FD9D7B /* Base */,
 			);
 			path = Common;
@@ -205,6 +218,7 @@
 		D3EA345123C30B3200FD9D7B /* Main */ = {
 			isa = PBXGroup;
 			children = (
+				D3EA346523C3137D00FD9D7B /* view */,
 				D3EA345223C30B4300FD9D7B /* LENMainViewController.h */,
 				D3EA345323C30B4300FD9D7B /* LENMainViewController.m */,
 				D3EA345423C30B4300FD9D7B /* LENMainViewController.xib */,
@@ -232,6 +246,17 @@
 				D3EA344E23C30B2400FD9D7B /* LENBaseViewController.xib */,
 			);
 			path = Base;
+			sourceTree = "<group>";
+		};
+		D3EA346523C3137D00FD9D7B /* view */ = {
+			isa = PBXGroup;
+			children = (
+				D3EA346623C3139700FD9D7B /* LENSudokuView.h */,
+				D3EA346723C3139700FD9D7B /* LENSudokuView.m */,
+				D3EA346D23C31ECF00FD9D7B /* LENSudokuSingleView.h */,
+				D3EA346E23C31ECF00FD9D7B /* LENSudokuSingleView.m */,
+			);
+			path = view;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -419,13 +444,16 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D3EA346B23C314C200FD9D7B /* LENSudokuSingleModel.m in Sources */,
 				D3EA341C23C30A6F00FD9D7B /* ViewController.m in Sources */,
 				D3EA345A23C30B7800FD9D7B /* LENHandle.m in Sources */,
 				D3EA346023C3108800FD9D7B /* LENSudokuViewController.m in Sources */,
+				D3EA346823C3139700FD9D7B /* LENSudokuView.m in Sources */,
 				D3EA341623C30A6F00FD9D7B /* AppDelegate.m in Sources */,
 				D3EA345523C30B4300FD9D7B /* LENMainViewController.m in Sources */,
 				D3EA342723C30A6F00FD9D7B /* main.m in Sources */,
 				D3EA346423C310BD00FD9D7B /* LENSudokuModel.m in Sources */,
+				D3EA346F23C31ECF00FD9D7B /* LENSudokuSingleView.m in Sources */,
 				D3EA344F23C30B2400FD9D7B /* LENBaseViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
