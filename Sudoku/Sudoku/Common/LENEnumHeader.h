@@ -28,6 +28,13 @@ typedef NS_ENUM(NSUInteger, LENSudokuStyle) {
     LENSudokuStyleNone, // 默认状态
 };
 
+// 表状态
+typedef NS_ENUM(NSUInteger, LENSudokuViewStatus) {
+    LENSudokuViewStatusNone, // 初始状态
+    LENSudokuViewStatusPrepareFillInOrMask, // 准备填入数字或者准备做标记的状态
+    LENSudokuViewStatusHighLightPart, // 相同数字部分高亮
+};
+
 
 
 #endif /* LENEnumHeader_h */

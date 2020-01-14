@@ -114,10 +114,27 @@
 //    NSLog(@"%i %i", time1 - time, time2 - time1);
     
     NSMutableArray *numbers = [self numbersCreate];
-    NSMutableArray *singles = [self singlesCreateWithMin:4 max:6 numbers:numbers];
-    return singles;
+    NSMutableArray *singles = [self singlesCreate];
+    NSMutableArray *models = [NSMutableArray array];
+    for (int i = 0; i < 81; i++) {
+        LENSudokuSingleModel *single = [LENSudokuSingleModel new];
+        int section = i / 9;
+        int row = i % 9;
+        single.section = section;
+        single.row = row;
+        NSString *status = singles[i];
+        if ([status isEqualToString:@"1"]) {
+            single.status = LENSudokuSingleStatusFillIn;
+        } else {
+            single.status = LENSudokuSingleStatusNone;
+        }
+        single.fillIn = [numbers[i] integerValue];
+        [models addObject:single];
+    }
+    return models;
 }
 
+# pragma mark -- 81位string类型随机数数据表格生成
 + (NSMutableArray *)numbersCreate{
     NSMutableArray *numbers = [NSMutableArray array];
     BOOL create = NO;
@@ -137,6 +154,7 @@
     return numbers;
 }
 
+# pragma mark -- 单行随机数生成
 + (NSMutableArray *)numbersCreateWithNumbers:(NSMutableArray *)numbers section:(int)section{
     NSMutableArray *nums_none = [NSMutableArray array];
     NSMutableArray *nums = [NSMutableArray array];
@@ -209,6 +227,7 @@
     return nums[random];
 }
 
+# pragma mark -- 单行随机数789位置生成 返回一个随机的3位数组
 + (NSMutableArray *)numbers789CreateWithNumber:(NSMutableArray *)numbers array:(NSMutableArray *)array section:(int)section{
     NSMutableArray *nums = [NSMutableArray array];
     int section0 = section % 3;
@@ -270,6 +289,7 @@
     return nums_r;
 }
 
+# pragma mark -- 单个随机数生成组合
 + (NSMutableArray *)numbersCreateWithNumbers:(NSMutableArray *)numbers array:(NSMutableArray *)array section:(int)section row:(int)row{
     NSMutableArray *array_t = [NSMutableArray arrayWithArray:array];
     int section0 = section % 3;
@@ -297,36 +317,12 @@
     return array_t;
 }
 
-# pragma mark -- 生成算法1 每行少n-m个
-+ (NSMutableArray *)singlesCreateWithMin:(int)min max:(int)max numbers:(NSArray *)numbers{
-    NSMutableArray *singles = [NSMutableArray arrayWithCapacity:81];
-    int m = max;
-    NSMutableArray *randoms = [NSMutableArray array];
-    NSArray *array = @[@"0", @"1", @"2", @"3", @"4", @"5", @"6", @"7", @"8"];
-    for (int i = 0; i < numbers.count; i++) {
-        int index = i % 9;
-        if (index == 0) {
-            // 需要更换m
-            m = [self singlesRandomMCreateWithMin:min max:max];
-            randoms = [self randomWithArray:array times:m];
-            NSLog(@"i = %i m = %i array = %@", i, m, array.description);
-        }
-        LENSudokuSingleModel *model = [LENSudokuSingleModel new];
-        model.fillIn = [numbers[i] intValue];
-        if ([randoms containsObject:[NSString stringWithFormat:@"%i", index]]) {
-            // 不显示
-            model.status = LENSudokuSingleStatusNone;
-        } else {
-            model.status = LENSudokuSingleStatusFillIn;
-        }
-        model.section = i / 9; // section
-        model.row = index; // row
-        [singles addObject:model];
-    }
-    return singles;
+# pragma mark -- 显示和隐藏算法的生成
++ (NSMutableArray *)singlesCreate{
+    return [self singlesCreateOne];
 }
 
-// 从最小值和最大值之后随机出一个数字
+# pragma mark -- 从最小值和最大值之后随机出一个数字
 + (int)singlesRandomMCreateWithMin:(int)min max:(int)max{
     int m = max;
     if (max > min) {
@@ -337,19 +333,117 @@
     return m;
 }
 
-// 从0-9中随机出一个数组 填入stirng数组 生成string数组
-+ (NSMutableArray *)randomWithArray:(NSArray *)array times:(int)times{
-    NSMutableArray *randoms = [NSMutableArray arrayWithCapacity:times];
-    int count = (int)array.count;
-    while (times == 0) {
-        int num = arc4random_uniform(count);
-        NSString *string = array[num];
-        if (![randoms containsObject:string]) {
-            [randoms addObject:string];
-            times--;
+# pragma mark -- sudoku算法一
++ (NSMutableArray *)singlesCreateOne{
+    int maxForSingle = 5; // 每一种隐藏的方式中的最大值
+    int max = 6;
+    int min = 4;
+    // 1代表显示 0代表隐藏
+    NSMutableArray *randoms = [NSMutableArray arrayWithCapacity:81];
+    for (int i = 0; i < 81; i++) {
+        [randoms addObject:@"1"];
+    }
+    // 从横排开始隐藏
+    for (int i = 0; i < 9; i++) {
+        // 获取每一行能够隐藏的index
+        NSMutableArray *indexs = [self randomsWithRandoms:randoms section:i];
+        int single = [self singlesRandomMCreateWithMin:min max:max];
+        // 需要隐藏的index集合
+        NSMutableArray *numbers = [self randomsWithRandoms:indexs random:single max:maxForSingle];
+        for (NSNumber *number in numbers) {
+            int index = [number intValue];
+            randoms[index] = @"0";
         }
     }
+    
+    // 竖排的隐藏
+    for (int i = 0; i < 9; i++) {
+        NSMutableArray *indexs = [self randomsWithRandoms:randoms row:i];
+        int single = [self singlesRandomMCreateWithMin:min max:max];
+        NSMutableArray *numbers = [self randomsWithRandoms:indexs random:single max:maxForSingle];
+        for (NSNumber *number in numbers) {
+            int index = [number intValue];
+            randoms[index] = @"0";
+        }
+    }
+    
+    // 九宫格的隐藏
+    for (int i = 0; i < 9; i++) {
+        NSMutableArray *indexs = [self randomsWithRandoms:randoms index:i];
+        int single = [self singlesRandomMCreateWithMin:min max:max];
+        NSMutableArray *numbers = [self randomsWithRandoms:indexs random:single max:maxForSingle];
+        for (NSNumber *number in numbers) {
+            int index = [number intValue];
+            randoms[index] = @"0";
+        }
+    }
+    
     return randoms;
 }
+
+# pragma mark -- 获取可以隐藏的数组 横排
++ (NSMutableArray *)randomsWithRandoms:(NSMutableArray *)randoms section:(int)section{
+    NSMutableArray *indexs = [NSMutableArray array];
+    for (int i = 0; i < 9; i++) {
+        int index = section * 9 + i;
+        NSString *num = randoms[index];
+        if ([num isEqualToString:@"1"]) {
+            [indexs addObject:@(index)];
+        }
+    }
+    return indexs;
+}
+
+# pragma mark -- 获取可以隐藏的数组 竖排
++ (NSMutableArray *)randomsWithRandoms:(NSMutableArray *)randoms row:(int)row{
+    NSMutableArray *indexs = [NSMutableArray array];
+    for (int i = 0; i < 9; i++) {
+        int index = i * 9 + row;
+        NSString *num = randoms[index];
+        if ([num isEqualToString:@"1"]) {
+            [indexs addObject:@(index)];
+        }
+    }
+    return indexs;
+}
+
+# pragma mark -- 获取可以隐藏的数组 九宫格
++ (NSMutableArray *)randomsWithRandoms:(NSMutableArray *)randoms index:(int)index{
+    NSArray *arr0 = @[@0, @1, @2, @9, @10, @11, @18, @19, @20];
+    NSArray *arr1 = @[@3, @4, @5, @12, @13, @14, @21, @22, @23];
+    NSArray *arr2 = @[@6, @7, @8, @15, @16, @17, @24, @25, @26];
+    NSArray *arr3 = @[@27, @28, @29, @36, @37, @38, @45, @46, @47];
+    NSArray *arr4 = @[@30, @31, @32, @39, @40, @41, @48, @49, @50];
+    NSArray *arr5 = @[@33, @34, @35, @42, @43, @44, @51, @52, @53];
+    NSArray *arr6 = @[@54, @55, @56, @63, @64, @65, @72, @73, @74];
+    NSArray *arr7 = @[@57, @58, @59, @66, @67, @68, @75, @76, @77];
+    NSArray *arr8 = @[@60, @61, @62, @69, @70, @71, @78, @79, @80];
+    NSArray *arr9 = @[arr0, arr1, arr2, arr3, arr4, arr5, arr6, arr7, arr8];
+    NSArray *array = arr9[index];
+    NSMutableArray *indexs = [NSMutableArray array];
+    for (int i = 0; i < 9; i++) {
+        int index = [array[i] intValue];
+        NSString *num = randoms[index];
+        if ([num isEqualToString:@"1"]) {
+            [indexs addObject:@(index)];
+        }
+    }
+    return indexs;
+}
+
+# pragma mark -- 根据random需要隐藏的数量，max最大的隐藏值，返回一个已经选择好的数据
++ (NSMutableArray *)randomsWithRandoms:(NSMutableArray *)randoms random:(int)random max:(int)max{
+    NSMutableArray *nums = [NSMutableArray array];
+    while (9 - (int)randoms.count < max && randoms.count > 0 && random > 0) {
+        int ran = arc4random_uniform((int)randoms.count-1);
+        int index = [randoms[ran] intValue];
+        [nums addObject:@(index)];
+        [randoms removeObject:@(index)];
+        random--;
+    }
+    return nums;
+}
+
+
 
 @end

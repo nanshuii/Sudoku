@@ -20,7 +20,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic, assign) NSInteger fillIn; // 格子填入的数字
 
-@property (nonatomic, copy) NSMutableArray <NSNumber *> *marks; // 标记
+@property (nonatomic, strong) NSMutableArray *marks; // 标记
 
 
 @end

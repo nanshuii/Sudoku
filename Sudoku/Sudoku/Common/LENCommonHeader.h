@@ -9,10 +9,22 @@
 #ifndef LENCommonHeader_h
 #define LENCommonHeader_h
 
-// 全屏的宽度
+# pragma mark -- 屏幕高宽
 #define kFullScreenWidth           ([UIScreen mainScreen].bounds.size.width)
-// 全屏的高度
 #define kFullScreenHeight          ([UIScreen mainScreen].bounds.size.height)
+
+# pragma mark -- 引用
+#define WEAKSELF(weakSelf)  __weak __typeof(&*self)weakSelf = self;
+
+# pragma mark -- 自定义打印，在debug时打印，发布时不打印
+#ifdef DEBUG
+#define SSLog(fmt, ...) NSLog((@"[函数名:%s] " " [行号:%d] " fmt), __FUNCTION__, __LINE__, ##__VA_ARGS__);
+#else
+#define SSLog(fmt, ...)
+#endif
+
+# pragma mark -- notification name
+#define LENNotificationNameMarkNumberViewChange @"LENNotificationNameMarkNumberViewChange"
 
 
 #endif /* LENCommonHeader_h */

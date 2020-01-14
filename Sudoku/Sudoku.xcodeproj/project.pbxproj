@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		5094AF0C23CC88AA001E8569 /* LENSudokuNumberView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5094AF0B23CC88AA001E8569 /* LENSudokuNumberView.m */; };
+		5094AF0F23CC8BD1001E8569 /* LENSudokuNumberSingleView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5094AF0E23CC8BD1001E8569 /* LENSudokuNumberSingleView.m */; };
 		AB01EBD31D4FD5983444BB37 /* libPods-Sudoku.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 58B0A736D4304DA4A575D681 /* libPods-Sudoku.a */; };
 		D3EA341623C30A6F00FD9D7B /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = D3EA341523C30A6F00FD9D7B /* AppDelegate.m */; };
 		D3EA341C23C30A6F00FD9D7B /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D3EA341B23C30A6F00FD9D7B /* ViewController.m */; };
@@ -48,6 +50,11 @@
 
 /* Begin PBXFileReference section */
 		3C57E7F0187B3D1095A87E0D /* Pods-Sudoku.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Sudoku.release.xcconfig"; path = "Pods/Target Support Files/Pods-Sudoku/Pods-Sudoku.release.xcconfig"; sourceTree = "<group>"; };
+		5094AF0923CC5F78001E8569 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		5094AF0A23CC88AA001E8569 /* LENSudokuNumberView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LENSudokuNumberView.h; sourceTree = "<group>"; };
+		5094AF0B23CC88AA001E8569 /* LENSudokuNumberView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LENSudokuNumberView.m; sourceTree = "<group>"; };
+		5094AF0D23CC8BD1001E8569 /* LENSudokuNumberSingleView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LENSudokuNumberSingleView.h; sourceTree = "<group>"; };
+		5094AF0E23CC8BD1001E8569 /* LENSudokuNumberSingleView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LENSudokuNumberSingleView.m; sourceTree = "<group>"; };
 		54D55EC74F5E10785D4DAD47 /* Pods-Sudoku.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Sudoku.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Sudoku/Pods-Sudoku.debug.xcconfig"; sourceTree = "<group>"; };
 		58B0A736D4304DA4A575D681 /* libPods-Sudoku.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Sudoku.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		D3EA341123C30A6F00FD9D7B /* Sudoku.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Sudoku.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -170,6 +177,7 @@
 				D3EA342223C30A6F00FD9D7B /* LaunchScreen.storyboard */,
 				D3EA342523C30A6F00FD9D7B /* Info.plist */,
 				D3EA342623C30A6F00FD9D7B /* main.m */,
+				5094AF0923CC5F78001E8569 /* README.md */,
 			);
 			path = Sudoku;
 			sourceTree = "<group>";
@@ -255,6 +263,10 @@
 				D3EA346723C3139700FD9D7B /* LENSudokuView.m */,
 				D3EA346D23C31ECF00FD9D7B /* LENSudokuSingleView.h */,
 				D3EA346E23C31ECF00FD9D7B /* LENSudokuSingleView.m */,
+				5094AF0A23CC88AA001E8569 /* LENSudokuNumberView.h */,
+				5094AF0B23CC88AA001E8569 /* LENSudokuNumberView.m */,
+				5094AF0D23CC8BD1001E8569 /* LENSudokuNumberSingleView.h */,
+				5094AF0E23CC8BD1001E8569 /* LENSudokuNumberSingleView.m */,
 			);
 			path = view;
 			sourceTree = "<group>";
@@ -446,6 +458,7 @@
 			files = (
 				D3EA346B23C314C200FD9D7B /* LENSudokuSingleModel.m in Sources */,
 				D3EA341C23C30A6F00FD9D7B /* ViewController.m in Sources */,
+				5094AF0F23CC8BD1001E8569 /* LENSudokuNumberSingleView.m in Sources */,
 				D3EA345A23C30B7800FD9D7B /* LENHandle.m in Sources */,
 				D3EA346023C3108800FD9D7B /* LENSudokuViewController.m in Sources */,
 				D3EA346823C3139700FD9D7B /* LENSudokuView.m in Sources */,
@@ -454,6 +467,7 @@
 				D3EA342723C30A6F00FD9D7B /* main.m in Sources */,
 				D3EA346423C310BD00FD9D7B /* LENSudokuModel.m in Sources */,
 				D3EA346F23C31ECF00FD9D7B /* LENSudokuSingleView.m in Sources */,
+				5094AF0C23CC88AA001E8569 /* LENSudokuNumberView.m in Sources */,
 				D3EA344F23C30B2400FD9D7B /* LENBaseViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -626,7 +640,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = FBPYVNBPCC;
-				GCC_PREFIX_HEADER = /Users/daimengren/programming/Sudoku_ios/Sudoku/Sudoku/Common/PrefixHeader.pch;
+				GCC_PREFIX_HEADER = /Users/ledon/Documents/programming/Sudoku_ios/Sudoku/Sudoku/Common/PrefixHeader.pch;
 				INFOPLIST_FILE = Sudoku/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -646,7 +660,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = FBPYVNBPCC;
-				GCC_PREFIX_HEADER = /Users/daimengren/programming/Sudoku_ios/Sudoku/Sudoku/Common/PrefixHeader.pch;
+				GCC_PREFIX_HEADER = /Users/ledon/Documents/programming/Sudoku_ios/Sudoku/Sudoku/Common/PrefixHeader.pch;
 				INFOPLIST_FILE = Sudoku/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = (

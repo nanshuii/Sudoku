@@ -24,8 +24,9 @@
 
 - (void)setRootViewController{
     LENMainViewController *vc = [LENMainViewController new];
+    UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:vc];
     self.window = [[UIWindow alloc] initWithFrame:CGRectMake(0, 0, kFullScreenWidth, kFullScreenHeight)];
-    [self.window setRootViewController:vc];
+    [self.window setRootViewController:nav];
     [self.window makeKeyAndVisible];
 }
 

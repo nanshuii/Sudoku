@@ -23,10 +23,11 @@
 
 - (IBAction)jump:(id)sender {
     NSLog(@"jump");
-//    LENSudokuViewController *vc = [LENSudokuViewController new];
-//    [self.navigationController pushViewController:vc animated:YES];
     LENSudokuModel *model = [LENHandle sudoKuCreateWithType:(LENSudokuTypeHard) style:(LENSudokuStyleNone)];
-    NSLog(@"model = %@", model.description);
+    LENSudokuViewController *vc = [LENSudokuViewController new];
+    vc.model = model;
+    [self.navigationController pushViewController:vc animated:YES];
+    
 }
 
 /*

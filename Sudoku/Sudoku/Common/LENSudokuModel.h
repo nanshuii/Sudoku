@@ -16,7 +16,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic, assign) LENSudokuStyle style; // 样式
 
-@property (nonatomic, copy) NSMutableArray <LENSudokuSingleModel *> *singles;
+@property (nonatomic, copy) NSMutableArray *singles;
 
 
 @end
