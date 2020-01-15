@@ -18,6 +18,10 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic, copy) NSMutableArray *singles;
 
+@property (nonatomic, assign) NSInteger time; // 时间 单位秒
+
+@property (nonatomic, assign) NSInteger errorTimes; // 错误次数
+
 
 @end
 

@@ -16,6 +16,10 @@
 
 @property (nonatomic, strong) LENSudokuNumberView *numbersView;
 
+@property (nonatomic, strong) NSTimer *timer;
+
+@property (nonatomic, assign) NSInteger time;
+
 @end
 
 @implementation LENSudokuViewController
@@ -23,9 +27,25 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
+    self.time = self.model.time;
+    [self notifications];
     [self configureUI];
 }
 
+- (void)viewWillDisappear:(BOOL)animated{
+    [super viewWillDisappear:animated];
+    self.sudokuView.sudoku.time = self.time;
+    [LENHandle currentSudokuSave:self.sudokuView.sudoku];
+    [self timerClose];
+}
+
+# pragma mark -- notifications
+- (void)notifications{
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didBecomeActive) name:LENNotificationNameDidBecomeActive object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(willResignActive) name:LENNotificationNameWillResignActive object:nil];
+}
+
+# pragma mark -- configureUI
 - (void)configureUI{
     self.view.backgroundColor = [UIColor groupTableViewBackgroundColor];
     [self sudokuCreate];
@@ -49,6 +69,7 @@
         [weakSelf tapNumber:number isEditing:isEditing];
     }];
     [self.numberView addSubview:self.numbersView];
+    self.timeLabel.text = [self timeString];
 }
 
 # pragma mark -- 编辑模式
@@ -62,7 +83,50 @@
     [self.sudokuView intoNumber:number mark:self.numbersView.isEditing];
 }
 
+# pragma mark -- 前台和后台
+- (void)didBecomeActive{
+    self.model = [LENHandle currentSudokuRead];
+    self.time = self.model.time;
+    self.timeLabel.text = [self timeString];
+    [self timerCreate];
+}
 
+- (void)willResignActive{
+    self.sudokuView.sudoku.time = self.time;
+    [LENHandle currentSudokuSave:self.sudokuView.sudoku];
+    [self timerClose];
+}
+
+# pragma mark -- timer
+- (void)timerCreate{
+    if (!_timer) {
+        _timer = [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(timerActive) userInfo:nil repeats:YES];
+    }
+}
+
+- (void)timerActive{
+    self.time += 1;
+    self.timeLabel.text = [self timeString];
+}
+
+- (void)timerClose{
+    if (_timer) {
+        [_timer invalidate];
+        _timer = nil;
+    }
+}
+
+- (NSString *)timeString{
+    NSInteger hour = self.time / 3600;
+    NSInteger mins = self.time - hour * 3600;
+    NSInteger min = mins / 60;
+    NSInteger sec = mins - min * 60;
+    NSString *string = [NSString stringWithFormat:@"%02ld:%02ld", (long)min, (long)sec];
+    if (hour > 0) {
+        string = [NSString stringWithFormat:@"%02ld:%@", (long)hour, string];
+    }
+    return string;
+}
 
 /*
 #pragma mark - Navigation

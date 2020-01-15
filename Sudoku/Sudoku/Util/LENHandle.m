@@ -16,6 +16,8 @@
     model.type = type;
     model.style = style;
     model.singles = [self sudokuSinglesCreateWithType:type];
+    model.time = 0;
+    model.errorTimes = 0;
     return model;
 }
 
@@ -444,6 +446,28 @@
     return nums;
 }
 
+# pragma mark -- 当前sudoku存储
++ (void)currentSudokuSave:(LENSudokuModel *)model{
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    if (model) {
+        [defaults removeObjectForKey:LENCurrentSudokuKey];
+    } else {
+        NSDictionary *dict = [model mj_keyValues];
+        [defaults setValue:dict forKey:LENCurrentSudokuKey];
+    }
+    [defaults synchronize];
+}
 
+# pragma mark -- 当前sudoku读取
++ (LENSudokuModel *)currentSudokuRead{
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    if ([defaults valueForKey:LENCurrentSudokuKey]) {
+        NSDictionary *dict = [defaults valueForKey:LENCurrentSudokuKey];
+        LENSudokuModel *model = [LENSudokuModel mj_setKeyValues:dict];
+        return model;
+    } else {
+        return nil;
+    }
+}
 
 @end

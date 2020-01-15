@@ -23,8 +23,13 @@
 #define SSLog(fmt, ...)
 #endif
 
+# pragma mark -- default key
+#define LENCurrentSudokuKey @"LENCurrentSudokuKey"
+
 # pragma mark -- notification name
 #define LENNotificationNameMarkNumberViewChange @"LENNotificationNameMarkNumberViewChange"
+#define LENNotificationNameDidBecomeActive @"LENNotificationNameDidBecomeActive"
+#define LENNotificationNameWillResignActive @"LENNotificationNameWillResignActive"
 
 
 #endif /* LENCommonHeader_h */

@@ -19,6 +19,13 @@ NS_ASSUME_NONNULL_BEGIN
 /// @param style style description
 + (LENSudokuModel *)sudoKuCreateWithType:(LENSudokuType)type style:(LENSudokuStyle)style;
 
+/// 当前sudoku存储
+/// @param model model description
++ (void)currentSudokuSave:(LENSudokuModel *)model;
+
+/// 当前sudoku读取
++ (LENSudokuModel *)currentSudokuRead;
+
 @end
 
 NS_ASSUME_NONNULL_END

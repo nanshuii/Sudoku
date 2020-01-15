@@ -11,8 +11,6 @@
 
 @interface LENSudokuView()
 
-@property (nonatomic, strong) LENSudokuModel *sudoku;
-
 @property (nonatomic, assign) LENSudokuType type;
 
 @property (nonatomic, assign) LENSudokuStyle style;
@@ -305,6 +303,9 @@
         // 部分高亮
         [self.highLights removeAllObjects];
         self.status = LENSudokuViewStatusHighLightPart;
+        single.status = LENSudokuSingleStatusFillIn;
+        self.singles[index ] = single;
+        self.sudoku.singles = self.singles;
         NSMutableArray *indexs = [NSMutableArray array];
         for (LENSudokuSingleModel *model in self.singles) {
             NSInteger fillIn_t = model.fillIn;
@@ -333,6 +334,9 @@
         }
     } else {
         SSLog(@"填入错误");
+        NSInteger errorTimes = self.sudoku.errorTimes;
+        errorTimes += 1;
+        self.sudoku.errorTimes = errorTimes;
     }
 }
 
@@ -366,6 +370,7 @@
         }
         self.singles[index] = single;
     }
+    self.sudoku.singles = self.singles;
 }
 
 # pragma mark -- mark 排序

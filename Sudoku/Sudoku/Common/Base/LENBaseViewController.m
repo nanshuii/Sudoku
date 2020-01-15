@@ -19,6 +19,12 @@
     // Do any additional setup after loading the view from its nib.
 }
 
+- (void)viewWillDisappear:(BOOL)animated{
+    [super viewWillDisappear:animated];
+    SSLog(@"view will disappear");
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
+
 
 
 /*

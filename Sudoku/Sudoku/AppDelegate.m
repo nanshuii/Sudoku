@@ -30,5 +30,13 @@
     [self.window makeKeyAndVisible];
 }
 
+- (void)applicationDidBecomeActive:(UIApplication *)application{
+    [[NSNotificationCenter defaultCenter] postNotificationName:LENNotificationNameDidBecomeActive object:nil];
+}
+
+- (void)applicationWillResignActive:(UIApplication *)application{
+    [[NSNotificationCenter defaultCenter] postNotificationName:LENNotificationNameWillResignActive object:nil];
+}
+
 
 @end

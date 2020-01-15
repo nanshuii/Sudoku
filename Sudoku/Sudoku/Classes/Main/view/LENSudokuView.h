@@ -12,9 +12,13 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface LENSudokuView : UIView
 
+@property (nonatomic, strong) LENSudokuModel *sudoku;
+
 - (instancetype)initWithFrame:(CGRect)frame sudoku:(LENSudokuModel *)sudoku;
 
 - (void)intoNumber:(int)number mark:(BOOL)mark;
+
+
 
 @end
 
