@@ -40,7 +40,6 @@
     self.sudokuView.sudoku.time = self.time;
     [LENHandle currentSudokuSave:self.sudokuView.sudoku];
     [self timerClose];
-    [self bottomRecovery];
 }
 
 # pragma mark -- notifications
@@ -107,6 +106,7 @@
     [LENHandle currentSudokuSave:self.sudokuView.sudoku];
     [self timerClose];
     [self bottomRecovery];
+    [self.sudokuView recovery];
 }
 
 # pragma mark -- timer

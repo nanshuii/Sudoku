@@ -16,6 +16,10 @@ typedef void(^TapBlock)(NSInteger section, NSInteger row);
 
 @property (nonatomic, copy) TapBlock tapBlock;
 
+/// 初始化
+/// @param frame frame description
+/// @param model model description
+/// @param style style description
 - (instancetype)initWithFrame:(CGRect)frame model:(LENSudokuSingleModel *)model style:(LENSudokuStyle)style;
 
 /// 高亮显示

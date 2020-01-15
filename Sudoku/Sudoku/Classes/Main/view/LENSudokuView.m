@@ -449,6 +449,16 @@
     return YES;
 }
 
+# pragma mark -- 复原
+- (void)recovery{
+    // 高亮取消
+    if (self.highLights.count > 0) {
+        NSMutableArray *array = [NSMutableArray arrayWithArray:self.highLights];
+        [self highLightHiddenWithIndexs:array];
+    }
+    // 状态变更
+    self.status = LENSudokuViewStatusNone;
+}
 
 
 @end

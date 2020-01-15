@@ -56,38 +56,15 @@
         make.centerX.mas_equalTo(self.normalView.mas_centerX);
         make.centerY.mas_equalTo(self.normalView.mas_centerY);
     }];
-    if (self.model.status == LENSudokuSingleStatusFillIn) {
-        self.normalLabel.hidden = NO;
-    }
-    else if (self.model.status == LENSudokuStyleNone) {
-        self.normalLabel.hidden = YES;
-    }
-    else {
-        self.normalLabel.hidden = YES;
-    }
-    
     self.markView = [[UIView alloc] initWithFrame:self.bounds];
     self.markView.backgroundColor = [UIColor whiteColor];
     [self addSubview:self.markView];
-    self.markView.hidden = YES;
-//    CGFloat maskWidth = self.frame.size.width / 3;
-//    for (int i = 0; i < 9; i++) {
-//        UILabel *label = [UILabel new];
-//        int section = i / 3;
-//        int row = i % 3;
-//        label.frame = CGRectMake(row * maskWidth, section *maskWidth, maskWidth, maskWidth);
-//        label.font = [UIFont systemFontOfSize:8];
-//        label.textColor = [UIColor lightTextColor];
-//        label.hidden = YES;
-//        [self.maskView addSubview:label];
-//        [self.maskLabels addObject:label];
-//    }
+    
     self.markLabel = [[UILabel alloc] initWithFrame:self.markView.bounds];
     self.markLabel.font = [UIFont systemFontOfSize:8];
     self.markLabel.textColor = [UIColor blackColor];
     self.markLabel.textAlignment = NSTextAlignmentCenter;
     self.markLabel.numberOfLines = 0;
-//    NSString *markString = [self marksString];
     NSString *markString = @"";
     self.markLabel.text = markString;
     [self.markView addSubview:self.markLabel];
@@ -108,6 +85,40 @@
     
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tap:)];
     [self addGestureRecognizer:tap];
+    
+    if (self.model.status == LENSudokuSingleStatusFillIn) {
+        self.normalLabel.hidden = NO;
+    }
+    else if (self.model.status == LENSudokuStyleNone) {
+        self.normalLabel.hidden = YES;
+    }
+    else {
+        self.normalLabel.hidden = YES;
+    }
+}
+
+- (void)configureUIStatus:(LENSudokuSingleStatus)status{
+    if (status == LENSudokuSingleStatusNone) {
+        self.normalView.hidden = NO;
+        self.normalLabel.hidden = YES;
+        self.markView.hidden = YES;
+    }
+    else if (status == LENSudokuSingleStatusmark) {
+        self.normalView.hidden = YES;
+        self.normalLabel.hidden = YES;
+        self.markView.hidden = NO;
+    }
+    else if (status == LENSudokuSingleStatusFillIn) {
+        self.normalView.hidden = NO;
+        self.normalLabel.hidden = NO;
+        self.markView.hidden = YES;
+    }
+}
+
+# pragma mark -- 修改status
+- (void)statusUpdateWithStatus:(LENSudokuSingleStatus)status{
+    self.model.status = status;
+    [self configureUIStatus:status];
 }
 
 # pragma mark -- 点击效果
@@ -145,22 +156,7 @@
     return string;
 }
 
-# pragma mark -- 修改status
-- (void)statusUpdateWithStatus:(LENSudokuSingleStatus)status{
-    self.model.status = status;
-    if (status == LENSudokuSingleStatusNone) {
-        self.normalView.hidden = NO;
-        self.markView.hidden = YES;
-    }
-    else if (status == LENSudokuSingleStatusmark) {
-        self.normalView.hidden = YES;
-        self.markView.hidden = NO;
-    }
-    else if (status == LENSudokuSingleStatusFillIn) {
-        self.normalView.hidden = NO;
-        self.markView.hidden = YES;
-        self.normalLabel.hidden = NO;
-    }
-}
+
+
 
 @end
