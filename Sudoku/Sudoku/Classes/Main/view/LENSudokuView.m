@@ -298,7 +298,7 @@
 # pragma mark -- 单个格子填入number内容
 - (void)fillInWithSingle:(LENSudokuSingleModel *)single number:(int)number index:(NSInteger)index{
     LENSudokuSingleView *view = self.singleViews[index];
-    int fillIn = single.fillIn;
+    int fillIn = (int)single.fillIn;
     if (fillIn == number) {
         SSLog(@"填入正确");
         [view statusUpdateWithStatus:LENSudokuSingleStatusFillIn];
@@ -315,9 +315,22 @@
         }
         [self highLightShowWithIndexs:indexs];
         // 是否全部正确
+        if ([self checkAll]) {
+            SSLog(@"全部正确");
+            return;
+        }
         // 判断九宫格正确
+        if ([self checkNineWithSection:single.section row:single.row]) {
+            SSLog(@"九宫格正确");
+        }
         // 判断单行正确
+        if ([self checkWithSection:single.section]) {
+            SSLog(@"单行正确");
+        }
         // 判断横行正确
+        if ([self checkWithRow:single.section]) {
+            SSLog(@"单列正确");
+        }
     } else {
         SSLog(@"填入错误");
     }
@@ -366,8 +379,67 @@
     }];
 }
 
+# pragma mark -- 全部正确检测
+- (BOOL)checkAll{
+    for (LENSudokuSingleModel *single in self.singles) {
+        if (single.status != LENSudokuSingleStatusFillIn) {
+            return NO;
+        }
+    }
+    return YES;
+}
+
+# pragma mark -- 横排正确检测
+- (BOOL)checkWithSection:(NSInteger)section{
+    for (int i = 0; i < 9; i++) {
+        NSInteger index = section * 9 + i;
+        LENSudokuSingleModel *single = self.singles[index];
+        if (single.status != LENSudokuSingleStatusFillIn) {
+            return NO;
+        }
+    }
+    return YES;
+}
+
+# pragma mark -- 竖排正确检测
+- (BOOL)checkWithRow:(NSInteger)row{
+    for (int i = 0; i < 9; i++) {
+        NSInteger index = i * 9 + row;
+        LENSudokuSingleModel *single = self.singles[index];
+        if (single.status != LENSudokuSingleStatusFillIn) {
+            return NO;
+        }
+    }
+    return YES;
+}
 
 
+# pragma mark -- 九宫格检测
+- (BOOL)checkNineWithSection:(NSInteger)section row:(NSInteger)row{
+    NSArray *arr0 = @[@0, @1, @2, @9, @10, @11, @18, @19, @20];
+    NSArray *arr1 = @[@3, @4, @5, @12, @13, @14, @21, @22, @23];
+    NSArray *arr2 = @[@6, @7, @8, @15, @16, @17, @24, @25, @26];
+    NSArray *arr3 = @[@27, @28, @29, @36, @37, @38, @45, @46, @47];
+    NSArray *arr4 = @[@30, @31, @32, @39, @40, @41, @48, @49, @50];
+    NSArray *arr5 = @[@33, @34, @35, @42, @43, @44, @51, @52, @53];
+    NSArray *arr6 = @[@54, @55, @56, @63, @64, @65, @72, @73, @74];
+    NSArray *arr7 = @[@57, @58, @59, @66, @67, @68, @75, @76, @77];
+    NSArray *arr8 = @[@60, @61, @62, @69, @70, @71, @78, @79, @80];
+    NSArray *arr9 = @[arr0, arr1, arr2, arr3, arr4, arr5, arr6, arr7, arr8];
+    NSArray *nine = [NSArray array];
+    NSInteger row_t = row / 3;
+    NSInteger section_t = section / 3;
+    int nineIndex = (int)(section_t * 3 + row_t);
+    nine = arr9[nineIndex];
+    for (NSNumber *number in nine) {
+        int nine = [number intValue];
+        LENSudokuSingleModel *single = self.singles[nine];
+        if (single.status != LENSudokuSingleStatusFillIn) {
+            return NO;
+        }
+    }
+    return YES;
+}
 
 
 
