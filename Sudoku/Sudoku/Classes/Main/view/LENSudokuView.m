@@ -337,6 +337,9 @@
         NSInteger errorTimes = self.sudoku.errorTimes;
         errorTimes += 1;
         self.sudoku.errorTimes = errorTimes;
+        if (self.inToBlock) {
+            self.inToBlock(YES);
+        }
     }
 }
 

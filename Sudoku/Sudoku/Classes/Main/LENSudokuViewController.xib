@@ -12,6 +12,7 @@
             <connections>
                 <outlet property="bottomView" destination="6Ez-SY-x1c" id="Fv6-tf-twj"/>
                 <outlet property="contentView" destination="Afn-AV-Ir8" id="muh-aK-mf0"/>
+                <outlet property="errorLabel" destination="Mp2-in-pZf" id="5Ou-96-Sfw"/>
                 <outlet property="numberView" destination="YWI-fs-5Vd" id="Fjk-Iv-h8e"/>
                 <outlet property="panButton" destination="22n-8v-ftd" id="gf8-uG-2zX"/>
                 <outlet property="timeLabel" destination="0vJ-GC-arU" id="dO7-jV-db5"/>
@@ -65,13 +66,21 @@
                                 <constraint firstAttribute="height" constant="44" id="IbZ-So-Lsn"/>
                             </constraints>
                         </view>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Mp2-in-pZf">
+                            <rect key="frame" x="20" y="10" width="42" height="21"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                            <nil key="textColor"/>
+                            <nil key="highlightedColor"/>
+                        </label>
                     </subviews>
                     <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                     <constraints>
                         <constraint firstItem="YWI-fs-5Vd" firstAttribute="leading" secondItem="6Ez-SY-x1c" secondAttribute="leading" id="02h-lC-1cN"/>
+                        <constraint firstItem="Mp2-in-pZf" firstAttribute="leading" secondItem="6Ez-SY-x1c" secondAttribute="leading" constant="20" id="4c6-a7-BYP"/>
                         <constraint firstAttribute="bottom" secondItem="YWI-fs-5Vd" secondAttribute="bottom" id="ECq-Rs-iaC"/>
                         <constraint firstItem="YWI-fs-5Vd" firstAttribute="top" secondItem="0vJ-GC-arU" secondAttribute="bottom" constant="20" id="Icf-vJ-dJf"/>
                         <constraint firstAttribute="trailing" secondItem="YWI-fs-5Vd" secondAttribute="trailing" id="Nem-bl-mx4"/>
+                        <constraint firstItem="Mp2-in-pZf" firstAttribute="centerY" secondItem="0vJ-GC-arU" secondAttribute="centerY" id="Vd8-do-YSe"/>
                         <constraint firstAttribute="trailing" secondItem="22n-8v-ftd" secondAttribute="trailing" constant="20" id="b5e-Sy-BvJ"/>
                         <constraint firstItem="0vJ-GC-arU" firstAttribute="centerX" secondItem="6Ez-SY-x1c" secondAttribute="centerX" id="bsp-CK-Kvj"/>
                         <constraint firstItem="0vJ-GC-arU" firstAttribute="top" secondItem="6Ez-SY-x1c" secondAttribute="top" constant="10" id="jwm-ja-VgU"/>

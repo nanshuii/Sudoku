@@ -10,13 +10,17 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+typedef void(^InToBlock)(BOOL error);
+
 @interface LENSudokuView : UIView
 
 @property (nonatomic, strong) LENSudokuModel *sudoku;
 
+@property (nonatomic, copy) InToBlock inToBlock;
+
 - (instancetype)initWithFrame:(CGRect)frame sudoku:(LENSudokuModel *)sudoku;
 
-- (void)intoNumber:(int)number mark:(BOOL)mark;
+- (void)intoNumber:(int)number mark:(BOOL)mark callback:(InToBlock)callback;
 
 
 

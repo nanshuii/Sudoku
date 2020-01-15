@@ -20,6 +20,8 @@
 
 @property (nonatomic, assign) NSInteger time;
 
+@property (nonatomic, assign) NSInteger errorTimes;
+
 @end
 
 @implementation LENSudokuViewController
@@ -28,6 +30,7 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     self.time = self.model.time;
+    self.errorTimes = self.model.errorTimes;
     [self notifications];
     [self configureUI];
 }
@@ -47,13 +50,19 @@
 
 # pragma mark -- configureUI
 - (void)configureUI{
+    WEAKSELF(weakSelf);
     self.view.backgroundColor = [UIColor groupTableViewBackgroundColor];
+    self.timeLabel.text = [self timeString];
+    self.errorLabel.text = [self errorString];
     [self sudokuCreate];
+    self.numbersView = [[LENSudokuNumberView alloc] initWithFrame:CGRectMake(0, 0, kFullScreenWidth, 44) style:self.model.style];
+    [self.numbersView setTapNumberBlock:^(int number, BOOL isEditing) {
+        [weakSelf tapNumber:number isEditing:isEditing];
+    }];
+    [self.numberView addSubview:self.numbersView];
 }
 
-# pragma mark -- sudoku create
 - (void)sudokuCreate{
-    WEAKSELF(weakSelf);
     CGFloat margin = 10;
     CGFloat width = kFullScreenWidth - margin * 2;
     self.sudokuView = [[LENSudokuView alloc] initWithFrame:CGRectMake(margin, margin, width, width) sudoku:self.model];
@@ -64,12 +73,6 @@
         make.bottom.mas_equalTo(self.contentView.mas_bottom).offset(-margin);
         make.right.mas_equalTo(self.contentView.mas_right).offset(-margin);
     }];
-    self.numbersView = [[LENSudokuNumberView alloc] initWithFrame:CGRectMake(0, 0, kFullScreenWidth, 44) style:self.model.style];
-    [self.numbersView setTapNumberBlock:^(int number, BOOL isEditing) {
-        [weakSelf tapNumber:number isEditing:isEditing];
-    }];
-    [self.numberView addSubview:self.numbersView];
-    self.timeLabel.text = [self timeString];
 }
 
 # pragma mark -- 编辑模式
@@ -80,7 +83,12 @@
 
 # pragma mark -- 点击数字
 - (void)tapNumber:(int)number isEditing:(BOOL)isEditing{
-    [self.sudokuView intoNumber:number mark:self.numbersView.isEditing];
+    [self.sudokuView intoNumber:number mark:self.numbersView.isEditing callback:^(BOOL error) {
+        if (error) {
+            self.errorTimes += 1;
+            self.errorLabel.text = [self errorString];
+        }
+    }];;
 }
 
 # pragma mark -- 前台和后台
@@ -88,6 +96,8 @@
     self.model = [LENHandle currentSudokuRead];
     self.time = self.model.time;
     self.timeLabel.text = [self timeString];
+    self.errorTimes = self.model.errorTimes;
+    self.errorLabel.text = [self errorString];
     [self timerCreate];
 }
 
@@ -116,6 +126,7 @@
     }
 }
 
+# pragma mark -- time string
 - (NSString *)timeString{
     NSInteger hour = self.time / 3600;
     NSInteger mins = self.time - hour * 3600;
@@ -127,6 +138,16 @@
     }
     return string;
 }
+
+# pragma mark -- error string
+- (NSString *)errorString{
+    NSString *string = @"";
+    if (self.errorTimes > 0) {
+        string = [NSString stringWithFormat:@"错误：%li次", self.errorTimes];
+    }
+    return string;
+}
+
 
 /*
 #pragma mark - Navigation
