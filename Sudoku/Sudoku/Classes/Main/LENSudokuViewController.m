@@ -40,6 +40,7 @@
     self.sudokuView.sudoku.time = self.time;
     [LENHandle currentSudokuSave:self.sudokuView.sudoku];
     [self timerClose];
+    [self bottomRecovery];
 }
 
 # pragma mark -- notifications
@@ -105,6 +106,7 @@
     self.sudokuView.sudoku.time = self.time;
     [LENHandle currentSudokuSave:self.sudokuView.sudoku];
     [self timerClose];
+    [self bottomRecovery];
 }
 
 # pragma mark -- timer
@@ -148,6 +150,11 @@
     return string;
 }
 
+# pragma mark -- bottom view 复原
+- (void)bottomRecovery{
+    self.panButton.selected = NO;
+    [self.numbersView recovery];
+}
 
 /*
 #pragma mark - Navigation

@@ -84,5 +84,13 @@
     self.isEditing = editing;
 }
 
+# pragma mark -- 复原
+- (void)recovery{
+    self.isEditing = NO;
+    for (LENSudokuNumberSingleView *item in self.items) {
+        item.hidden = NO;
+        [item recovery];
+    }
+}
 
 @end

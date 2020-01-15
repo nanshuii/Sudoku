@@ -18,9 +18,17 @@ typedef void(^TapNumberBlock)(int number, BOOL isEditing);
 
 @property (nonatomic, copy) TapNumberBlock tapNumberBlock;
 
+/// 初始化
+/// @param frame frame description
+/// @param style style description
 - (instancetype)initWithFrame:(CGRect)frame style:(LENSudokuStyle)style;
 
+/// 编辑状态切换
+/// @param editing editing description
 - (void)beEditing:(BOOL)editing;
+
+/// 复原
+- (void)recovery;
 
 @end
 

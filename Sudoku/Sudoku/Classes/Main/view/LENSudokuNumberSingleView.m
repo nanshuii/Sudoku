@@ -14,6 +14,8 @@
 
 @property (nonatomic, strong) UIView *view;
 
+@property (nonatomic, strong) UIView *highLightView;
+
 @property (nonatomic, strong) UILabel *label;
 
 @property (nonatomic, assign) int number;
@@ -38,6 +40,11 @@
     self.view.layer.borderColor = [UIColor lightGrayColor].CGColor;
     self.view.layer.borderWidth = 1;
     [self addSubview:self.view];
+    
+    self.highLightView = [[UIView alloc] initWithFrame:self.bounds];
+    self.highLightView.backgroundColor = [UIColor lightGrayColor];
+    self.highLightView.hidden = YES;
+    [self addSubview:self.highLightView];
     
     self.label = [UILabel new];
     self.label.font = [UIFont systemFontOfSize:12];
@@ -66,6 +73,12 @@
     } else {
         self.label.textColor = [UIColor blackColor];
     }
+}
+
+# pragma mark -- recovery
+- (void)recovery{
+    self.label.textColor = [UIColor blackColor];
+    self.highLightView.hidden = YES;
 }
 
 @end

@@ -18,8 +18,13 @@ typedef void(^TapBlock)(int number);
 
 - (instancetype)initWithFrame:(CGRect)frame style:(LENSudokuStyle)style number:(int)number;
 
-# pragma mark -- edit
+/// 编辑模式开启和关闭
+/// @param editing editing description
 - (void)beEditing:(BOOL)editing;
+
+/// 复原
+- (void)recovery;
+
 
 @end
 
