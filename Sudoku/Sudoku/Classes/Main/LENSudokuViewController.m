@@ -50,16 +50,11 @@
 
 # pragma mark -- configureUI
 - (void)configureUI{
-    WEAKSELF(weakSelf);
     self.view.backgroundColor = [UIColor groupTableViewBackgroundColor];
     self.timeLabel.text = [self timeString];
     self.errorLabel.text = [self errorString];
     [self sudokuCreate];
-    self.numbersView = [[LENSudokuNumberView alloc] initWithFrame:CGRectMake(0, 0, kFullScreenWidth, 44) style:self.model.style];
-    [self.numbersView setTapNumberBlock:^(int number, BOOL isEditing) {
-        [weakSelf tapNumber:number isEditing:isEditing];
-    }];
-    [self.numberView addSubview:self.numbersView];
+    [self numbersViewCreate];
 }
 
 - (void)sudokuCreate{
@@ -73,6 +68,16 @@
         make.bottom.mas_equalTo(self.contentView.mas_bottom).offset(-margin);
         make.right.mas_equalTo(self.contentView.mas_right).offset(-margin);
     }];
+}
+
+- (void)numbersViewCreate{
+    WEAKSELF(weakSelf);
+    NSMutableArray *numbers = [LENHandle sodukuFillInNumberAllWithNumbers:self.model.numbers];
+    self.numbersView = [[LENSudokuNumberView alloc] initWithFrame:CGRectMake(0, 0, kFullScreenWidth, 44) style:self.model.style normalHiddens:numbers];
+    [self.numbersView setTapNumberBlock:^(int number, BOOL isEditing) {
+        [weakSelf tapNumber:number isEditing:isEditing];
+    }];
+    [self.numberView addSubview:self.numbersView];
 }
 
 # pragma mark -- 编辑模式

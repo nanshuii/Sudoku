@@ -18,6 +18,7 @@
     model.singles = [self sudokuSinglesCreateWithType:type];
     model.time = 0;
     model.errorTimes = 0;
+    model.numbers = [self sudokuFillInNumbersCreateWithSoduku:model];
     return model;
 }
 
@@ -469,5 +470,38 @@
         return nil;
     }
 }
+
+# pragma mark -- 获取sudoku中已经全部填入的数字的数量
++ (NSMutableArray *)sudokuFillInNumbersCreateWithSoduku:(LENSudokuModel *)sudoku{
+    // 数字数组创建
+    NSMutableArray *array = [NSMutableArray array];
+    for (int i = 0; i < 9; i++) {
+        [array addObject:@(0)];
+    }
+    // 遍历填入数字
+    for (LENSudokuSingleModel *single in sudoku.singles) {
+        if (single.status == LENSudokuSingleStatusFillIn) {
+            NSInteger fillIn = single.fillIn;
+            NSNumber *number = array[fillIn-1];
+            int num = [number intValue];
+            num += 1;
+            array[fillIn-1] = @(num);
+        }
+    }
+    return array;
+}
+
+# pragma mark -- 获取soduku numbers中数量为9的数字
++ (NSMutableArray *)sodukuFillInNumberAllWithNumbers:(NSMutableArray *)numbers{
+    NSMutableArray *array = [NSMutableArray array];
+    for (int i = 0; i < numbers.count; i++) {
+        int number = [numbers[i] intValue];
+        if (number == 9) {
+            [array addObject:@(i+1)];
+        }
+    }
+    return array;
+}
+
 
 @end

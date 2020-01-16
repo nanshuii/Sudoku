@@ -23,18 +23,19 @@
 
 @property (nonatomic, strong) NSMutableArray *items;
 
-
+@property (nonatomic, strong) NSMutableArray *normalHiddens;
 
 @end
 
 @implementation LENSudokuNumberView
 
-- (instancetype)initWithFrame:(CGRect)frame style:(LENSudokuStyle)style{
+- (instancetype)initWithFrame:(CGRect)frame style:(LENSudokuStyle)style normalHiddens:(nonnull NSMutableArray *)normalHiddens{
     self = [super initWithFrame:frame];
     if (self) {
         self.style = style;
         self.isEditing = NO;
         self.items = [NSMutableArray arrayWithCapacity:9];
+        self.normalHiddens = normalHiddens;
         [self configureUI];
     }
     return self;
@@ -61,10 +62,15 @@
     [self addSubview:self.contentView];
     // items
     for (int i = 0; i < 9; i++) {
-        LENSudokuNumberSingleView *view = [[LENSudokuNumberSingleView alloc] initWithFrame:CGRectMake(self.itemMargin * i + self.itemWidth * i, 0, self.itemWidth, self.itemWidth) style:self.style number:i+1];
+        LENSudokuNumberStatus status = LENSudokuNumberStatusNormal;
+        if ([self.normalHiddens containsObject:@(i+1)]) {
+            status = LENSudokuNumberStatusNormalEnable;
+        }
+        LENSudokuNumberSingleView *view = [[LENSudokuNumberSingleView alloc] initWithFrame:CGRectMake(self.itemMargin * i + self.itemWidth * i, 0, self.itemWidth, self.itemWidth) style:self.style number:i+1 status:status];
         [view setTapBlock:^(int number) {
             [weakSelf tapNumber:number];
         }];
+        view.hidden = YES;
         [self.contentView addSubview:view];
         [self.items addObject:view];
     }

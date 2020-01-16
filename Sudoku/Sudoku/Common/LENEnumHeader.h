@@ -35,6 +35,15 @@ typedef NS_ENUM(NSUInteger, LENSudokuViewStatus) {
     LENSudokuViewStatusHighLightPart, // 相同数字部分高亮
 };
 
+// 数字栏格子状态
+typedef NS_ENUM(NSUInteger, LENSudokuNumberStatus) {
+    LENSudokuNumberStatusNormal, // 正常
+    LENSudokuNumberStatusNormalHidden, // 正常的隐藏状态
+    LENSudokuNumberStatusNormalEnable, // 正常的不可点击状态
+    LENSudokuNumberStatusMark, // mark
+    LENSudokuNumberStatusMarkSelected, // mark被选中状态
+    LENSudokuNumberStatusMarkEnable, // mark不可选中状态
+};
 
 
 #endif /* LENEnumHeader_h */

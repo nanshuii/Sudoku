@@ -16,7 +16,9 @@ typedef void(^TapBlock)(int number);
 
 @property (nonatomic, copy) TapBlock tapBlock;
 
-- (instancetype)initWithFrame:(CGRect)frame style:(LENSudokuStyle)style number:(int)number;
+@property (nonatomic, assign) LENSudokuNumberStatus status;
+
+- (instancetype)initWithFrame:(CGRect)frame style:(LENSudokuStyle)style number:(int)number status:(LENSudokuNumberStatus)status;
 
 /// 编辑模式开启和关闭
 /// @param editing editing description

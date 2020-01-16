@@ -21,7 +21,8 @@ typedef void(^TapNumberBlock)(int number, BOOL isEditing);
 /// 初始化
 /// @param frame frame description
 /// @param style style description
-- (instancetype)initWithFrame:(CGRect)frame style:(LENSudokuStyle)style;
+/// @param normalHiddens 正常状态下需要隐藏的数字数组
+- (instancetype)initWithFrame:(CGRect)frame style:(LENSudokuStyle)style normalHiddens:(NSMutableArray *)normalHiddens;
 
 /// 编辑状态切换
 /// @param editing editing description

@@ -22,6 +22,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic, assign) NSInteger errorTimes; // 错误次数
 
+@property (nonatomic, copy) NSMutableArray *numbers; // 已经填入的所有数字数量集合 1-9排列
+
 
 @end
 
