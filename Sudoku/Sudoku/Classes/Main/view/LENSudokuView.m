@@ -315,8 +315,13 @@
         }
         [self highLightShowWithIndexs:indexs];
         self.currentSingle = single;
+        NSMutableArray *numbers = [NSMutableArray arrayWithArray:self.sudoku.numbers];
+        int num = [numbers[number-1] intValue];
+        num += 1;
+        numbers[number-1] = @(num);
+        self.sudoku.numbers = numbers;
         if (self.inToBlock) {
-            self.inToBlock(NO, number);
+            self.inToBlock(NO, numbers, NO, -1, NO);
         }
         // 是否全部正确
         if ([self checkAll]) {
@@ -341,7 +346,7 @@
         errorTimes += 1;
         self.sudoku.errorTimes = errorTimes;
         if (self.inToBlock) {
-            self.inToBlock(YES, -1);
+            self.inToBlock(YES, nil, NO, -1, NO);
         }
     }
 }
@@ -364,6 +369,9 @@
         } else {
             [view markUpdateWithMarks:marks];
         }
+        if (self.inToBlock) {
+            self.inToBlock(NO, nil, YES, number, NO);
+        }
     } else {
         // mark添加
         [marks addObject:markNumber];
@@ -375,6 +383,9 @@
             [view statusUpdateWithStatus:LENSudokuSingleStatusmark];
         }
         self.singles[index] = single;
+        if (self.inToBlock) {
+            self.inToBlock(NO, nil, YES, number, YES);
+        }
     }
     self.sudoku.singles = self.singles;
     self.currentSingle = single;

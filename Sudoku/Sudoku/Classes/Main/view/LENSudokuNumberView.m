@@ -149,6 +149,33 @@
     self.isEditing = editing;
 }
 
+# pragma mark -- 更改normal下需要隐藏的部分
+- (void)normalHiddensUpdate:(NSMutableArray *)normalHiddens{
+    self.normalHiddens = normalHiddens;
+}
+
+# pragma mark -- normal下除了要隐藏的部分，全部变为不可点击的状态
+- (void)normalEnableAll{
+    for (int i = 0; i < self.items.count; i++) {
+       LENSudokuNumberSingleView *item = self.items[i];
+        if ([self.normalHiddens containsObject:@(i+1)]) {
+            [item statusUpdateWithStatus:LENSudokuNumberStatusNormalHidden editing:NO];
+        } else {
+            [item statusUpdateWithStatus:LENSudokuNumberStatusNormalEnable editing:NO];
+        }
+    }
+}
+
+# pragma mark -- mark模式下因为键入的关系，减少或增加markSelected状态的值
+- (void)markAdd:(BOOL)add number:(int)number{
+    LENSudokuNumberSingleView *item = self.items[number-1];
+    if (add) {
+        [item statusUpdateWithStatus:(LENSudokuNumberStatusMarkSelected) editing:YES];
+    } else {
+        [item statusUpdateWithStatus:(LENSudokuNumberStatusMark) editing:NO];
+    }
+}
+
 # pragma mark -- 复原
 - (void)recovery{
     self.isEditing = NO;

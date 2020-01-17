@@ -167,6 +167,7 @@
     // normal下隐藏
     else if (status == LENSudokuNumberStatusNormalHidden) {
         self.normalView.hidden = YES;
+         
     }
 }
 

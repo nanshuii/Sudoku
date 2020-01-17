@@ -30,6 +30,18 @@ typedef void(^TapNumberBlock)(int number, BOOL isEditing);
 /// @param sudokuSingle sudokuSingle description
 - (void)beEditing:(BOOL)editing sudokuViewStatus:(LENSudokuViewStatus)sudokuViewStatus sudokuSingle:(LENSudokuSingleModel *)sudokuSingle;
 
+/// 更改normal下需要隐藏的部分
+/// @param normalHiddens normalHiddens description
+- (void)normalHiddensUpdate:(NSMutableArray *)normalHiddens;
+
+/// normal下除了要隐藏的部分，全部变为不可点击的状态
+- (void)normalEnableAll;
+
+/// mark模式下因为键入的关系，减少或增加markSelected状态的值
+/// @param add add description
+/// @param number number description
+- (void)markAdd:(BOOL)add number:(int)number;
+
 /// 复原
 - (void)recovery;
 

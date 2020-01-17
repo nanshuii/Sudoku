@@ -10,7 +10,8 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-typedef void(^InToBlock)(BOOL error, int fillInNumber);
+/// 键入数字之后的block；error是键入数字之后错误；numbers是键入正确之后，返回的numbers数组；mark是mark模式的标记；markNumber是mark模式键入的数字返回，markAdd表明是添加mark
+typedef void(^InToBlock)(BOOL error,  NSMutableArray * _Nullable numbers, BOOL mark, int markNumber, BOOL markAdd);
 
 @interface LENSudokuView : UIView
 
@@ -30,7 +31,7 @@ typedef void(^InToBlock)(BOOL error, int fillInNumber);
 /// 输入数字
 /// @param number number description
 /// @param mark 是否标记模式
-/// @param callback error:是否错误 fillInNumber:如果是填入正确，那么返回填入的这个数字，默认-1
+/// @param callback  callback
 - (void)intoNumber:(int)number mark:(BOOL)mark callback:(InToBlock)callback;
 
 /// 复原

@@ -89,13 +89,18 @@
 
 # pragma mark -- 点击数字
 - (void)tapNumber:(int)number isEditing:(BOOL)isEditing{
-    [self.sudokuView intoNumber:number mark:self.numbersView.isEditing callback:^(BOOL error, int fillInNumber) {
-        if (error) {
-            self.errorTimes += 1;
-            self.errorLabel.text = [self errorString];
+    [self.sudokuView intoNumber:number mark:self.numbersView.isEditing callback:^(BOOL error, NSMutableArray * _Nullable numbers, BOOL mark, int markNumber, BOOL markAdd) {
+        if (mark) {
+            [self.numbersView markAdd:markAdd number:markNumber];
         } else {
-            if (fillInNumber > 0) {
-                // 变更numbers数组
+            if (error) {
+                self.errorTimes += 1;
+                self.errorLabel.text = [self errorString];
+            } else {
+                NSMutableArray *nums = [LENHandle sodukuFillInNumberAllWithNumbers:numbers];
+                [self.numbersView normalHiddensUpdate:nums];
+                // 因为填入正确所以变为了部分高亮，normal下的numbersView变为不可点击的模式
+                [self.numbersView normalEnableAll];
             }
         }
     }];;
