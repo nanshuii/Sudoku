@@ -473,6 +473,8 @@
     }
     // 状态变更
     self.status = LENSudokuViewStatusNone;
+    // currenSingle nil
+    self.currentSingle = nil;
 }
 
 
