@@ -58,9 +58,13 @@
 }
 
 - (void)sudokuCreate{
+    WEAKSELF(weakSelf);
     CGFloat margin = 10;
     CGFloat width = kFullScreenWidth - margin * 2;
     self.sudokuView = [[LENSudokuView alloc] initWithFrame:CGRectMake(margin, margin, width, width) sudoku:self.model];
+    [self.sudokuView setTapBlock:^(LENSudokuViewStatus status, LENSudokuSingleModel * _Nullable currentSingle) {
+        [weakSelf.numbersView beEditing:weakSelf.panButton.selected sudokuViewStatus:status sudokuSingle:currentSingle];
+    }];
     [self.contentView addSubview:self.sudokuView];
     [self.sudokuView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.mas_equalTo(self.contentView.mas_top).offset(margin);

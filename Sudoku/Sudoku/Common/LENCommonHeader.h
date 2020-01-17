@@ -27,7 +27,6 @@
 #define LENCurrentSudokuKey @"LENCurrentSudokuKey"
 
 # pragma mark -- notification name
-#define LENNotificationNameMarkNumberViewChange @"LENNotificationNameMarkNumberViewChange"
 #define LENNotificationNameDidBecomeActive @"LENNotificationNameDidBecomeActive"
 #define LENNotificationNameWillResignActive @"LENNotificationNameWillResignActive"
 

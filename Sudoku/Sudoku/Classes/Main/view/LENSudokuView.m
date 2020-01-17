@@ -237,6 +237,9 @@
     }
     
     SSLog(@"self.status = %li", self.status);
+    if (self.tapBlock) {
+        self.tapBlock(self.status, self.currentSingle);
+    }
 }
 
 # pragma mark -- section row index 互转

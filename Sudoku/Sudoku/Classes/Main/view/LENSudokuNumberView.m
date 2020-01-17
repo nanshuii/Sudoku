@@ -173,7 +173,7 @@
     if (add) {
         [item statusUpdateWithStatus:(LENSudokuNumberStatusMarkSelected) editing:YES];
     } else {
-        [item statusUpdateWithStatus:(LENSudokuNumberStatusMark) editing:NO];
+        [item statusUpdateWithStatus:(LENSudokuNumberStatusMark) editing:YES];
     }
 }
 

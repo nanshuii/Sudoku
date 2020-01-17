@@ -13,6 +13,8 @@ NS_ASSUME_NONNULL_BEGIN
 /// 键入数字之后的block；error是键入数字之后错误；numbers是键入正确之后，返回的numbers数组；mark是mark模式的标记；markNumber是mark模式键入的数字返回，markAdd表明是添加mark
 typedef void(^InToBlock)(BOOL error,  NSMutableArray * _Nullable numbers, BOOL mark, int markNumber, BOOL markAdd);
 
+typedef void(^TapSudokuViewBlock)(LENSudokuViewStatus status, LENSudokuSingleModel * _Nullable currentSingle);
+
 @interface LENSudokuView : UIView
 
 @property (nonatomic, strong) LENSudokuModel *sudoku;
@@ -22,6 +24,8 @@ typedef void(^InToBlock)(BOOL error,  NSMutableArray * _Nullable numbers, BOOL m
 @property (nonatomic, strong, nullable) LENSudokuSingleModel *currentSingle;
 
 @property (nonatomic, copy) InToBlock inToBlock;
+
+@property (nonatomic, copy) TapSudokuViewBlock tapBlock;
 
 /// 初始化
 /// @param frame frame description
