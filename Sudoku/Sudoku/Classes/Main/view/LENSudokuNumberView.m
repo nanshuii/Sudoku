@@ -70,7 +70,6 @@
         [view setTapBlock:^(int number) {
             [weakSelf tapNumber:number];
         }];
-        view.hidden = YES;
         [self.contentView addSubview:view];
         [self.items addObject:view];
     }
@@ -83,10 +82,70 @@
 }
 
 # pragma mark -- 编辑模式开关
-- (void)beEditing:(BOOL)editing{
-    for (LENSudokuNumberSingleView *item in self.items) {
-        [item beEditing:editing];
+- (void)beEditing:(BOOL)editing sudokuViewStatus:(LENSudokuViewStatus)sudokuViewStatus sudokuSingle:(nonnull LENSudokuSingleModel *)sudokuSingle{
+    // normal -> mark
+    if (editing) {
+        // 没有任何点击的时候，mark全部为不可点击
+        if (sudokuViewStatus == LENSudokuViewStatusNone) {
+            for (LENSudokuNumberSingleView *item in self.items) {
+                [item statusUpdateWithStatus:LENSudokuNumberStatusMarkEnable editing:YES];
+            }
+        }
+        // 点击一个空的或是mark的格子
+        else if (sudokuViewStatus == LENSudokuViewStatusPrepareFillInOrMask) {
+            // 点击空格子，mark全部正常显示
+            if (sudokuSingle.status == LENSudokuSingleStatusNone) {
+                for (LENSudokuNumberSingleView *item in self.items) {
+                    [item statusUpdateWithStatus:LENSudokuNumberStatusMark editing:YES];
+                }
+            }
+            // 点击mark格子，部分正常显示，部分点击状态
+            else if (sudokuSingle.status == LENSudokuNumberStatusMark) {
+                NSMutableArray *marks = sudokuSingle.marks;
+                for (int i = 0; i < self.items.count; i++) {
+                    LENSudokuNumberSingleView *item = self.items[i];
+                    if ([marks containsObject:@(i+1)]) {
+                        [item statusUpdateWithStatus:LENSudokuNumberStatusMarkSelected editing:YES];
+                    } else {
+                        [item statusUpdateWithStatus:LENSudokuNumberStatusMark editing:YES];
+                    }
+                }
+            }
+        }
+        // 点击一个填入数字的格子，mark全部不可点击
+        else if (sudokuViewStatus == LENSudokuViewStatusHighLightPart) {
+            for (LENSudokuNumberSingleView *item in self.items) {
+                [item statusUpdateWithStatus:LENSudokuNumberStatusMarkEnable editing:YES];
+            }
+        }
     }
+    // mark -> normal
+    else {
+        // 未点击状态，部分隐藏，部分不可点击状态
+        // 点击一个填有数字的，部分隐藏，部分不可点击状态
+        if (sudokuViewStatus == LENSudokuViewStatusNone || sudokuViewStatus == LENSudokuViewStatusHighLightPart) {
+            for (int i = 0; i < self.items.count; i++) {
+               LENSudokuNumberSingleView *item = self.items[i];
+                if ([self.normalHiddens containsObject:@(i+1)]) {
+                    [item statusUpdateWithStatus:LENSudokuNumberStatusNormalHidden editing:NO];
+                } else {
+                    [item statusUpdateWithStatus:LENSudokuNumberStatusNormalEnable editing:NO];
+                }
+            }
+        }
+        // 点击一个空的或是mark格子，部分隐藏，部分正常
+        else if (sudokuViewStatus == LENSudokuViewStatusPrepareFillInOrMask) {
+            for (int i = 0; i < self.items.count; i++) {
+               LENSudokuNumberSingleView *item = self.items[i];
+                if ([self.normalHiddens containsObject:@(i+1)]) {
+                    [item statusUpdateWithStatus:LENSudokuNumberStatusNormalHidden editing:NO];
+                } else {
+                    [item statusUpdateWithStatus:LENSudokuNumberStatusNormal editing:NO];
+                }
+            }
+        }
+    }
+        
     self.isEditing = editing;
 }
 

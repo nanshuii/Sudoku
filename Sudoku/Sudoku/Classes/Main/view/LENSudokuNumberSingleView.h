@@ -27,6 +27,11 @@ typedef void(^TapBlock)(int number);
 /// 复原
 - (void)recovery;
 
+/// 状态变更
+/// @param status status description
+/// @param editing editing description
+- (void)statusUpdateWithStatus:(LENSudokuNumberStatus)status editing:(BOOL)editing;
+
 
 @end
 

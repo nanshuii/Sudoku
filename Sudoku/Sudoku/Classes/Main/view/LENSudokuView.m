@@ -27,8 +27,6 @@
 
 @property (nonatomic, strong) NSMutableArray *singleViews;
 
-@property (nonatomic, assign) LENSudokuViewStatus status;
-
 @property (nonatomic, strong) NSMutableArray *highLights; // 高亮的view indexs集合
 
 @end
@@ -116,6 +114,7 @@
 - (void)singlesTapWithSingle:(LENSudokuSingleModel *)single{
     SSLog(@"single.status = %li", single.status);
     SSLog(@"self.status = %li", self.status);
+    self.currentSingle = single;
     // 格子里什么都没有填入的状态
     if (single.status == LENSudokuSingleStatusNone) {
         if (self.status == LENSudokuViewStatusNone) {
@@ -264,7 +263,7 @@
 }
 
 # pragma mark -- 填入数字
-- (void)intoNumber:(int)number mark:(BOOL)mark{
+- (void)intoNumber:(int)number mark:(BOOL)mark callback:(nonnull InToBlock)callback{
     if (self.status == LENSudokuViewStatusNone) {
         SSLog(@"还没选择格子");
         return;
@@ -315,6 +314,10 @@
             }
         }
         [self highLightShowWithIndexs:indexs];
+        self.currentSingle = single;
+        if (self.inToBlock) {
+            self.inToBlock(NO, number);
+        }
         // 是否全部正确
         if ([self checkAll]) {
             SSLog(@"全部正确");
@@ -338,7 +341,7 @@
         errorTimes += 1;
         self.sudoku.errorTimes = errorTimes;
         if (self.inToBlock) {
-            self.inToBlock(YES);
+            self.inToBlock(YES, -1);
         }
     }
 }
@@ -374,6 +377,7 @@
         self.singles[index] = single;
     }
     self.sudoku.singles = self.singles;
+    self.currentSingle = single;
 }
 
 # pragma mark -- mark 排序
@@ -459,6 +463,7 @@
     // 状态变更
     self.status = LENSudokuViewStatusNone;
 }
+
 
 
 @end

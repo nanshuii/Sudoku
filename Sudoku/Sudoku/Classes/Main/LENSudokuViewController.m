@@ -83,15 +83,20 @@
 # pragma mark -- 编辑模式
 - (IBAction)panEdit:(UIButton *)sender {
     sender.selected = !sender.selected;
-    [self.numbersView beEditing:sender.selected];
+    // 需要获取当前sudoku view 的部分数据
+    [self.numbersView beEditing:sender.selected sudokuViewStatus:self.sudokuView.status sudokuSingle:self.sudokuView.currentSingle];
 }
 
 # pragma mark -- 点击数字
 - (void)tapNumber:(int)number isEditing:(BOOL)isEditing{
-    [self.sudokuView intoNumber:number mark:self.numbersView.isEditing callback:^(BOOL error) {
+    [self.sudokuView intoNumber:number mark:self.numbersView.isEditing callback:^(BOOL error, int fillInNumber) {
         if (error) {
             self.errorTimes += 1;
             self.errorLabel.text = [self errorString];
+        } else {
+            if (fillInNumber > 0) {
+                // 变更numbers数组
+            }
         }
     }];;
 }

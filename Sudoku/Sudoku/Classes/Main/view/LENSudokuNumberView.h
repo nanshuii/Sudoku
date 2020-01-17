@@ -26,7 +26,9 @@ typedef void(^TapNumberBlock)(int number, BOOL isEditing);
 
 /// 编辑状态切换
 /// @param editing editing description
-- (void)beEditing:(BOOL)editing;
+/// @param sudokuViewStatus sudokuViewStatus description
+/// @param sudokuSingle sudokuSingle description
+- (void)beEditing:(BOOL)editing sudokuViewStatus:(LENSudokuViewStatus)sudokuViewStatus sudokuSingle:(LENSudokuSingleModel *)sudokuSingle;
 
 /// 复原
 - (void)recovery;
