@@ -158,6 +158,7 @@
 - (void)normalEnableAll{
     for (int i = 0; i < self.items.count; i++) {
        LENSudokuNumberSingleView *item = self.items[i];
+        SSLog(@"[self.normalHiddens containsObject:@(i+1)] = %i", [self.normalHiddens containsObject:@(i+1)]);
         if ([self.normalHiddens containsObject:@(i+1)]) {
             [item statusUpdateWithStatus:LENSudokuNumberStatusNormalHidden editing:NO];
         } else {

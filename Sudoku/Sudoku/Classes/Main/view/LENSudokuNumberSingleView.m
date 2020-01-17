@@ -92,6 +92,7 @@
     self.markLabel.font = [UIFont systemFontOfSize:12];
     self.markLabel.textColor = [UIColor darkGrayColor];
     self.markLabel.text = [NSString stringWithFormat:@"%i", self.number];
+    [self.markView addSubview:self.markLabel];
     [self.markLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerX.mas_equalTo(self.markView.mas_centerX);
         make.centerY.mas_equalTo(self.markView.mas_centerY);
@@ -137,8 +138,8 @@
         self.normalView.hidden = YES;
         self.markView.hidden = NO;
     } else {
-        self.normalView.hidden = YES;
-        self.markView.hidden = NO;
+        self.normalView.hidden = NO;
+        self.markView.hidden = YES;
     }
     
     // mark下不可点击的状态
@@ -158,16 +159,17 @@
     }
     // normal
     else if (status == LENSudokuNumberStatusNormal) {
-        self.normalLabel.textColor = [UIColor blueColor];
+//        self.normalLabel.textColor = [UIColor whiteColor];
+        self.normalBgView.backgroundColor = [UIColor blueColor];
     }
     // normal下不可点击
     else if (status == LENSudokuNumberStatusNormalEnable) {
-        self.normalLabel.textColor = [UIColor blueColor];
+//        self.normalLabel.textColor = [UIColor lightGrayColor];
+        self.normalBgView.backgroundColor = [UIColor lightGrayColor];
     }
     // normal下隐藏
     else if (status == LENSudokuNumberStatusNormalHidden) {
-        self.normalView.hidden = YES;
-         
+        self.hidden = YES;
     }
 }
 

@@ -338,9 +338,9 @@
 
 # pragma mark -- sudoku算法一
 + (NSMutableArray *)singlesCreateOne{
-    int maxForSingle = 5; // 每一种隐藏的方式中的最大值
-    int max = 6;
-    int min = 4;
+    int maxForSingle = 3; // 每一种隐藏的方式中的最大值
+    int max = 1;
+    int min = 1;
     // 1代表显示 0代表隐藏
     NSMutableArray *randoms = [NSMutableArray arrayWithCapacity:81];
     for (int i = 0; i < 81; i++) {

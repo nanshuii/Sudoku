@@ -86,15 +86,7 @@
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tap:)];
     [self addGestureRecognizer:tap];
     
-    if (self.model.status == LENSudokuSingleStatusFillIn) {
-        self.normalLabel.hidden = NO;
-    }
-    else if (self.model.status == LENSudokuStyleNone) {
-        self.normalLabel.hidden = YES;
-    }
-    else {
-        self.normalLabel.hidden = YES;
-    }
+    [self configureUIStatus:self.model.status];
 }
 
 - (void)configureUIStatus:(LENSudokuSingleStatus)status{

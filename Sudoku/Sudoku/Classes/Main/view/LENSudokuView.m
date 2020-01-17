@@ -36,6 +36,7 @@
 - (instancetype)initWithFrame:(CGRect)frame sudoku:(LENSudokuModel *)sudoku{
     self = [super initWithFrame:frame];
     if (self) {
+        self.sudoku = sudoku;
         self.type = sudoku.type;
         self.style = sudoku.style;
         self.singles = self.singles = [NSMutableArray arrayWithArray:sudoku.singles];
@@ -213,8 +214,8 @@
         else if (self.status == LENSudokuViewStatusHighLightPart) {
             // 观察高亮数字是否一致
             NSInteger index = [self.highLights[0] integerValue];
-            LENSudokuSingleModel *single = self.singles[index];
-            NSInteger fillIn = single.fillIn;
+            LENSudokuSingleModel *single_t = self.singles[index];
+            NSInteger fillIn = single_t.fillIn;
             NSInteger fillInCurrent = single.fillIn;
             if (fillIn == fillInCurrent) {
                 return;
@@ -264,6 +265,7 @@
 
 # pragma mark -- 填入数字
 - (void)intoNumber:(int)number mark:(BOOL)mark callback:(nonnull InToBlock)callback{
+    self.inToBlock = callback;
     if (self.status == LENSudokuViewStatusNone) {
         SSLog(@"还没选择格子");
         return;
