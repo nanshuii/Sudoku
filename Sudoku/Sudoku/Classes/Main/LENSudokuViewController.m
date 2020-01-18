@@ -107,6 +107,7 @@
                 self.errorTimes += 1;
                 self.errorLabel.text = [self errorString];
             } else {
+                // hiddenNumbers获取
                 NSMutableArray *nums = [LENHandle sodukuFillInNumberAllWithNumbers:numbers];
                 [self.numbersView normalHiddensUpdate:nums];
                 // 因为填入正确所以变为了部分高亮，normal下的numbersView变为不可点击的模式

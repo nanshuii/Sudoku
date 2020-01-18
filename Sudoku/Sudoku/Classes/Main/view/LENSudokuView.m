@@ -347,9 +347,6 @@
         num += 1;
         numbers[number-1] = @(num);
         self.sudoku.numbers = numbers;
-        if (self.inToBlock) {
-            self.inToBlock(NO, numbers, NO, -1, NO);
-        }
         // 是否全部正确
         if ([self checkAll]) {
             SSLog(@"全部正确");
@@ -366,6 +363,11 @@
         // 判断横行正确
         if ([self checkWithRow:single.section]) {
             SSLog(@"单列正确");
+        }
+        // 对同行，同列，同九宫格内mark的部分取消
+        [self markCancelWithSingle:single];
+        if (self.inToBlock) {
+            self.inToBlock(NO, numbers, NO, -1, NO);
         }
     } else {
         SSLog(@"填入错误");
@@ -489,6 +491,108 @@
         }
     }
     return YES;
+}
+
+# pragma mark -- mark cancel
+- (void)markCancelWithSingle:(LENSudokuSingleModel *)single{
+    // 对同行，同列，同九宫格内mark的部分取消
+    NSMutableArray *indexs = [self markCancelIndexsWithSingle:single];
+    for (NSNumber *num in indexs) {
+        NSInteger index = [num integerValue];
+        LENSudokuSingleModel *model = self.singles[index];
+        LENSudokuSingleView *view = self.singleViews[index];
+        NSMutableArray *marks = model.marks;
+        [marks removeObject:@(single.fillIn)];
+        if (marks.count == 0) {
+            model.status = LENSudokuSingleStatusNone;
+            [view statusUpdateWithStatus:LENSudokuSingleStatusNone];
+        } else {
+            [view markUpdateWithMarks:marks];
+        }
+        model.marks = marks;
+        self.singles[index] = model;
+    }
+    self.sudoku.singles = self.singles;
+}
+
+- (NSMutableArray *)markCancelIndexsWithSingle:(LENSudokuSingleModel *)single{
+    NSMutableArray *indexs = [NSMutableArray array];
+    NSMutableArray *indexs0 = [self markEqualIndexsWithNumber:single.fillIn section:single.section];
+    for (NSNumber *number in indexs0) {
+        if (![indexs containsObject:number]) {
+            [indexs addObject:number];
+        }
+    }
+    NSMutableArray *indexs1 = [self markEqualIndexsWithNumber:single.fillIn row:single.row];
+    for (NSNumber *number in indexs1) {
+        if (![indexs containsObject:number]) {
+            [indexs addObject:number];
+        }
+    }
+    NSMutableArray *indexs2 = [self markEqualIndexsWithNumber:single.fillIn section:single.section row:single.row];
+    for (NSNumber *number in indexs2) {
+        if (![indexs containsObject:number]) {
+            [indexs addObject:number];
+        }
+    }
+    return indexs;
+}
+
+// 返回横排中number和格子mark有相同的index
+- (NSMutableArray *)markEqualIndexsWithNumber:(NSInteger)number section:(NSInteger)section{
+    NSMutableArray *indexs = [NSMutableArray array];
+    for (int i = 0; i < 9; i++) {
+        int index = (int)section * 9 + i;
+        LENSudokuSingleModel *single = self.singles[index];
+        NSMutableArray *marks = single.marks;
+        if ([marks containsObject:@(number)] && single.status == LENSudokuSingleStatusmark) {
+            [indexs addObject:@(index)];
+        }
+    }
+    return indexs;
+}
+
+// 返回竖排中number和格子mark有相同的index
+- (NSMutableArray *)markEqualIndexsWithNumber:(NSInteger)number row:(NSInteger)row{
+    NSMutableArray *indexs = [NSMutableArray array];
+    for (int i = 0; i < 9; i++) {
+        int index = i * 9 + (int)row;
+        LENSudokuSingleModel *single = self.singles[index];
+        NSMutableArray *marks = single.marks;
+        if ([marks containsObject:@(number)] && single.status == LENSudokuSingleStatusmark) {
+            [indexs addObject:@(index)];
+        }
+    }
+    return indexs;
+}
+
+// 返回九宫格中number和格子mark有相同的index
+- (NSMutableArray *)markEqualIndexsWithNumber:(NSInteger)number section:(NSInteger)section row:(NSInteger)row{
+    NSMutableArray *indexs = [NSMutableArray array];
+    NSArray *arr0 = @[@0, @1, @2, @9, @10, @11, @18, @19, @20];
+    NSArray *arr1 = @[@3, @4, @5, @12, @13, @14, @21, @22, @23];
+    NSArray *arr2 = @[@6, @7, @8, @15, @16, @17, @24, @25, @26];
+    NSArray *arr3 = @[@27, @28, @29, @36, @37, @38, @45, @46, @47];
+    NSArray *arr4 = @[@30, @31, @32, @39, @40, @41, @48, @49, @50];
+    NSArray *arr5 = @[@33, @34, @35, @42, @43, @44, @51, @52, @53];
+    NSArray *arr6 = @[@54, @55, @56, @63, @64, @65, @72, @73, @74];
+    NSArray *arr7 = @[@57, @58, @59, @66, @67, @68, @75, @76, @77];
+    NSArray *arr8 = @[@60, @61, @62, @69, @70, @71, @78, @79, @80];
+    NSArray *arr9 = @[arr0, arr1, arr2, arr3, arr4, arr5, arr6, arr7, arr8];
+    NSArray *nine = [NSArray array];
+    NSInteger row_t = row / 3;
+    NSInteger section_t = section / 3;
+    int nineIndex = (int)(section_t * 3 + row_t);
+    nine = arr9[nineIndex];
+    for (NSNumber *num in nine) {
+        int index = [num intValue];
+        LENSudokuSingleModel *single = self.singles[index];
+        NSMutableArray *marks = single.marks;
+        if ([marks containsObject:@(number)] && single.status == LENSudokuSingleStatusmark) {
+            [indexs addObject:@(index)];
+        }
+    }
+    return indexs;
 }
 
 # pragma mark -- 复原

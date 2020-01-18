@@ -24,8 +24,6 @@
 
 @property (nonatomic, strong) UIView *markView; // 在填入笔记数字的视图
 
-@property (nonatomic, strong) NSMutableArray *maskLabels;
-
 @property (nonatomic, strong) UILabel *markLabel;
 
 
@@ -39,7 +37,6 @@
         self.model = model;
         self.style = style;
         self.styleModel = [LENHandle styleModelWithStyle:self.style];
-        self.maskLabels = [NSMutableArray arrayWithCapacity:9];
         [self configureUI];
     }
     return self;
