@@ -62,7 +62,8 @@
     [self.normalView addSubview:self.normalBgView];
     
     self.normalLabel = [UILabel new];
-    self.normalLabel.font = [UIFont systemFontOfSize:12];
+//    self.normalLabel.font = [UIFont systemFontOfSize:12];
+    self.normalLabel.font = FONTBOLD(14);
     self.normalLabel.textColor = [UIColor whiteColor];
     self.normalLabel.text = [NSString stringWithFormat:@"%i", self.number];
     [self.normalView addSubview:self.normalLabel];
@@ -89,7 +90,8 @@
     [self.markView addSubview:self.markSelectedView];
     
     self.markLabel = [UILabel new];
-    self.markLabel.font = [UIFont systemFontOfSize:12];
+//    self.markLabel.font = [UIFont systemFontOfSize:12];
+    self.markLabel.font = FONTBOLD(14);
     self.markLabel.textColor = [UIColor blackColor];
     self.markLabel.text = [NSString stringWithFormat:@"%i", self.number];
     [self.markView addSubview:self.markLabel];

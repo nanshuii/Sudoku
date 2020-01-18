@@ -23,6 +23,26 @@
 #define SSLog(fmt, ...)
 #endif
 
+# pragma mark -- color
+//色码转RGB UIColor
+#undef UIColorFromHex
+#define UIColorFromHex(hexValue) ([UIColor colorWithRed:((float)((hexValue & 0xFF0000) >> 16))/255.0 green:((float)((hexValue & 0x00FF00) >> 8))/255.0 blue:((float)(hexValue & 0x0000FF))/255.0 alpha:1.0])
+//附带透明度
+#undef UIColorFromHexA
+#define UIColorFromHexA(hexValue,a) ([UIColor colorWithRed:((float)((hexValue & 0xFF0000) >> 16))/255.0 green:((float)((hexValue & 0x00FF00) >> 8))/255.0 blue:((float)(hexValue & 0x0000FF))/255.0 alpha:(a)])
+
+# pragma mark -- 字体
+#undef FONTWITHNAME
+#define FONTWITHNAME(fontName,fontSize)    ([UIFont fontWithName:fontName size:fontSize])
+//系统默认字体   设置字体的大小
+#undef FONTDEFAULT
+#define FONTDEFAULT(fontSize)            ([UIFont systemFontOfSize:fontSize])
+//系统加粗字体   设置字体的大小
+#undef FONTBOLD
+#define FONTBOLD(fontSize)            ([UIFont boldSystemFontOfSize:fontSize])
+#define NORMALFONTNAME              @"PingFangSC-Regular"
+#define SEMIBOLDFONTNAME            @"PingFangSC-Semibold"
+
 # pragma mark -- default key
 #define LENCurrentSudokuKey @"LENCurrentSudokuKey"
 

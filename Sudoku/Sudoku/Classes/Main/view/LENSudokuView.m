@@ -23,6 +23,10 @@
 
 @property (nonatomic, strong) UIView *bgView;
 
+@property (nonatomic, assign) CGFloat lineWidthBig;
+
+@property (nonatomic, assign) CGFloat lineWidth;
+
 @property (nonatomic, strong) NSMutableArray *lines;
 
 @property (nonatomic, strong) NSMutableArray *singleViews;
@@ -48,8 +52,10 @@
 }
 
 - (void)configureUI{
-    self.margin = 2;
-    self.width = (self.frame.size.width - self.margin * 2) / 9;
+    self.margin = 4;
+    self.lineWidthBig = 3;
+    self.lineWidth = 1;
+    self.width = (self.frame.size.width - self.margin * 2 - self.lineWidthBig * 2 - self.lineWidth * 6 ) / 9;
     self.backgroundColor = [UIColor clearColor];
     [self bgViewCreate];
     [self singlesCreate];
@@ -60,7 +66,7 @@
 - (void)bgViewCreate{
     self.bgView = [[UIView alloc] initWithFrame:self.bounds];
     self.bgView.layer.borderWidth = self.margin;
-    self.bgView.layer.borderColor = [UIColor redColor].CGColor;
+    self.bgView.layer.borderColor = [UIColor grayColor].CGColor;
     [self addSubview:self.bgView];
 }
 
@@ -69,26 +75,34 @@
     self.lines = [NSMutableArray arrayWithCapacity:18];
     UIColor *lineColor = [UIColor lightGrayColor];
     CGFloat line_width = self.frame.size.width - self.margin * 2;
-    CGFloat line_height = 1;
-    CGFloat line_height_big = 2;
     // 横排
     for (int i = 0; i < 9; i++) {
-        CGFloat height = line_height;
-        if (i % 3 == 0) {
-            height = line_height_big;
+        if (i == 0) {
+            continue;
         }
-        UIView *line = [[UIView alloc] initWithFrame:CGRectMake(self.margin, i * self.width + self.margin, line_width, height)];
+        CGFloat height = self.lineWidth;
+        if (i % 3 == 0) {
+            height = self.lineWidthBig;
+        }
+        CGFloat x = self.margin;
+        CGFloat y = i * self.lineWidth + (int)((i-1) / 3) * (self.lineWidthBig - self.lineWidth) + self.margin + i * self.width;
+        UIView *line = [[UIView alloc] initWithFrame:CGRectMake(x, y, line_width, height)];
         line.backgroundColor = lineColor;
         [self addSubview:line];
         [self.lines addObject:line];
     }
     // 竖排
     for (int i = 0; i < 9; i++) {
-        CGFloat height = line_height;
-        if (i % 3 == 0) {
-            height = line_height_big;
+        if (i == 0) {
+            continue;
         }
-        UIView *line = [[UIView alloc] initWithFrame:CGRectMake(i * self.width + self.margin, self.margin, height, line_width)];
+        CGFloat height = self.lineWidth;
+        if (i % 3 == 0) {
+            height = self.lineWidthBig;
+        }
+        CGFloat y = self.margin;
+        CGFloat x = i * self.lineWidth + (int)((i-1) / 3) * (self.lineWidthBig - self.lineWidth) + self.margin + i * self.width;
+        UIView *line = [[UIView alloc] initWithFrame:CGRectMake(x, y, height, line_width)];
         line.backgroundColor = lineColor;
         [self addSubview:line];
         [self.lines addObject:line];
@@ -102,7 +116,9 @@
     for (LENSudokuSingleModel *model in self.singles) {
         NSInteger section = model.section;
         NSInteger row = model.row;
-        LENSudokuSingleView *view = [[LENSudokuSingleView alloc] initWithFrame:CGRectMake(self.margin + row * self.width, self.margin + section * self.width, self.width, self.width) model:model style:self.style];
+        CGFloat x = row * self.lineWidth + (int)(row / 3) * (self.lineWidthBig - self.lineWidth) + self.margin + row * self.width;
+        CGFloat y = section * self.lineWidth + (int)(section / 3) * (self.lineWidthBig - self.lineWidth) + self.margin + section * self.width;
+        LENSudokuSingleView *view = [[LENSudokuSingleView alloc] initWithFrame:CGRectMake(x, y, self.width, self.width) model:model style:self.style];
         [view setTapBlock:^(NSInteger section, NSInteger row) {
             [weakSelf singlesTapWithSingle:model];
         }];

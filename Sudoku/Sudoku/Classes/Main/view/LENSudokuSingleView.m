@@ -48,7 +48,8 @@
     [self addSubview:self.normalView];
     
     self.normalLabel = [UILabel new];
-    self.normalLabel.font = [UIFont systemFontOfSize:12];
+//    self.normalLabel.font = [UIFont systemFontOfSize:12];
+    self.normalLabel.font = FONTBOLD(18);
     self.normalLabel.textColor = [UIColor darkGrayColor];
     self.normalLabel.text = [NSString stringWithFormat:@"%li", (long)self.model.fillIn];
     [self.normalView addSubview:self.normalLabel];
@@ -60,8 +61,19 @@
     self.markView.backgroundColor = [UIColor whiteColor];
     [self addSubview:self.markView];
     
+    CGFloat margin = 2;
+//    self.highLightView = [[UIView alloc] initWithFrame:CGRectMake(margin, margin, self.frame.size.width - margin * 2,  self.frame.size.width - margin * 2)];
+    self.highLightView = [[UIView alloc] initWithFrame:self.bounds];
+    self.highLightView.backgroundColor = [UIColor lightGrayColor];
+//    self.highLightView.layer.borderColor = [UIColor redColor].CGColor;
+//    self.highLightView.layer.borderWidth = 2;
+    self.highLightView.alpha = 0.3;
+    self.highLightView.hidden = YES;
+    [self addSubview:self.highLightView];
+    
     self.markLabel = [[UILabel alloc] initWithFrame:self.markView.bounds];
-    self.markLabel.font = [UIFont systemFontOfSize:8];
+    //    self.markLabel.font = [UIFont systemFontOfSize:8];
+    self.markLabel.font = FONTDEFAULT(10);
     self.markLabel.textColor = [UIColor blackColor];
     self.markLabel.textAlignment = NSTextAlignmentCenter;
     self.markLabel.numberOfLines = 0;
@@ -72,16 +84,8 @@
         make.top.mas_equalTo(self.markView.mas_top).offset(4);
         make.left.mas_equalTo(self.markView.mas_left).offset(4);
         make.right.mas_equalTo(self.markView.mas_right).offset(-4);
-        make.bottom.mas_equalTo(self.markView.mas_bottom).offset(-4);
+//        make.bottom.mas_equalTo(self.markView.mas_bottom).offset(-4);
     }];
-    
-    CGFloat margin = 2;
-    self.highLightView = [[UIView alloc] initWithFrame:CGRectMake(margin, margin, self.frame.size.width - margin * 2,  self.frame.size.width - margin * 2)];
-    self.highLightView.backgroundColor = [UIColor clearColor];
-    self.highLightView.layer.borderColor = [UIColor redColor].CGColor;
-    self.highLightView.layer.borderWidth = 2;
-    self.highLightView.hidden = YES;
-    [self addSubview:self.highLightView];
     
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tap:)];
     [self addGestureRecognizer:tap];
@@ -140,12 +144,18 @@
 
 # pragma mark -- marks排列
 - (NSString *)marksString{
-    NSString *string = @"";
-    for (NSNumber *number in self.model.marks) {
-        int mark = [number intValue];
-        string = [NSString stringWithFormat:@"%@ %i", string, mark];
+    if (self.model.marks.count == 0) {
+        return @"";
+    } else {
+        NSString *string = [NSString stringWithFormat:@"%i", [self.model.marks[0] intValue]];
+        for (int i = 1; i < self.model.marks.count; i++) {
+            NSNumber *number = self.model.marks[i];
+            int mark = [number intValue];
+            string = [NSString stringWithFormat:@"%@ %i", string, mark];
+        }
+        return string;
     }
-    return string;
+    
 }
 
 
