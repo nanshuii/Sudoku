@@ -78,19 +78,19 @@
     [self addSubview:self.markView];
     
     self.markBgView = [[UIView alloc] initWithFrame:self.markView.bounds];
-    self.markBgView.backgroundColor = [UIColor lightGrayColor];
+    self.markBgView.backgroundColor = [UIColor redColor];
     [self.markView addSubview:self.markBgView];
     
     self.markSelectedView = [[UIView alloc] initWithFrame:self.markView.bounds];
-    self.markSelectedView.backgroundColor = [UIColor lightGrayColor];
-    self.markSelectedView.layer.borderColor = [UIColor darkGrayColor].CGColor;
+    self.markSelectedView.backgroundColor = [UIColor redColor];
+    self.markSelectedView.layer.borderColor = [UIColor blackColor].CGColor;
     self.markSelectedView.layer.borderWidth = 1;
     self.markSelectedView.hidden = YES;
     [self.markView addSubview:self.markSelectedView];
     
     self.markLabel = [UILabel new];
     self.markLabel.font = [UIFont systemFontOfSize:12];
-    self.markLabel.textColor = [UIColor darkGrayColor];
+    self.markLabel.textColor = [UIColor blackColor];
     self.markLabel.text = [NSString stringWithFormat:@"%i", self.number];
     [self.markView addSubview:self.markLabel];
     [self.markLabel mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -145,27 +145,25 @@
     // mark下不可点击的状态
     if (status == LENSudokuNumberStatusMarkEnable) {
         self.markSelectedView.hidden = YES;
-        self.markLabel.textColor = [UIColor grayColor];
+        self.markLabel.textColor = [UIColor lightTextColor];
     }
     // mark下状态
     else if (status == LENSudokuNumberStatusMark) {
         self.markSelectedView.hidden = YES;
-        self.markLabel.textColor = [UIColor darkGrayColor];
+        self.markLabel.textColor = [UIColor blackColor];
     }
     // mark下选择的状态
     else if (status == LENSudokuNumberStatusMarkSelected) {
         self.markSelectedView.hidden = NO;
-        self.markLabel.textColor = [UIColor darkGrayColor];
+        self.markLabel.textColor = [UIColor blackColor];
     }
     // normal
     else if (status == LENSudokuNumberStatusNormal) {
-//        self.normalLabel.textColor = [UIColor whiteColor];
-        self.normalBgView.backgroundColor = [UIColor blueColor];
+        self.normalLabel.textColor = [UIColor whiteColor];
     }
     // normal下不可点击
     else if (status == LENSudokuNumberStatusNormalEnable) {
-//        self.normalLabel.textColor = [UIColor lightGrayColor];
-        self.normalBgView.backgroundColor = [UIColor lightGrayColor];
+        self.normalLabel.textColor = [UIColor greenColor];
     }
     // normal下隐藏
     else if (status == LENSudokuNumberStatusNormalHidden) {

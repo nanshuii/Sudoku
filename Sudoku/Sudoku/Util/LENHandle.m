@@ -338,9 +338,9 @@
 
 # pragma mark -- sudoku算法一
 + (NSMutableArray *)singlesCreateOne{
-    int maxForSingle = 3; // 每一种隐藏的方式中的最大值
-    int max = 1;
-    int min = 1;
+    int maxForSingle = 4; // 每一种隐藏的方式中的最大值
+    int max = 4;
+    int min = 4;
     // 1代表显示 0代表隐藏
     NSMutableArray *randoms = [NSMutableArray arrayWithCapacity:81];
     for (int i = 0; i < 81; i++) {
@@ -450,7 +450,7 @@
 # pragma mark -- 当前sudoku存储
 + (void)currentSudokuSave:(LENSudokuModel *)model{
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    if (model) {
+    if (model == nil) {
         [defaults removeObjectForKey:LENCurrentSudokuKey];
     } else {
         NSDictionary *dict = [model mj_keyValues];
@@ -464,7 +464,7 @@
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     if ([defaults valueForKey:LENCurrentSudokuKey]) {
         NSDictionary *dict = [defaults valueForKey:LENCurrentSudokuKey];
-        LENSudokuModel *model = [LENSudokuModel mj_setKeyValues:dict];
+        LENSudokuModel *model = [LENSudokuModel mj_objectWithKeyValues:dict];
         return model;
     } else {
         return nil;

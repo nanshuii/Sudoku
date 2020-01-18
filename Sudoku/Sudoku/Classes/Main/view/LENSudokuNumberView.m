@@ -63,8 +63,8 @@
     // items
     for (int i = 0; i < 9; i++) {
         LENSudokuNumberStatus status = LENSudokuNumberStatusNormal;
-        if ([self.normalHiddens containsObject:@(i+1)]) {
-            status = LENSudokuNumberStatusNormalEnable;
+        if ([self.normalHiddens containsObject:[NSNumber numberWithInt:i+1]]) {
+            status = LENSudokuNumberStatusNormalHidden;
         }
         LENSudokuNumberSingleView *view = [[LENSudokuNumberSingleView alloc] initWithFrame:CGRectMake(self.itemMargin * i + self.itemWidth * i, 0, self.itemWidth, self.itemWidth) style:self.style number:i+1 status:status];
         [view setTapBlock:^(int number) {
@@ -100,7 +100,7 @@
                 }
             }
             // 点击mark格子，部分正常显示，部分点击状态
-            else if (sudokuSingle.status == LENSudokuNumberStatusMark) {
+            else if (sudokuSingle.status == LENSudokuSingleStatusmark) {
                 NSMutableArray *marks = sudokuSingle.marks;
                 for (int i = 0; i < self.items.count; i++) {
                     LENSudokuNumberSingleView *item = self.items[i];
@@ -158,7 +158,6 @@
 - (void)normalEnableAll{
     for (int i = 0; i < self.items.count; i++) {
        LENSudokuNumberSingleView *item = self.items[i];
-        SSLog(@"[self.normalHiddens containsObject:@(i+1)] = %i", [self.normalHiddens containsObject:@(i+1)]);
         if ([self.normalHiddens containsObject:@(i+1)]) {
             [item statusUpdateWithStatus:LENSudokuNumberStatusNormalHidden editing:NO];
         } else {

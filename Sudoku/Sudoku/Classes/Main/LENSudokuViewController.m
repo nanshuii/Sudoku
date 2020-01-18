@@ -33,6 +33,7 @@
     self.errorTimes = self.model.errorTimes;
     [self notifications];
     [self configureUI];
+    [self timerCreate];
 }
 
 - (void)viewWillDisappear:(BOOL)animated{
