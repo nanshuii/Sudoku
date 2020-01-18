@@ -33,7 +33,7 @@
     // Do any additional setup after loading the view from its nib.
     self.time = self.model.time;
     self.errorTimes = self.model.errorTimes;
-    self.styleModel = [LENHandle styleModelWithStyle:self.model.style];
+    self.styleModel = [LENHandle styleModelWithStyle:[LENHandle defaultConfigureRead].style];
     [self notifications];
     [self configureUI];
     [self timerCreate];
@@ -83,7 +83,7 @@
 - (void)numbersViewCreate{
     WEAKSELF(weakSelf);
     NSMutableArray *numbers = [LENHandle sodukuFillInNumberAllWithNumbers:self.model.numbers];
-    self.numbersView = [[LENSudokuNumberView alloc] initWithFrame:CGRectMake(0, 0, kFullScreenWidth, 44) style:self.model.style normalHiddens:numbers];
+    self.numbersView = [[LENSudokuNumberView alloc] initWithFrame:CGRectMake(0, 0, kFullScreenWidth, 44) style:[LENHandle defaultConfigureRead].style normalHiddens:numbers];
     [self.numbersView setTapNumberBlock:^(int number, BOOL isEditing) {
         [weakSelf tapNumber:number isEditing:isEditing];
     }];

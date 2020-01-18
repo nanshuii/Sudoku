@@ -45,6 +45,7 @@
 
 # pragma mark -- default key
 #define LENCurrentSudokuKey @"LENCurrentSudokuKey"
+#define LENDefaultConfigureKey @"LENDefaultConfigureKey"
 
 # pragma mark -- notification name
 #define LENNotificationNameDidBecomeActive @"LENNotificationNameDidBecomeActive"

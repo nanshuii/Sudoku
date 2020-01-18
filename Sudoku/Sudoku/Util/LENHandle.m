@@ -12,10 +12,9 @@
 @implementation LENHandle
 
 # pragma mark -- sudoku创建
-+ (LENSudokuModel *)sudoKuCreateWithType:(LENSudokuType)type style:(LENSudokuStyle)style{
++ (LENSudokuModel *)sudoKuCreateWithType:(LENSudokuType)type{
     LENSudokuModel *model = [LENSudokuModel new];
     model.type = type;
-    model.style = style;
     model.singles = [self sudokuSinglesCreateWithType:type];
     model.time = 0;
     model.errorTimes = 0;
@@ -520,6 +519,36 @@
 + (LENSudokuStyleModel *)styleModelWithStyle:(LENSudokuStyle)style{
     return [LENStyleHandle styleModelWithStyle:style];
 }
+
+# pragma mark -- default configure read
++ (LENDefaultConfigModel *)defaultConfigureRead{
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    if ([defaults valueForKey:LENDefaultConfigureKey]) {
+        NSDictionary *dict = [defaults valueForKey:LENDefaultConfigureKey];
+        LENDefaultConfigModel *model = [LENDefaultConfigModel mj_objectWithKeyValues:dict];
+        return model;
+    } else {
+        return [self defaultsConfigureModel];
+    }
+}
+
++ (LENDefaultConfigModel *)defaultsConfigureModel{
+    LENDefaultConfigModel *model = [LENDefaultConfigModel new];
+    model.volume = 1.0;
+    model.timerHidden = NO;
+    model.style = LENSudokuStyleNone;
+    return model;
+}
+
+# pragma mark -- default configure save
++ (void)defaultConfigureSave:(LENDefaultConfigModel *)model{
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    NSDictionary *dict = [model mj_keyValues];
+    [defaults setValue:dict forKey:LENDefaultConfigureKey];
+    [defaults synchronize];
+}
+
+
 
 
 @end

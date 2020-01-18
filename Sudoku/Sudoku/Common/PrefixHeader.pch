@@ -16,6 +16,7 @@
 #import "LENCommonHeader.h"
 #import "LENEnumHeader.h"
 
+#import "LENDefaultConfigModel.h"
 #import "LENSudokuStyleModel.h"
 #import "LENSudokuSingleModel.h"
 #import "LENSudokuModel.h"

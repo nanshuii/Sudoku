@@ -17,7 +17,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// sudoku创建
 /// @param type type description
 /// @param style style description
-+ (LENSudokuModel *)sudoKuCreateWithType:(LENSudokuType)type style:(LENSudokuStyle)style;
++ (LENSudokuModel *)sudoKuCreateWithType:(LENSudokuType)type;
 
 /// 当前sudoku存储
 /// @param model model description
@@ -25,6 +25,13 @@ NS_ASSUME_NONNULL_BEGIN
 
 /// 当前sudoku读取
 + (LENSudokuModel *)currentSudokuRead;
+
+/// 默认配置保存
+/// @param model model description
++ (void)defaultConfigureSave:(LENDefaultConfigModel *)model;
+
+/// 默认配置读取
++ (LENDefaultConfigModel *)defaultConfigureRead;
 
 /// 获取soduku numbers中数量为9的数字
 /// @param numbers numbers description

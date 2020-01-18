@@ -44,7 +44,7 @@
     if (self) {
         self.sudoku = sudoku;
         self.type = sudoku.type;
-        self.style = sudoku.style;
+        self.style = [LENHandle defaultConfigureRead].style;
         self.singles = self.singles = [NSMutableArray arrayWithArray:sudoku.singles];
         self.status = LENSudokuViewStatusNone;
         self.highLights = [NSMutableArray array];
