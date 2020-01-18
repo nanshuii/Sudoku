@@ -100,24 +100,8 @@
 
 # pragma mark -- 随机数生成
 + (NSMutableArray *)sudokuSinglesCreateWithType:(LENSudokuType)type{
-//    NSMutableArray *n = [NSMutableArray array];
-//    NSInteger time = [[NSDate date] timeIntervalSince1970];
-//    for (int i = 0; i < 1000; i++) {
-//        NSMutableArray *numbers = [self numbersCreate];
-//        [n addObject:numbers];
-//    }
-//    NSInteger time1 = [[NSDate date] timeIntervalSince1970];
-//    for (int i = 0; i < n.count; i++) {
-//        BOOL verity = [self veritySudokuWithNumbers:n[i]];
-//        if (verity == NO) {
-//            NSLog(@"不合格");
-//        }
-//    }
-//    NSInteger time2 = [[NSDate date] timeIntervalSince1970];
-//    NSLog(@"%i %i", time1 - time, time2 - time1);
-    
     NSMutableArray *numbers = [self numbersCreate];
-    NSMutableArray *singles = [self singlesCreate];
+    NSMutableArray *singles = [self singlesCreateWithType:type];
     NSMutableArray *models = [NSMutableArray array];
     for (int i = 0; i < 81; i++) {
         LENSudokuSingleModel *single = [LENSudokuSingleModel new];
@@ -321,26 +305,42 @@
 }
 
 # pragma mark -- 显示和隐藏算法的生成
-+ (NSMutableArray *)singlesCreate{
-    return [self singlesCreateOne];
-}
-
-# pragma mark -- 从最小值和最大值之后随机出一个数字
-+ (int)singlesRandomMCreateWithMin:(int)min max:(int)max{
-    int m = max;
-    if (max > min) {
-        int m_ = max - min + 1;
-        int m_r = arc4random_uniform(m_);
-        m = m_r + min;
++ (NSMutableArray *)singlesCreateWithType:(LENSudokuType)type{
+    switch (type) {
+        case LENSudokuTypeOne:
+            return [self singlesCreateOneWithMax:1 min:1 maxForSingle:1];
+            break;
+        case LENSudokuTypeTwo:
+            return [self singlesCreateOneWithMax:2 min:2 maxForSingle:2];
+            break;
+        case LENSudokuTypeThree:
+            return [self singlesCreateOneWithMax:3 min:2 maxForSingle:3];
+            break;
+        case LENSudokuTypeFour:
+            return [self singlesCreateOneWithMax:4 min:3 maxForSingle:4];
+            break;
+        case LENSudokuTypeFive:
+            return [self singlesCreateOneWithMax:5 min:4 maxForSingle:5];
+            break;
+        case LENSudokuTypeSix:
+            return [self singlesCreateOneWithMax:7 min:5 maxForSingle:6];
+            break;
+        case LENSudokuTypeSeven:
+            return [self singlesCreateOneWithMax:7 min:6 maxForSingle:7];
+            break;
+        default:
+            break;
     }
-    return m;
+    // 默认难度一
+    return [self singlesCreateOneWithMax:1 min:1 maxForSingle:1];
 }
 
 # pragma mark -- sudoku算法一
-+ (NSMutableArray *)singlesCreateOne{
-    int maxForSingle = 1; // 每一种隐藏的方式中的最大值
-    int max = 1;
-    int min = 1;
+/// 算法一
+/// @param max max description
+/// @param min min description
+/// @param maxForSingle // 每一种隐藏的方式中的最大值
++ (NSMutableArray *)singlesCreateOneWithMax:(int)max min:(int)min maxForSingle:(int)maxForSingle{
     // 1代表显示 0代表隐藏
     NSMutableArray *randoms = [NSMutableArray arrayWithCapacity:81];
     for (int i = 0; i < 81; i++) {
@@ -382,6 +382,17 @@
     }
     
     return randoms;
+}
+
+# pragma mark -- 从最小值和最大值之后随机出一个数字
++ (int)singlesRandomMCreateWithMin:(int)min max:(int)max{
+    int m = max;
+    if (max > min) {
+        int m_ = max - min + 1;
+        int m_r = arc4random_uniform(m_);
+        m = m_r + min;
+    }
+    return m;
 }
 
 # pragma mark -- 获取可以隐藏的数组 横排

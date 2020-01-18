@@ -11,9 +11,16 @@
 
 // 难度等级
 typedef NS_ENUM(NSUInteger, LENSudokuType) {
-    LENSudokuTypeEasy,
-    LENSudokuTypeMiddle,
-    LENSudokuTypeHard,
+    LENSudokuTypeOne,
+    LENSudokuTypeTwo,
+    LENSudokuTypeThree,
+    LENSudokuTypeFour,
+    LENSudokuTypeFive,
+    LENSudokuTypeSix,
+    LENSudokuTypeSeven,
+    LENSudokuTypeEight,
+    LENSudokuTypeNine,
+    LENSudokuTypeTen,
 };
 
 // 单个格子的状态
