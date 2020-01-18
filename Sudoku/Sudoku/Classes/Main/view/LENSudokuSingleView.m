@@ -26,6 +26,8 @@
 
 @property (nonatomic, strong) UILabel *markLabel;
 
+@property (nonatomic, strong) CABasicAnimation *animation;
+
 
 @end
 
@@ -91,6 +93,10 @@
     [self addGestureRecognizer:tap];
     
     [self configureUIStatus:self.model.status];
+    
+    if (self.model.status == LENSudokuSingleStatusFillIn) {
+        [self animationStart];
+    }
 }
 
 - (void)configureUIStatus:(LENSudokuSingleStatus)status{
@@ -158,6 +164,24 @@
     
 }
 
+# pragma mark -- animation
+- (void)animationStart{
+    if (!_animation) {
+        _animation = [CABasicAnimation animationWithKeyPath:@"transform.rotation.z"];
+        _animation.fromValue = [NSNumber numberWithFloat:0.f];
+        _animation.toValue = [NSNumber numberWithFloat:M_PI * 2];
+        _animation.duration = 1.0;
+        _animation.autoreverses = NO;
+        _animation.autoreverses = NO;
+        _animation.fillMode = kCAFillModeForwards;
+        _animation.repeatCount = 0.6;
+    }
+    [self.normalLabel.layer addAnimation:self.animation forKey:nil];
+}
+
+- (void)animationStop{
+    [self.normalLabel.layer removeAllAnimations];
+}
 
 
 

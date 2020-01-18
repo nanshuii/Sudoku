@@ -127,6 +127,7 @@
     self.errorTimes = self.model.errorTimes;
     self.errorLabel.text = [self errorString];
     [self timerCreate];
+    [self.sudokuView singleAnimationStart];
 }
 
 - (void)willResignActive{

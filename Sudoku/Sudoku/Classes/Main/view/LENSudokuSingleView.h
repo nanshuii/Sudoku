@@ -36,6 +36,12 @@ typedef void(^TapBlock)(NSInteger section, NSInteger row);
 /// @param status status description
 - (void)statusUpdateWithStatus:(LENSudokuSingleStatus)status;
 
+/// 动画开始
+- (void)animationStart;
+
+/// 动画结束
+- (void)animationStop;
+
 @end
 
 NS_ASSUME_NONNULL_END

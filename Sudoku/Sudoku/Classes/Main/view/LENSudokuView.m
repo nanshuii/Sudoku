@@ -347,23 +347,42 @@
         num += 1;
         numbers[number-1] = @(num);
         self.sudoku.numbers = numbers;
-        // 是否全部正确
+        // 是否全部正确，以及动画效果
         if ([self checkAll]) {
             SSLog(@"全部正确");
+            [self singleAnimationStart];
             return;
         }
-        // 判断九宫格正确
-        if ([self checkNineWithSection:single.section row:single.row]) {
-            SSLog(@"九宫格正确");
+        NSMutableArray *animationIndexs = [NSMutableArray array];
+        [animationIndexs addObject:@(index)];
+        // 九宫格
+        NSMutableArray *indexs0 = [self checkNineWithSection:single.section row:single.row];
+        if (indexs0.count == 9) {
+            for (NSNumber *num in indexs0) {
+                if (![animationIndexs containsObject:num]) {
+                    [animationIndexs addObject:num];
+                }
+            }
         }
-        // 判断单行正确
-        if ([self checkWithSection:single.section]) {
-            SSLog(@"单行正确");
+        // 单行
+        NSMutableArray *indexs1 = [self checkWithSection:single.section];
+        if (indexs1.count == 9) {
+            for (NSNumber *num in indexs1) {
+                if (![animationIndexs containsObject:num]) {
+                    [animationIndexs addObject:num];
+                }
+            }
         }
-        // 判断横行正确
-        if ([self checkWithRow:single.section]) {
-            SSLog(@"单列正确");
+        // 单列
+        NSMutableArray *indexs2 = [self checkWithRow:single.row];
+        if (indexs2.count == 9) {
+            for (NSNumber *num in indexs2) {
+                if (![animationIndexs containsObject:num]) {
+                    [animationIndexs addObject:num];
+                }
+            }
         }
+        [self singleAnimationStartWithIndexs:animationIndexs];
         // 对同行，同列，同九宫格内mark的部分取消
         [self markCancelWithSingle:single];
         if (self.inToBlock) {
@@ -442,32 +461,33 @@
 }
 
 # pragma mark -- 横排正确检测
-- (BOOL)checkWithSection:(NSInteger)section{
+- (NSMutableArray *)checkWithSection:(NSInteger)section{
+    NSMutableArray *indexs = [NSMutableArray array];
     for (int i = 0; i < 9; i++) {
         NSInteger index = section * 9 + i;
         LENSudokuSingleModel *single = self.singles[index];
-        if (single.status != LENSudokuSingleStatusFillIn) {
-            return NO;
+        if (single.status == LENSudokuSingleStatusFillIn) {
+            [indexs addObject:@(index)];
         }
     }
-    return YES;
+    return indexs;
 }
 
 # pragma mark -- 竖排正确检测
-- (BOOL)checkWithRow:(NSInteger)row{
+- (NSMutableArray *)checkWithRow:(NSInteger)row{
+    NSMutableArray *indexs = [NSMutableArray array];
     for (int i = 0; i < 9; i++) {
         NSInteger index = i * 9 + row;
         LENSudokuSingleModel *single = self.singles[index];
-        if (single.status != LENSudokuSingleStatusFillIn) {
-            return NO;
+        if (single.status == LENSudokuSingleStatusFillIn) {
+            [indexs addObject:@(index)];
         }
     }
-    return YES;
+    return indexs;
 }
 
-
 # pragma mark -- 九宫格检测
-- (BOOL)checkNineWithSection:(NSInteger)section row:(NSInteger)row{
+- (NSMutableArray *)checkNineWithSection:(NSInteger)section row:(NSInteger)row{
     NSArray *arr0 = @[@0, @1, @2, @9, @10, @11, @18, @19, @20];
     NSArray *arr1 = @[@3, @4, @5, @12, @13, @14, @21, @22, @23];
     NSArray *arr2 = @[@6, @7, @8, @15, @16, @17, @24, @25, @26];
@@ -483,14 +503,15 @@
     NSInteger section_t = section / 3;
     int nineIndex = (int)(section_t * 3 + row_t);
     nine = arr9[nineIndex];
+    NSMutableArray *indexs = [NSMutableArray array];
     for (NSNumber *number in nine) {
         int nine = [number intValue];
         LENSudokuSingleModel *single = self.singles[nine];
-        if (single.status != LENSudokuSingleStatusFillIn) {
-            return NO;
+        if (single.status == LENSudokuSingleStatusFillIn) {
+            [indexs addObject:@(nine)];
         }
     }
-    return YES;
+    return indexs;
 }
 
 # pragma mark -- mark cancel
@@ -593,6 +614,26 @@
         }
     }
     return indexs;
+}
+
+# pragma mark -- 格子动画
+- (void)singleAnimationStart{
+    NSMutableArray *indexs = [NSMutableArray array];
+    for (LENSudokuSingleModel *single in self.singles) {
+        if (single.status == LENSudokuSingleStatusFillIn) {
+            NSInteger index = [self indexWithSection:single.section row:single.row];
+            [indexs addObject:@(index)];
+        }
+    }
+    [self singleAnimationStartWithIndexs:indexs];
+}
+
+- (void)singleAnimationStartWithIndexs:(NSMutableArray *)indexs{
+    for (NSNumber *number in indexs) {
+        NSInteger index = [number integerValue];
+        LENSudokuSingleView *view = self.singleViews[index];
+        [view animationStart];
+    }
 }
 
 # pragma mark -- 复原

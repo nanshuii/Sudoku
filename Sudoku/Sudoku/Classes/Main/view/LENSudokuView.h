@@ -38,6 +38,9 @@ typedef void(^TapSudokuViewBlock)(LENSudokuViewStatus status, LENSudokuSingleMod
 /// @param callback  callback
 - (void)intoNumber:(int)number mark:(BOOL)mark callback:(InToBlock)callback;
 
+/// 格子动画
+- (void)singleAnimationStart;
+
 /// 复原
 - (void)recovery;
 
