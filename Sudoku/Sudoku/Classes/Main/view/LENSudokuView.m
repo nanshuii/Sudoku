@@ -35,6 +35,8 @@
 
 @property (nonatomic, strong) LENSudokuStyleModel *styleModel;
 
+@property (nonatomic, strong) CAKeyframeAnimation *animation;
+
 @end
 
 @implementation LENSudokuView
@@ -390,6 +392,7 @@
         }
     } else {
         SSLog(@"填入错误");
+        [self animationStart];
         NSInteger errorTimes = self.sudoku.errorTimes;
         errorTimes += 1;
         self.sudoku.errorTimes = errorTimes;
@@ -634,6 +637,19 @@
         LENSudokuSingleView *view = self.singleViews[index];
         [view animationStart];
     }
+}
+
+# pragma mark -- 错误时候的动画
+#define angleValue(angle) ((angle) * M_PI / 180.0)//角度数值转换宏
+- (void)animationStart{
+//    [self.bgView.layer removeAllAnimations];
+    if (!_animation) {
+        _animation = [CAKeyframeAnimation animation];
+        _animation.keyPath = @"transform.rotation";
+        _animation.values = @[@(angleValue(-5)),@(angleValue(5)),@(angleValue(-5))];
+        _animation.repeatCount = 2;
+    }
+    [self.layer addAnimation:self.animation forKey:nil];
 }
 
 # pragma mark -- 复原

@@ -24,6 +24,8 @@
 
 @property (nonatomic, assign) NSInteger errorTimes;
 
+@property (nonatomic, strong) CABasicAnimation *errorAnimation;
+
 @end
 
 @implementation LENSudokuViewController
@@ -106,6 +108,7 @@
             [self.numbersView markAdd:markAdd number:markNumber];
         } else {
             if (error) {
+                [self errorAnimationStart];
                 self.errorTimes += 1;
                 self.errorLabel.text = [self errorString];
             } else {
@@ -183,6 +186,20 @@
 - (void)bottomRecovery{
     self.panButton.selected = NO;
     [self.numbersView recovery];
+}
+
+# pragma mark -- error animation
+- (void)errorAnimationStart{
+    [self.errorLabel.layer removeAllAnimations];
+    if (!_errorAnimation) {
+        _errorAnimation = [CABasicAnimation animation];
+        _errorAnimation.keyPath = @"transform.scale";
+        _errorAnimation.toValue = @0.5;
+        _errorAnimation.repeatCount = 1;
+        _errorAnimation.duration = 0.5;
+        _errorAnimation.autoreverses = YES;
+    }
+    [self.errorLabel.layer addAnimation:_errorAnimation forKey:nil];
 }
 
 /*
