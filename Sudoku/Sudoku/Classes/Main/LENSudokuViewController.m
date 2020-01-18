@@ -61,6 +61,8 @@
     self.errorLabel.textColor = self.styleModel.errorTimesTextColor;
     [self sudokuCreate];
     [self numbersViewCreate];
+    BOOL hidden = [LENHandle defaultConfigureRead].timerHidden;
+    self.timeLabel.hidden = hidden;
 }
 
 - (void)sudokuCreate{
