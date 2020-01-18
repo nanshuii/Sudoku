@@ -20,6 +20,16 @@
     // Do any additional setup after loading the view from its nib.
 }
 
+- (void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+    LENSudokuModel *model = [LENHandle currentSudokuRead];
+    if (model) {
+        self.continueButton.hidden = NO;
+    } else {
+        self.continueButton.hidden = YES;
+    }
+}
+
 
 - (IBAction)jump:(id)sender {
     NSLog(@"jump");
@@ -28,6 +38,13 @@
     vc.model = model;
     [self.navigationController pushViewController:vc animated:YES];
     
+}
+
+- (IBAction)continueButtonAction:(id)sender {
+    LENSudokuModel *model = [LENHandle currentSudokuRead];
+    LENSudokuViewController *vc = [LENSudokuViewController new];
+    vc.model = model;
+    [self.navigationController pushViewController:vc animated:YES];
 }
 
 /*

@@ -26,8 +26,13 @@ NS_ASSUME_NONNULL_BEGIN
 /// 当前sudoku读取
 + (LENSudokuModel *)currentSudokuRead;
 
-# pragma mark -- 获取soduku numbers中数量为9的数字
+/// 获取soduku numbers中数量为9的数字
+/// @param numbers numbers description
 + (NSMutableArray *)sodukuFillInNumberAllWithNumbers:(NSMutableArray *)numbers;
+
+/// 根据style返回model
+/// @param style style description
++ (LENSudokuStyleModel *)styleModelWithStyle:(LENSudokuStyle)style;
 
 @end
 

@@ -33,6 +33,8 @@
 
 @property (nonatomic, strong) NSMutableArray *highLights; // 高亮的view indexs集合
 
+@property (nonatomic, strong) LENSudokuStyleModel *styleModel;
+
 @end
 
 @implementation LENSudokuView
@@ -46,6 +48,7 @@
         self.singles = self.singles = [NSMutableArray arrayWithArray:sudoku.singles];
         self.status = LENSudokuViewStatusNone;
         self.highLights = [NSMutableArray array];
+        self.styleModel = [LENHandle styleModelWithStyle:self.style];
         [self configureUI];
     }
     return self;
@@ -66,14 +69,13 @@
 - (void)bgViewCreate{
     self.bgView = [[UIView alloc] initWithFrame:self.bounds];
     self.bgView.layer.borderWidth = self.margin;
-    self.bgView.layer.borderColor = [UIColor grayColor].CGColor;
+    self.bgView.layer.borderColor = self.styleModel.sudokuViewBoardColor.CGColor;
     [self addSubview:self.bgView];
 }
 
 # pragma mark -- 线条创建
 - (void)linesCreate{
     self.lines = [NSMutableArray arrayWithCapacity:18];
-    UIColor *lineColor = [UIColor lightGrayColor];
     CGFloat line_width = self.frame.size.width - self.margin * 2;
     // 横排
     for (int i = 0; i < 9; i++) {
@@ -81,8 +83,10 @@
             continue;
         }
         CGFloat height = self.lineWidth;
+        UIColor *lineColor = self.styleModel.sudokuViewLineColor;
         if (i % 3 == 0) {
             height = self.lineWidthBig;
+            lineColor = self.styleModel.sudokuViewLineBigColor;
         }
         CGFloat x = self.margin;
         CGFloat y = i * self.lineWidth + (int)((i-1) / 3) * (self.lineWidthBig - self.lineWidth) + self.margin + i * self.width;
@@ -97,8 +101,10 @@
             continue;
         }
         CGFloat height = self.lineWidth;
+        UIColor *lineColor = self.styleModel.sudokuViewLineColor;
         if (i % 3 == 0) {
             height = self.lineWidthBig;
+            lineColor = self.styleModel.sudokuViewLineBigColor;
         }
         CGFloat y = self.margin;
         CGFloat x = i * self.lineWidth + (int)((i-1) / 3) * (self.lineWidthBig - self.lineWidth) + self.margin + i * self.width;

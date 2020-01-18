@@ -1,15 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="15505" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="15702" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15510"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15704"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="LENMainViewController">
             <connections>
+                <outlet property="continueButton" destination="GM5-c3-WxP" id="OpS-pz-Fn7"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -19,17 +20,26 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zEs-5H-30x">
-                    <rect key="frame" x="187.5" y="103" width="39" height="30"/>
-                    <state key="normal" title="Jump"/>
+                    <rect key="frame" x="184" y="103" width="46" height="30"/>
+                    <state key="normal" title="新游戏"/>
                     <connections>
                         <action selector="jump:" destination="-1" eventType="touchUpInside" id="tc1-HQ-K8p"/>
+                    </connections>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GM5-c3-WxP">
+                    <rect key="frame" x="176" y="154" width="62" height="30"/>
+                    <state key="normal" title="继续游戏"/>
+                    <connections>
+                        <action selector="continueButtonAction:" destination="-1" eventType="touchUpInside" id="Beu-jU-m3e"/>
                     </connections>
                 </button>
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
                 <constraint firstItem="zEs-5H-30x" firstAttribute="top" secondItem="Q5M-cg-NOt" secondAttribute="top" constant="59" id="6Pf-S7-Szx"/>
+                <constraint firstItem="GM5-c3-WxP" firstAttribute="centerX" secondItem="zEs-5H-30x" secondAttribute="centerX" id="Bni-HX-i7c"/>
                 <constraint firstItem="zEs-5H-30x" firstAttribute="centerX" secondItem="Q5M-cg-NOt" secondAttribute="centerX" id="RLk-yq-Lys"/>
+                <constraint firstItem="GM5-c3-WxP" firstAttribute="top" secondItem="zEs-5H-30x" secondAttribute="bottom" constant="21" id="t12-tM-xIe"/>
             </constraints>
             <viewLayoutGuide key="safeArea" id="Q5M-cg-NOt"/>
             <point key="canvasLocation" x="139" y="154"/>

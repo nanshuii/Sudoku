@@ -7,6 +7,7 @@
 //
 
 #import "LENHandle.h"
+#import "LENStyleHandle.h"
 
 @implementation LENHandle
 
@@ -453,6 +454,12 @@
     if (model == nil) {
         [defaults removeObjectForKey:LENCurrentSudokuKey];
     } else {
+        NSMutableArray *singles = [NSMutableArray array];
+        for (LENSudokuSingleModel *single in model.singles) {
+            NSDictionary *singleDict = [single mj_keyValues];
+            [singles addObject:singleDict];
+        }
+        model.singles = singles;
         NSDictionary *dict = [model mj_keyValues];
         [defaults setValue:dict forKey:LENCurrentSudokuKey];
     }
@@ -465,6 +472,12 @@
     if ([defaults valueForKey:LENCurrentSudokuKey]) {
         NSDictionary *dict = [defaults valueForKey:LENCurrentSudokuKey];
         LENSudokuModel *model = [LENSudokuModel mj_objectWithKeyValues:dict];
+        NSMutableArray *singles = [NSMutableArray array];
+        for (NSDictionary *singleDict in model.singles) {
+            LENSudokuSingleModel *single = [LENSudokuSingleModel mj_objectWithKeyValues:singleDict];
+            [singles addObject:single];
+        }
+        model.singles = singles;
         return model;
     } else {
         return nil;
@@ -503,5 +516,9 @@
     return array;
 }
 
+# pragma mark -- 根据style返回model
++ (LENSudokuStyleModel *)styleModelWithStyle:(LENSudokuStyle)style{
+    return [LENStyleHandle styleModelWithStyle:style];
+}
 
 @end

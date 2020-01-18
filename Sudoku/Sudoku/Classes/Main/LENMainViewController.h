@@ -12,6 +12,9 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface LENMainViewController : LENBaseViewController
 
+@property (weak, nonatomic) IBOutlet UIButton *continueButton;
+
+
 @end
 
 NS_ASSUME_NONNULL_END

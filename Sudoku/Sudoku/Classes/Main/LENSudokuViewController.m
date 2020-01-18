@@ -16,6 +16,8 @@
 
 @property (nonatomic, strong) LENSudokuNumberView *numbersView;
 
+@property (nonatomic, strong) LENSudokuStyleModel *styleModel;
+
 @property (nonatomic, strong) NSTimer *timer;
 
 @property (nonatomic, assign) NSInteger time;
@@ -31,6 +33,7 @@
     // Do any additional setup after loading the view from its nib.
     self.time = self.model.time;
     self.errorTimes = self.model.errorTimes;
+    self.styleModel = [LENHandle styleModelWithStyle:self.model.style];
     [self notifications];
     [self configureUI];
     [self timerCreate];
@@ -51,9 +54,11 @@
 
 # pragma mark -- configureUI
 - (void)configureUI{
-    self.view.backgroundColor = [UIColor groupTableViewBackgroundColor];
+    self.view.backgroundColor = [UIColor whiteColor];
     self.timeLabel.text = [self timeString];
     self.errorLabel.text = [self errorString];
+    self.timeLabel.textColor = self.styleModel.timesTextColor;
+    self.errorLabel.textColor = self.styleModel.errorTimesTextColor;
     [self sudokuCreate];
     [self numbersViewCreate];
 }

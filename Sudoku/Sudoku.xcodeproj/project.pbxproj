@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		50766E2B23D2DE2D00DACDA6 /* LENSudokuStyleModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 50766E2A23D2DE2D00DACDA6 /* LENSudokuStyleModel.m */; };
+		50766E2E23D2E15D00DACDA6 /* LENStyleHandle.m in Sources */ = {isa = PBXBuildFile; fileRef = 50766E2D23D2E15D00DACDA6 /* LENStyleHandle.m */; };
 		5094AF0C23CC88AA001E8569 /* LENSudokuNumberView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5094AF0B23CC88AA001E8569 /* LENSudokuNumberView.m */; };
 		5094AF0F23CC8BD1001E8569 /* LENSudokuNumberSingleView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5094AF0E23CC8BD1001E8569 /* LENSudokuNumberSingleView.m */; };
 		AB01EBD31D4FD5983444BB37 /* libPods-Sudoku.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 58B0A736D4304DA4A575D681 /* libPods-Sudoku.a */; };
@@ -50,6 +52,10 @@
 
 /* Begin PBXFileReference section */
 		3C57E7F0187B3D1095A87E0D /* Pods-Sudoku.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Sudoku.release.xcconfig"; path = "Pods/Target Support Files/Pods-Sudoku/Pods-Sudoku.release.xcconfig"; sourceTree = "<group>"; };
+		50766E2923D2DE2D00DACDA6 /* LENSudokuStyleModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LENSudokuStyleModel.h; sourceTree = "<group>"; };
+		50766E2A23D2DE2D00DACDA6 /* LENSudokuStyleModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LENSudokuStyleModel.m; sourceTree = "<group>"; };
+		50766E2C23D2E15D00DACDA6 /* LENStyleHandle.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LENStyleHandle.h; sourceTree = "<group>"; };
+		50766E2D23D2E15D00DACDA6 /* LENStyleHandle.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LENStyleHandle.m; sourceTree = "<group>"; };
 		5094AF0923CC5F78001E8569 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		5094AF0A23CC88AA001E8569 /* LENSudokuNumberView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LENSudokuNumberView.h; sourceTree = "<group>"; };
 		5094AF0B23CC88AA001E8569 /* LENSudokuNumberView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LENSudokuNumberView.m; sourceTree = "<group>"; };
@@ -218,6 +224,8 @@
 				D3EA346323C310BD00FD9D7B /* LENSudokuModel.m */,
 				D3EA346923C314C200FD9D7B /* LENSudokuSingleModel.h */,
 				D3EA346A23C314C200FD9D7B /* LENSudokuSingleModel.m */,
+				50766E2923D2DE2D00DACDA6 /* LENSudokuStyleModel.h */,
+				50766E2A23D2DE2D00DACDA6 /* LENSudokuStyleModel.m */,
 				D3EA345C23C30BF300FD9D7B /* Base */,
 			);
 			path = Common;
@@ -242,6 +250,8 @@
 			children = (
 				D3EA345823C30B7800FD9D7B /* LENHandle.h */,
 				D3EA345923C30B7800FD9D7B /* LENHandle.m */,
+				50766E2C23D2E15D00DACDA6 /* LENStyleHandle.h */,
+				50766E2D23D2E15D00DACDA6 /* LENStyleHandle.m */,
 			);
 			path = Util;
 			sourceTree = "<group>";
@@ -458,10 +468,12 @@
 			files = (
 				D3EA346B23C314C200FD9D7B /* LENSudokuSingleModel.m in Sources */,
 				D3EA341C23C30A6F00FD9D7B /* ViewController.m in Sources */,
+				50766E2B23D2DE2D00DACDA6 /* LENSudokuStyleModel.m in Sources */,
 				5094AF0F23CC8BD1001E8569 /* LENSudokuNumberSingleView.m in Sources */,
 				D3EA345A23C30B7800FD9D7B /* LENHandle.m in Sources */,
 				D3EA346023C3108800FD9D7B /* LENSudokuViewController.m in Sources */,
 				D3EA346823C3139700FD9D7B /* LENSudokuView.m in Sources */,
+				50766E2E23D2E15D00DACDA6 /* LENStyleHandle.m in Sources */,
 				D3EA341623C30A6F00FD9D7B /* AppDelegate.m in Sources */,
 				D3EA345523C30B4300FD9D7B /* LENMainViewController.m in Sources */,
 				D3EA342723C30A6F00FD9D7B /* main.m in Sources */,

@@ -14,6 +14,8 @@
 
 @property (nonatomic, assign) LENSudokuStyle style;
 
+@property (nonatomic, strong) LENSudokuStyleModel *styleModel;
+
 @property (nonatomic, strong) UIView *normalView; // 在填入数字和没有填入数字的视图
 
 @property (nonatomic, strong) UILabel *normalLabel;
@@ -36,6 +38,7 @@
     if (self) {
         self.model = model;
         self.style = style;
+        self.styleModel = [LENHandle styleModelWithStyle:self.style];
         self.maskLabels = [NSMutableArray arrayWithCapacity:9];
         [self configureUI];
     }
@@ -44,13 +47,13 @@
 
 - (void)configureUI{
     self.normalView = [[UIView alloc] initWithFrame:self.bounds];
-    self.normalView.backgroundColor = [UIColor whiteColor];
+    self.normalView.backgroundColor = self.styleModel.sudokuViewSingleBackgroundColor;
     [self addSubview:self.normalView];
     
     self.normalLabel = [UILabel new];
 //    self.normalLabel.font = [UIFont systemFontOfSize:12];
     self.normalLabel.font = FONTBOLD(18);
-    self.normalLabel.textColor = [UIColor darkGrayColor];
+    self.normalLabel.textColor = self.styleModel.sudokuViewSingleFillInTextColor;
     self.normalLabel.text = [NSString stringWithFormat:@"%li", (long)self.model.fillIn];
     [self.normalView addSubview:self.normalLabel];
     [self.normalLabel mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -58,13 +61,13 @@
         make.centerY.mas_equalTo(self.normalView.mas_centerY);
     }];
     self.markView = [[UIView alloc] initWithFrame:self.bounds];
-    self.markView.backgroundColor = [UIColor whiteColor];
+    self.markView.backgroundColor = self.styleModel.sudokuViewSingleMarkBackgroundColor;
     [self addSubview:self.markView];
     
     CGFloat margin = 2;
 //    self.highLightView = [[UIView alloc] initWithFrame:CGRectMake(margin, margin, self.frame.size.width - margin * 2,  self.frame.size.width - margin * 2)];
     self.highLightView = [[UIView alloc] initWithFrame:self.bounds];
-    self.highLightView.backgroundColor = [UIColor lightGrayColor];
+    self.highLightView.backgroundColor = self.styleModel.sudokuViewSingleHighLightBackgroundColor;
 //    self.highLightView.layer.borderColor = [UIColor redColor].CGColor;
 //    self.highLightView.layer.borderWidth = 2;
     self.highLightView.alpha = 0.3;
@@ -74,10 +77,10 @@
     self.markLabel = [[UILabel alloc] initWithFrame:self.markView.bounds];
     //    self.markLabel.font = [UIFont systemFontOfSize:8];
     self.markLabel.font = FONTDEFAULT(10);
-    self.markLabel.textColor = [UIColor blackColor];
+    self.markLabel.textColor = self.styleModel.sudokuViewSingleMarkTextColor;
     self.markLabel.textAlignment = NSTextAlignmentCenter;
     self.markLabel.numberOfLines = 0;
-    NSString *markString = @"";
+    NSString *markString = [self marksString];
     self.markLabel.text = markString;
     [self.markView addSubview:self.markLabel];
     [self.markLabel mas_makeConstraints:^(MASConstraintMaker *make) {
