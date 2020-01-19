@@ -8,6 +8,7 @@
 
 #import "LENSudokuView.h"
 #import "LENSudokuSingleView.h"
+#import "LENSudokuSupposeView.h"
 
 @interface LENSudokuView()
 
@@ -36,6 +37,8 @@
 @property (nonatomic, strong) LENSudokuStyleModel *styleModel;
 
 @property (nonatomic, strong) CAKeyframeAnimation *animation;
+
+@property (nonatomic, strong) LENSudokuSupposeView *supposeView;
 
 @end
 
@@ -93,6 +96,9 @@
         CGFloat x = self.margin;
         CGFloat y = i * self.lineWidth + (int)((i-1) / 3) * (self.lineWidthBig - self.lineWidth) + self.margin + i * self.width;
         UIView *line = [[UIView alloc] initWithFrame:CGRectMake(x, y, line_width, height)];
+        if (i % 3 != 0) {
+            line.alpha = 0.5;
+        }
         line.backgroundColor = lineColor;
         [self addSubview:line];
         [self.lines addObject:line];
@@ -111,6 +117,9 @@
         CGFloat y = self.margin;
         CGFloat x = i * self.lineWidth + (int)((i-1) / 3) * (self.lineWidthBig - self.lineWidth) + self.margin + i * self.width;
         UIView *line = [[UIView alloc] initWithFrame:CGRectMake(x, y, height, line_width)];
+        if (i % 3 != 0) {
+            line.alpha = 0.6;
+        }
         line.backgroundColor = lineColor;
         [self addSubview:line];
         [self.lines addObject:line];
@@ -128,7 +137,9 @@
         CGFloat y = section * self.lineWidth + (int)(section / 3) * (self.lineWidthBig - self.lineWidth) + self.margin + section * self.width;
         LENSudokuSingleView *view = [[LENSudokuSingleView alloc] initWithFrame:CGRectMake(x, y, self.width, self.width) model:model style:self.style];
         [view setTapBlock:^(NSInteger section, NSInteger row) {
-            [weakSelf singlesTapWithSingle:model];
+            NSInteger index = [LENHandle indexWithSection:section row:row];
+            LENSudokuSingleModel *model_t = self.singles[index];
+            [weakSelf singlesTapWithSingle:model_t];
         }];
         [self addSubview:view];
         [self.singleViews addObject:view];
@@ -146,19 +157,20 @@
             // 进入到准备填入数字或者填入标记的状态
             self.status = LENSudokuViewStatusPrepareFillInOrMask;
             // 单格子高亮
-            NSInteger index = [self indexWithSection:single.section row:single.row];
-            [self highLightShowWithIndexs:@[@(index)]];
+            NSInteger index_t = [LENHandle indexWithSection:single.section row:single.row];
+            [self highLightShowWithIndexs:@[@(index_t)]];
         }
         else if (self.status == LENSudokuViewStatusPrepareFillInOrMask) {
+            self.status = LENSudokuViewStatusPrepareFillInOrMask;
             // 准备填入数字或者填入标记的状态 点击相同格子或者不同格子
-            NSInteger index = [self.highLights[0] integerValue]; // 上一次高亮的格子
-            NSInteger currenIndex = [self indexWithSection:single.section row:single.row]; // 这次点击的格子
-            if (index == currenIndex) {
+            NSInteger index_t = [self.highLights[0] integerValue]; // 上一次高亮的格子
+            NSInteger currenIndex = [LENHandle indexWithSection:single.section row:single.row]; // 这次点击的格子
+            if (index_t == currenIndex) {
                 // 相同格子不做处理
                 return;
             }
             // 不同的格子
-            [self highLightHiddenWithIndexs:@[@(index)]];
+            [self highLightHiddenWithIndexs:@[@(index_t)]];
             [self highLightShowWithIndexs:@[@(currenIndex)]];
         }
         else if (self.status == LENSudokuViewStatusHighLightPart) {
@@ -166,8 +178,8 @@
             NSMutableArray *array = [NSMutableArray arrayWithArray:self.highLights];
             [self highLightHiddenWithIndexs:array];
             self.status = LENSudokuViewStatusPrepareFillInOrMask;
-            NSInteger index = [self indexWithSection:single.section row:single.row];
-            [self highLightShowWithIndexs:@[@(index)]];
+            NSInteger index_t = [LENHandle indexWithSection:single.section row:single.row];
+            [self highLightShowWithIndexs:@[@(index_t)]];
         }
     }
     
@@ -177,19 +189,19 @@
             // 进入到准备填入数字或者填入标记的状态
             self.status = LENSudokuViewStatusPrepareFillInOrMask;
             // 单格子高亮
-            NSInteger index = [self indexWithSection:single.section row:single.row];
-            [self highLightShowWithIndexs:@[@(index)]];
+            NSInteger index_t = [LENHandle indexWithSection:single.section row:single.row];
+            [self highLightShowWithIndexs:@[@(index_t)]];
         }
         else if (self.status == LENSudokuViewStatusPrepareFillInOrMask) {
             // 准备填入数字或者填入标记的状态 点击相同格子或者不同格子
-            NSInteger index = [self.highLights[0] integerValue]; // 上一次高亮的格子
-            NSInteger currenIndex = [self indexWithSection:single.section row:single.row]; // 这次点击的格子
-            if (index == currenIndex) {
+            NSInteger index_t = [self.highLights[0] integerValue]; // 上一次高亮的格子
+            NSInteger currenIndex = [LENHandle indexWithSection:single.section row:single.row];
+            if (index_t == currenIndex) {
                 // 相同格子不做处理
                 return;
             }
             // 不同的格子
-            [self highLightHiddenWithIndexs:@[@(index)]];
+            [self highLightHiddenWithIndexs:@[@(index_t)]];
             [self highLightShowWithIndexs:@[@(currenIndex)]];
         }
         else if (self.status == LENSudokuViewStatusHighLightPart) {
@@ -197,8 +209,8 @@
             NSMutableArray *array = [NSMutableArray arrayWithArray:self.highLights];
             [self highLightHiddenWithIndexs:array];
             self.status = LENSudokuViewStatusPrepareFillInOrMask;
-            NSInteger index = [self indexWithSection:single.section row:single.row];
-            [self highLightShowWithIndexs:@[@(index)]];
+            NSInteger index_t = [LENHandle indexWithSection:single.section row:single.row];
+            [self highLightShowWithIndexs:@[@(index_t)]];
         }
     }
     
@@ -212,8 +224,8 @@
             for (LENSudokuSingleModel *model in self.singles) {
                 NSInteger fillIn_t = model.fillIn;
                 if (fillIn == fillIn_t && model.status == LENSudokuSingleStatusFillIn) {
-                    NSInteger index = [self indexWithSection:model.section row:model.row];
-                    [indexs addObject:@(index)];
+                    NSInteger index_t = [LENHandle indexWithSection:model.section row:model.row];
+                    [indexs addObject:@(index_t)];
                 }
             }
             [self highLightShowWithIndexs:indexs];
@@ -229,8 +241,8 @@
             for (LENSudokuSingleModel *model in self.singles) {
                 NSInteger fillIn_t = model.fillIn;
                 if (fillIn == fillIn_t && model.status == LENSudokuSingleStatusFillIn) {
-                    NSInteger index = [self indexWithSection:model.section row:model.row];
-                    [indexs addObject:@(index)];
+                    NSInteger index_t = [LENHandle indexWithSection:single.section row:single.row];
+                    [indexs addObject:@(index_t)];
                 }
             }
             [self highLightShowWithIndexs:indexs];
@@ -252,8 +264,8 @@
             for (LENSudokuSingleModel *model in self.singles) {
                 NSInteger fillIn_t = model.fillIn;
                 if (fillInCurrent == fillIn_t && model.status == LENSudokuSingleStatusFillIn) {
-                    NSInteger index = [self indexWithSection:model.section row:model.row];
-                    [indexs addObject:@(index)];
+                    NSInteger index_t = [LENHandle indexWithSection:model.section row:model.row];
+                    [indexs addObject:@(index_t)];
                 }
             }
             [self highLightShowWithIndexs:indexs];
@@ -264,11 +276,6 @@
     if (self.tapBlock) {
         self.tapBlock(self.status, self.currentSingle);
     }
-}
-
-# pragma mark -- section row index 互转
-- (NSInteger)indexWithSection:(NSInteger)section row:(NSInteger)row{
-    return section * 9 + row;
 }
 
 # pragma mark -- 高亮显示格子和隐藏高亮个字
@@ -292,6 +299,7 @@
 
 # pragma mark -- 填入数字
 - (void)intoNumber:(int)number mark:(BOOL)mark callback:(nonnull InToBlock)callback{
+    SSLog(@"into number");
     self.inToBlock = callback;
     if (self.status == LENSudokuViewStatusNone) {
         SSLog(@"还没选择格子");
@@ -338,7 +346,7 @@
         for (LENSudokuSingleModel *model in self.singles) {
             NSInteger fillIn_t = model.fillIn;
             if (fillIn == fillIn_t && model.status == LENSudokuSingleStatusFillIn) {
-                NSInteger index = [self indexWithSection:model.section row:model.row];
+                NSInteger index = [LENHandle indexWithSection:model.section row:model.row];
                 [indexs addObject:@(index)];
             }
         }
@@ -387,6 +395,10 @@
         [self singleAnimationStartWithIndexs:animationIndexs];
         // 对同行，同列，同九宫格内mark的部分取消
         [self markCancelWithSingle:single];
+        // 对supposeView的影响
+        if (_supposeView) {
+            [_supposeView updateSudokuViewIntoNumber:number index:index];
+        }
         if (self.inToBlock) {
             self.inToBlock(NO, numbers, NO, -1, NO);
         }
@@ -624,7 +636,7 @@
     NSMutableArray *indexs = [NSMutableArray array];
     for (LENSudokuSingleModel *single in self.singles) {
         if (single.status == LENSudokuSingleStatusFillIn) {
-            NSInteger index = [self indexWithSection:single.section row:single.row];
+            NSInteger index = [LENHandle indexWithSection:single.section row:single.row];
             [indexs addObject:@(index)];
         }
     }
@@ -663,6 +675,48 @@
     self.status = LENSudokuViewStatusNone;
     // currenSingle nil
     self.currentSingle = nil;
+    // 去除supposeView
+    if (_supposeView) {
+        [_supposeView removeFromSuperview];
+        _supposeView = nil;
+    }
+}
+
+# pragma mark -- suppose
+- (void)supposeShow:(BOOL)show{
+    if (show) {
+        // 高亮还原
+        if (self.status != LENSudokuViewStatusNone) {
+            self.status = LENSudokuViewStatusNone;
+            if (self.highLights.count > 0) {
+                NSMutableArray *indexs = [NSMutableArray arrayWithArray:self.highLights];
+                [self highLightHiddenWithIndexs:indexs];
+            }
+        }
+        // suppose view
+        if (!_supposeView) {
+            _supposeView = [[LENSudokuSupposeView alloc] initWithFrame:self.bounds singles:self.singles singleViews:self.singleViews];
+            [self addSubview:_supposeView];
+        }
+        self.supposeView.hidden = NO;
+    } else {
+        if (_supposeView) {
+            [_supposeView hiddenView];
+            _supposeView.hidden = YES;
+        }
+    }
+}
+
+- (void)supposeIntoNumber:(int)number{
+    if (_supposeView) {
+        [_supposeView intoNumber:number];
+    }
+}
+
+- (void)supposeClear{
+    if (_supposeView) {
+        [_supposeView clear];
+    }
 }
 
 

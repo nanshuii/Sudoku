@@ -42,6 +42,9 @@ typedef void(^TapNumberBlock)(int number, BOOL isEditing);
 /// @param number number description
 - (void)markAdd:(BOOL)add number:(int)number;
 
+/// suppose模式开启
+- (void)supposeOpen;
+
 /// 复原
 - (void)recovery;
 

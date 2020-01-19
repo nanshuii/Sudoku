@@ -23,11 +23,19 @@ typedef NS_ENUM(NSUInteger, LENSudokuType) {
     LENSudokuTypeTen,
 };
 
+// controller status
+typedef NS_ENUM(NSUInteger, LENSudokuStatus) {
+    LENSudokuStatusNone,
+    LENSudokuStatusSuppose,
+};
+
 // 单个格子的状态
 typedef NS_ENUM(NSUInteger, LENSudokuSingleStatus) {
     LENSudokuSingleStatusNone, // 空白
     LENSudokuSingleStatusFillIn, // 已经填入数字
     LENSudokuSingleStatusmark, // 标记
+    LENSudokuSingleStatusSupposeFillIn, // 假设的填入数字
+    LENSudokuSingleStatusSupposeFillInError, // 假设的填入数字错误
 };
 
 // 样式

@@ -12,6 +12,8 @@
 
 @interface LENSudokuViewController ()
 
+@property (nonatomic, assign) LENSudokuStatus status;
+
 @property (nonatomic, strong) LENSudokuView *sudokuView;
 
 @property (nonatomic, strong) LENSudokuNumberView *numbersView;
@@ -36,6 +38,7 @@
     self.time = self.model.time;
     self.errorTimes = self.model.errorTimes;
     self.styleModel = [LENHandle styleModelWithStyle:[LENHandle defaultConfigureRead].style];
+    self.status = LENSudokuStatusNone;
     [self notifications];
     [self configureUI];
     [self timerCreate];
@@ -56,7 +59,8 @@
 
 # pragma mark -- configureUI
 - (void)configureUI{
-    self.view.backgroundColor = [UIColor whiteColor];
+    self.view.backgroundColor = [UIColor groupTableViewBackgroundColor];
+    [self topViewCreate];
     self.timeLabel.text = [self timeString];
     self.errorLabel.text = [self errorString];
     self.timeLabel.textColor = self.styleModel.timesTextColor;
@@ -103,23 +107,28 @@
 
 # pragma mark -- 点击数字
 - (void)tapNumber:(int)number isEditing:(BOOL)isEditing{
-    [self.sudokuView intoNumber:number mark:self.numbersView.isEditing callback:^(BOOL error, NSMutableArray * _Nullable numbers, BOOL mark, int markNumber, BOOL markAdd) {
-        if (mark) {
-            [self.numbersView markAdd:markAdd number:markNumber];
-        } else {
-            if (error) {
-                [self errorAnimationStart];
-                self.errorTimes += 1;
-                self.errorLabel.text = [self errorString];
+    if (self.status == LENSudokuStatusNone) {
+        [self.sudokuView intoNumber:number mark:self.numbersView.isEditing callback:^(BOOL error, NSMutableArray * _Nullable numbers, BOOL mark, int markNumber, BOOL markAdd) {
+            if (mark) {
+                [self.numbersView markAdd:markAdd number:markNumber];
             } else {
-                // hiddenNumbers获取
-                NSMutableArray *nums = [LENHandle sodukuFillInNumberAllWithNumbers:numbers];
-                [self.numbersView normalHiddensUpdate:nums];
-                // 因为填入正确所以变为了部分高亮，normal下的numbersView变为不可点击的模式
-                [self.numbersView normalEnableAll];
+                if (error) {
+                    [self errorAnimationStart];
+                    self.errorTimes += 1;
+                    self.errorLabel.text = [self errorString];
+                } else {
+                    // hiddenNumbers获取
+                    NSMutableArray *nums = [LENHandle sodukuFillInNumberAllWithNumbers:numbers];
+                    [self.numbersView normalHiddensUpdate:nums];
+                    // 因为填入正确所以变为了部分高亮，normal下的numbersView变为不可点击的模式
+                    [self.numbersView normalEnableAll];
+                }
             }
-        }
-    }];;
+        }];;
+    }
+    else if (self.status == LENSudokuStatusSuppose) {
+        [self.sudokuView supposeIntoNumber:number];
+    }
 }
 
 # pragma mark -- 前台和后台
@@ -200,6 +209,47 @@
         _errorAnimation.autoreverses = YES;
     }
     [self.errorLabel.layer addAnimation:_errorAnimation forKey:nil];
+}
+
+# pragma mark -- top view
+- (void)topViewCreate{
+    self.clearButton.hidden = YES;
+    [self.supposeButton setTitle:@"Suppose" forState:(UIControlStateNormal)];
+    [self.supposeButton setTitle:@"Suppose" forState:(UIControlStateSelected)];
+    [self.supposeButton setTitleColor:[UIColor blueColor] forState:(UIControlStateNormal)];
+    [self.supposeButton setTitleColor:[UIColor whiteColor] forState:(UIControlStateSelected)];
+    [self.supposeButton.titleLabel setFont:FONTBOLD(15)];
+}
+
+- (IBAction)supposeButtonAction:(UIButton *)sender {
+    if (sender.selected) {
+        [self statusChangeWithStatus:LENSudokuStatusNone];
+    } else {
+        [self statusChangeWithStatus:LENSudokuStatusSuppose];
+    }
+}
+
+- (IBAction)clearButtonAction:(UIButton *)sender {
+    [self.sudokuView supposeClear];
+}
+
+# pragma mark -- status change
+- (void)statusChangeWithStatus:(LENSudokuStatus)status{
+    if (self.status == LENSudokuStatusNone && status == LENSudokuStatusSuppose) {
+        self.supposeButton.selected = YES;
+        self.clearButton.hidden = NO;
+        [self.sudokuView supposeShow:YES];
+        self.panButton.hidden = YES;
+        [self.numbersView normalEnableAll];
+    }
+    else if (self.status == LENSudokuStatusSuppose && status == LENSudokuStatusNone) {
+        self.supposeButton.selected = NO;
+        self.clearButton.hidden = YES;
+        [self.sudokuView supposeShow:NO];
+        self.panButton.hidden = NO;
+        [self.numbersView recovery];
+    }
+    self.status = status;
 }
 
 /*

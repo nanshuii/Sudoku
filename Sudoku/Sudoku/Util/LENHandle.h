@@ -41,6 +41,11 @@ NS_ASSUME_NONNULL_BEGIN
 /// @param style style description
 + (LENSudokuStyleModel *)styleModelWithStyle:(LENSudokuStyle)style;
 
+/// sudoku根据section和row返回index
+/// @param section section description
+/// @param row row description
++ (NSInteger)indexWithSection:(NSInteger)section row:(NSInteger)row;
+
 @end
 
 NS_ASSUME_NONNULL_END

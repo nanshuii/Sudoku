@@ -559,7 +559,10 @@
     [defaults synchronize];
 }
 
-
+# pragma mark -- sudoku根据section和row返回index
++ (NSInteger)indexWithSection:(NSInteger)section row:(NSInteger)row{
+    return section * 9 + row;
+}
 
 
 @end

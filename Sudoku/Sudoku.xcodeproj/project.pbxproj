@@ -10,6 +10,8 @@
 		50766E2B23D2DE2D00DACDA6 /* LENSudokuStyleModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 50766E2A23D2DE2D00DACDA6 /* LENSudokuStyleModel.m */; };
 		50766E2E23D2E15D00DACDA6 /* LENStyleHandle.m in Sources */ = {isa = PBXBuildFile; fileRef = 50766E2D23D2E15D00DACDA6 /* LENStyleHandle.m */; };
 		50766E3123D34CE500DACDA6 /* LENDefaultConfigModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 50766E3023D34CE500DACDA6 /* LENDefaultConfigModel.m */; };
+		50766E3423D4555700DACDA6 /* LENSudokuSupposeView.m in Sources */ = {isa = PBXBuildFile; fileRef = 50766E3323D4555700DACDA6 /* LENSudokuSupposeView.m */; };
+		50766E3723D45A6900DACDA6 /* LENSudokuSupposeSingleView.m in Sources */ = {isa = PBXBuildFile; fileRef = 50766E3623D45A6900DACDA6 /* LENSudokuSupposeSingleView.m */; };
 		5094AF0C23CC88AA001E8569 /* LENSudokuNumberView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5094AF0B23CC88AA001E8569 /* LENSudokuNumberView.m */; };
 		5094AF0F23CC8BD1001E8569 /* LENSudokuNumberSingleView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5094AF0E23CC8BD1001E8569 /* LENSudokuNumberSingleView.m */; };
 		AB01EBD31D4FD5983444BB37 /* libPods-Sudoku.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 58B0A736D4304DA4A575D681 /* libPods-Sudoku.a */; };
@@ -59,6 +61,10 @@
 		50766E2D23D2E15D00DACDA6 /* LENStyleHandle.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LENStyleHandle.m; sourceTree = "<group>"; };
 		50766E2F23D34CE500DACDA6 /* LENDefaultConfigModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LENDefaultConfigModel.h; sourceTree = "<group>"; };
 		50766E3023D34CE500DACDA6 /* LENDefaultConfigModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LENDefaultConfigModel.m; sourceTree = "<group>"; };
+		50766E3223D4555700DACDA6 /* LENSudokuSupposeView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LENSudokuSupposeView.h; sourceTree = "<group>"; };
+		50766E3323D4555700DACDA6 /* LENSudokuSupposeView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LENSudokuSupposeView.m; sourceTree = "<group>"; };
+		50766E3523D45A6900DACDA6 /* LENSudokuSupposeSingleView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LENSudokuSupposeSingleView.h; sourceTree = "<group>"; };
+		50766E3623D45A6900DACDA6 /* LENSudokuSupposeSingleView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LENSudokuSupposeSingleView.m; sourceTree = "<group>"; };
 		5094AF0923CC5F78001E8569 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		5094AF0A23CC88AA001E8569 /* LENSudokuNumberView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LENSudokuNumberView.h; sourceTree = "<group>"; };
 		5094AF0B23CC88AA001E8569 /* LENSudokuNumberView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LENSudokuNumberView.m; sourceTree = "<group>"; };
@@ -278,6 +284,10 @@
 				D3EA346723C3139700FD9D7B /* LENSudokuView.m */,
 				D3EA346D23C31ECF00FD9D7B /* LENSudokuSingleView.h */,
 				D3EA346E23C31ECF00FD9D7B /* LENSudokuSingleView.m */,
+				50766E3223D4555700DACDA6 /* LENSudokuSupposeView.h */,
+				50766E3323D4555700DACDA6 /* LENSudokuSupposeView.m */,
+				50766E3523D45A6900DACDA6 /* LENSudokuSupposeSingleView.h */,
+				50766E3623D45A6900DACDA6 /* LENSudokuSupposeSingleView.m */,
 				5094AF0A23CC88AA001E8569 /* LENSudokuNumberView.h */,
 				5094AF0B23CC88AA001E8569 /* LENSudokuNumberView.m */,
 				5094AF0D23CC8BD1001E8569 /* LENSudokuNumberSingleView.h */,
@@ -476,10 +486,12 @@
 				50766E2B23D2DE2D00DACDA6 /* LENSudokuStyleModel.m in Sources */,
 				5094AF0F23CC8BD1001E8569 /* LENSudokuNumberSingleView.m in Sources */,
 				D3EA345A23C30B7800FD9D7B /* LENHandle.m in Sources */,
+				50766E3723D45A6900DACDA6 /* LENSudokuSupposeSingleView.m in Sources */,
 				D3EA346023C3108800FD9D7B /* LENSudokuViewController.m in Sources */,
 				D3EA346823C3139700FD9D7B /* LENSudokuView.m in Sources */,
 				50766E2E23D2E15D00DACDA6 /* LENStyleHandle.m in Sources */,
 				D3EA341623C30A6F00FD9D7B /* AppDelegate.m in Sources */,
+				50766E3423D4555700DACDA6 /* LENSudokuSupposeView.m in Sources */,
 				D3EA345523C30B4300FD9D7B /* LENMainViewController.m in Sources */,
 				D3EA342723C30A6F00FD9D7B /* main.m in Sources */,
 				D3EA346423C310BD00FD9D7B /* LENSudokuModel.m in Sources */,

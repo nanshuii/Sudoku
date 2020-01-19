@@ -14,6 +14,10 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic, strong) LENSudokuModel *model;
 
+@property (weak, nonatomic) IBOutlet UIButton *clearButton;
+
+@property (weak, nonatomic) IBOutlet UIButton *supposeButton;
+
 @property (weak, nonatomic) IBOutlet UIView *contentView;
 
 @property (weak, nonatomic) IBOutlet UIView *bottomView;

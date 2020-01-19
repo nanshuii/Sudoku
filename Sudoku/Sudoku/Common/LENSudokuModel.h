@@ -14,13 +14,13 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic, assign) LENSudokuType type; // 难度
 
-@property (nonatomic, copy) NSMutableArray *singles;
+@property (nonatomic, strong) NSMutableArray *singles;
 
 @property (nonatomic, assign) NSInteger time; // 时间 单位秒
 
 @property (nonatomic, assign) NSInteger errorTimes; // 错误次数
 
-@property (nonatomic, copy) NSMutableArray *numbers; // 已经填入的所有数字数量集合 1-9排列
+@property (nonatomic, strong) NSMutableArray *numbers; // 已经填入的所有数字数量集合 1-9排列
 
 
 @end

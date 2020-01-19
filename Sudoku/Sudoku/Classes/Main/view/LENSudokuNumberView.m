@@ -166,6 +166,18 @@
     }
 }
 
+# pragma mark -- normal下除了要隐藏的部分，全部变为normal状态
+- (void)normalAll{
+    for (int i = 0; i < self.items.count; i++) {
+       LENSudokuNumberSingleView *item = self.items[i];
+        if ([self.normalHiddens containsObject:@(i+1)]) {
+            [item statusUpdateWithStatus:LENSudokuNumberStatusNormalHidden editing:NO];
+        } else {
+            [item statusUpdateWithStatus:LENSudokuNumberStatusNormal editing:NO];
+        }
+    }
+}
+
 # pragma mark -- mark模式下因为键入的关系，减少或增加markSelected状态的值
 - (void)markAdd:(BOOL)add number:(int)number{
     LENSudokuNumberSingleView *item = self.items[number-1];
@@ -174,6 +186,12 @@
     } else {
         [item statusUpdateWithStatus:(LENSudokuNumberStatusMark) editing:YES];
     }
+}
+
+# pragma mark -- suppose
+- (void)supposeOpen{
+    self.isEditing = NO;
+    [self normalAll];
 }
 
 # pragma mark -- 复原

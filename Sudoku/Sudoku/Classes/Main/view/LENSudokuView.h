@@ -44,6 +44,17 @@ typedef void(^TapSudokuViewBlock)(LENSudokuViewStatus status, LENSudokuSingleMod
 /// 复原
 - (void)recovery;
 
+/// 开启假设页面
+/// @param show show description
+- (void)supposeShow:(BOOL)show;
+
+/// 假设页面清理
+- (void)supposeClear;
+
+/// 假设输入数字
+/// @param number number description
+- (void)supposeIntoNumber:(int)number;
+
 @end
 
 NS_ASSUME_NONNULL_END

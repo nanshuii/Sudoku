@@ -11,10 +11,12 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="LENSudokuViewController">
             <connections>
                 <outlet property="bottomView" destination="6Ez-SY-x1c" id="Fv6-tf-twj"/>
+                <outlet property="clearButton" destination="Mea-bX-q4a" id="Wu1-P8-yqP"/>
                 <outlet property="contentView" destination="Afn-AV-Ir8" id="muh-aK-mf0"/>
                 <outlet property="errorLabel" destination="Mp2-in-pZf" id="5Ou-96-Sfw"/>
                 <outlet property="numberView" destination="YWI-fs-5Vd" id="Fjk-Iv-h8e"/>
                 <outlet property="panButton" destination="22n-8v-ftd" id="gf8-uG-2zX"/>
+                <outlet property="supposeButton" destination="VEJ-dk-y0H" id="lku-nw-zsV"/>
                 <outlet property="timeLabel" destination="0vJ-GC-arU" id="dO7-jV-db5"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
@@ -26,9 +28,29 @@
             <subviews>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9sT-cU-O3K">
                     <rect key="frame" x="0.0" y="62" width="414" height="80"/>
+                    <subviews>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VEJ-dk-y0H">
+                            <rect key="frame" x="333" y="50" width="61" height="30"/>
+                            <state key="normal" title="Suppose"/>
+                            <connections>
+                                <action selector="supposeButtonAction:" destination="-1" eventType="touchUpInside" id="fiy-Mb-52n"/>
+                            </connections>
+                        </button>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Mea-bX-q4a">
+                            <rect key="frame" x="20" y="50" width="36" height="30"/>
+                            <state key="normal" title="Clear"/>
+                            <connections>
+                                <action selector="clearButtonAction:" destination="-1" eventType="touchUpInside" id="qAn-iw-3D6"/>
+                            </connections>
+                        </button>
+                    </subviews>
                     <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                     <constraints>
+                        <constraint firstItem="Mea-bX-q4a" firstAttribute="leading" secondItem="9sT-cU-O3K" secondAttribute="leading" constant="20" id="Gug-vB-jsS"/>
+                        <constraint firstItem="Mea-bX-q4a" firstAttribute="centerY" secondItem="VEJ-dk-y0H" secondAttribute="centerY" id="Hya-gf-f4v"/>
+                        <constraint firstAttribute="trailing" secondItem="VEJ-dk-y0H" secondAttribute="trailing" constant="20" id="cXk-8Q-CEZ"/>
                         <constraint firstAttribute="height" constant="80" id="cxU-Wg-6ep"/>
+                        <constraint firstAttribute="bottom" secondItem="VEJ-dk-y0H" secondAttribute="bottom" id="gx3-fq-J3R"/>
                     </constraints>
                 </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Afn-AV-Ir8">
