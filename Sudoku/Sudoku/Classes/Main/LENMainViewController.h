@@ -12,7 +12,13 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface LENMainViewController : LENBaseViewController
 
-@property (weak, nonatomic) IBOutlet UIButton *continueButton;
+@property (weak, nonatomic) IBOutlet UIButton *gameNewButton;
+
+@property (weak, nonatomic) IBOutlet UIButton *gamaContinueButton;
+
+
+
+
 
 
 @end
