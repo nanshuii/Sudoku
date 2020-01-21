@@ -53,10 +53,10 @@
 - (void)configureUI{
     self.backgroundColor = [UIColor clearColor];
     // bgView
-//    self.bgView = [[UIView alloc] initWithFrame:self.bounds];
-//    self.bgView.backgroundColor = self.styleModel.sudokuSupposeBackgroundColor;
-//    self.bgView.alpha = 0.2;
-//    [self addSubview:self.bgView];
+    self.bgView = [[UIView alloc] initWithFrame:self.bounds];
+    self.bgView.backgroundColor = self.styleModel.sudokuSupposeBackgroundColor;
+    self.bgView.alpha = 0.2;
+    [self addSubview:self.bgView];
     // 里面的构成
     [self supposeSinglesCreate];
     // 页面构成

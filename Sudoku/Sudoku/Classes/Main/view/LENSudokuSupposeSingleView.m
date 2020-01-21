@@ -40,7 +40,11 @@
 - (void)configureUI{
     self.backgroundColor = [UIColor clearColor];
     self.normalView = [[UIView alloc] initWithFrame:self.bounds];
-    self.normalView.backgroundColor = self.styleModel.sudokuSupposeSingleBackgroundColor;
+    if ([LENHandle defaultConfigureRead].supposeCloseMark) {
+        self.normalView.backgroundColor = self.styleModel.sudokuSupposeSingleBackgroundColor;
+    } else {
+        self.normalView.backgroundColor = [UIColor clearColor];
+    }
     [self addSubview:self.normalView];
     
     self.normalLabel = [UILabel new];

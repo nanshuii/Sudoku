@@ -14,10 +14,6 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic, strong) LENSudokuModel *model;
 
-@property (weak, nonatomic) IBOutlet UIButton *clearButton;
-
-@property (weak, nonatomic) IBOutlet UIButton *supposeButton;
-
 @property (weak, nonatomic) IBOutlet UIView *contentView;
 
 @property (weak, nonatomic) IBOutlet UIView *bottomView;
@@ -26,9 +22,35 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (weak, nonatomic) IBOutlet UILabel *timeLabel;
 
-@property (weak, nonatomic) IBOutlet UIButton *panButton;
-
 @property (weak, nonatomic) IBOutlet UIView *numberView;
+
+// 底部功能栏
+@property (weak, nonatomic) IBOutlet UIView *bottom_view1;
+
+@property (weak, nonatomic) IBOutlet UIImageView *bottom_image1;
+
+@property (weak, nonatomic) IBOutlet UILabel *bottom_label1;
+
+@property (weak, nonatomic) IBOutlet UIView *bottom_view2;
+
+@property (weak, nonatomic) IBOutlet UIImageView *bottom_image2;
+
+@property (weak, nonatomic) IBOutlet UILabel *bottom_label2;
+
+@property (weak, nonatomic) IBOutlet UIView *bottom_view3;
+
+@property (weak, nonatomic) IBOutlet UIImageView *bottom_image3;
+
+@property (weak, nonatomic) IBOutlet UILabel *bottom_label3;
+
+@property (weak, nonatomic) IBOutlet UIView *bottom_view4;
+
+@property (weak, nonatomic) IBOutlet UIImageView *bottom_image4;
+
+@property (weak, nonatomic) IBOutlet UILabel *bottom_label4;
+
+
+
 
 
 @end

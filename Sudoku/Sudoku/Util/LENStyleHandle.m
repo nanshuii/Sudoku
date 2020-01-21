@@ -36,7 +36,7 @@
     model.sudokuViewSingleMarkTextColor = UIColorFromHex(0x333333);
     // sudokuSupposeView
     model.sudokuSupposeBackgroundColor = UIColorFromHex(0x778899);
-    model.sudokuSupposeSingleBackgroundColor = [UIColor clearColor];
+    model.sudokuSupposeSingleBackgroundColor = UIColorFromHex(0xFFFFFF);
     model.sudokuSupposeSingleHighLightBackgroundColor = UIColorFromHex(0x5F9EA0);
     model.sudokuSupposeSingleFillInTextColor = UIColorFromHex(0x333333);
     model.sudokuSupposeSingleFillInErrorTextColor = UIColorFromHex(0x0000FF);

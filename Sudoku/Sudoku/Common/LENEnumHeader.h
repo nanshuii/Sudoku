@@ -25,7 +25,8 @@ typedef NS_ENUM(NSUInteger, LENSudokuType) {
 
 // controller status
 typedef NS_ENUM(NSUInteger, LENSudokuStatus) {
-    LENSudokuStatusNone,
+    LENSudokuStatusNone, // 初始状态 填入模式
+    LENSudokuStatusMark,
     LENSudokuStatusSuppose,
 };
 

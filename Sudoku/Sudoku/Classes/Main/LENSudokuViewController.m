@@ -28,6 +28,8 @@
 
 @property (nonatomic, strong) CABasicAnimation *errorAnimation;
 
+@property (nonatomic, assign) BOOL numbersViewEditing;
+
 @end
 
 @implementation LENSudokuViewController
@@ -60,7 +62,6 @@
 # pragma mark -- configureUI
 - (void)configureUI{
     self.view.backgroundColor = [UIColor groupTableViewBackgroundColor];
-    [self topViewCreate];
     self.timeLabel.text = [self timeString];
     self.errorLabel.text = [self errorString];
     self.timeLabel.textColor = self.styleModel.timesTextColor;
@@ -69,6 +70,7 @@
     [self numbersViewCreate];
     BOOL hidden = [LENHandle defaultConfigureRead].timerHidden;
     self.timeLabel.hidden = hidden;
+    [self bottomButtonsCreate];
 }
 
 - (void)sudokuCreate{
@@ -77,7 +79,7 @@
     CGFloat width = kFullScreenWidth - margin * 2;
     self.sudokuView = [[LENSudokuView alloc] initWithFrame:CGRectMake(margin, margin, width, width) sudoku:self.model];
     [self.sudokuView setTapBlock:^(LENSudokuViewStatus status, LENSudokuSingleModel * _Nullable currentSingle) {
-        [weakSelf.numbersView beEditing:weakSelf.panButton.selected sudokuViewStatus:status sudokuSingle:currentSingle];
+        [weakSelf.numbersView beEditing:weakSelf.numbersViewEditing sudokuViewStatus:status sudokuSingle:currentSingle];
     }];
     [self.contentView addSubview:self.sudokuView];
     [self.sudokuView mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -96,13 +98,6 @@
         [weakSelf tapNumber:number isEditing:isEditing];
     }];
     [self.numberView addSubview:self.numbersView];
-}
-
-# pragma mark -- 编辑模式
-- (IBAction)panEdit:(UIButton *)sender {
-    sender.selected = !sender.selected;
-    // 需要获取当前sudoku view 的部分数据
-    [self.numbersView beEditing:sender.selected sudokuViewStatus:self.sudokuView.status sudokuSingle:self.sudokuView.currentSingle];
 }
 
 # pragma mark -- 点击数字
@@ -193,7 +188,7 @@
 
 # pragma mark -- bottom view 复原
 - (void)bottomRecovery{
-    self.panButton.selected = NO;
+    [self statusChangeWithStatus:(LENSudokuStatusNone)];
     [self.numbersView recovery];
 }
 
@@ -211,43 +206,161 @@
     [self.errorLabel.layer addAnimation:_errorAnimation forKey:nil];
 }
 
-# pragma mark -- top view
-- (void)topViewCreate{
-    self.clearButton.hidden = YES;
-    [self.supposeButton setTitle:@"Suppose" forState:(UIControlStateNormal)];
-    [self.supposeButton setTitle:@"Suppose" forState:(UIControlStateSelected)];
-    [self.supposeButton setTitleColor:[UIColor blueColor] forState:(UIControlStateNormal)];
-    [self.supposeButton setTitleColor:[UIColor whiteColor] forState:(UIControlStateSelected)];
-    [self.supposeButton.titleLabel setFont:FONTBOLD(15)];
+# pragma mark -- bottom buttons
+- (void)bottomButtonsCreate{
+    [self clearButtonWithStatus:-1];
+    [self noticeButtonWithStatus:0];
+    [self supposeButtonWithStatus:0];
+    [self markButtonWithStatus:1];
 }
 
-- (IBAction)supposeButtonAction:(UIButton *)sender {
-    if (sender.selected) {
-        [self statusChangeWithStatus:LENSudokuStatusNone];
-    } else {
-        [self statusChangeWithStatus:LENSudokuStatusSuppose];
+// clear button -1 0
+- (void)clearButtonWithStatus:(int)status{
+    if (status == -1) {
+        self.bottom_image1.image = [UIImage imageNamed:@"clearEnable"];
+        self.bottom_label1.text = @"清除全部";
+        self.bottom_label1.textColor = Color_CDCDCD;
+    } else if (status == 0) {
+        self.bottom_image1.image = [UIImage imageNamed:@"clear"];
+        self.bottom_label1.text = @"清除全部";
+        self.bottom_label1.textColor = Color_1296DB;
     }
 }
 
-- (IBAction)clearButtonAction:(UIButton *)sender {
-    [self.sudokuView supposeClear];
+// notice button -1 0
+- (void)noticeButtonWithStatus:(int)status{
+    if (status == -1) {
+        self.bottom_image2.image = [UIImage imageNamed:@"noticeEnable"];
+        self.bottom_label2.text = @"提示";
+        self.bottom_label2.textColor = Color_CDCDCD;
+    } else if (status == 0) {
+        self.bottom_image2.image = [UIImage imageNamed:@"notice"];
+        self.bottom_label2.text = @"提示";
+        self.bottom_label2.textColor = Color_1296DB;
+    }
+}
+
+// suppose button -1 0
+- (void)supposeButtonWithStatus:(int)status{
+    if (status == -1) {
+        self.bottom_image3.image = [UIImage imageNamed:@"supposeEnable"];
+        self.bottom_label3.text = @"预设";
+        self.bottom_label3.textColor = Color_CDCDCD;
+    } else if (status == 0) {
+        self.bottom_image3.image = [UIImage imageNamed:@"suppose"];
+        self.bottom_label3.text = @"开启预设";
+        self.bottom_label3.textColor = Color_1296DB;
+    } else if (status == 1) {
+        self.bottom_image3.image = [UIImage imageNamed:@"suppose"];
+        self.bottom_label3.text = @"关闭预设";
+        self.bottom_label3.textColor = Color_1296DB;
+    }
+}
+
+// mark button -1 0 1
+- (void)markButtonWithStatus:(int)status{
+    if (status == -1) {
+        self.bottom_image4.image = [UIImage imageNamed:@"intoEnable"];
+        self.bottom_label4.text = @"填入";
+        self.bottom_label4.textColor = Color_CDCDCD;
+    } else if (status == -2) {
+        self.bottom_image4.image = [UIImage imageNamed:@"markEnable"];
+        self.bottom_label4.text = @"笔记";
+        self.bottom_label4.textColor = Color_CDCDCD;
+    } else if (status == 0) {
+        self.bottom_image4.image = [UIImage imageNamed:@"mark"];
+        self.bottom_label4.text = @"开启填入";
+        self.bottom_label4.textColor = Color_1296DB;
+    } else if (status == 1) {
+        self.bottom_image4.image = [UIImage imageNamed:@"into"];
+        self.bottom_label4.text = @"开启笔记";
+        self.bottom_label4.textColor = Color_1296DB;
+    }
+}
+
+# pragma mark -- bottom tap
+- (IBAction)bottomTap1:(id)sender {
+    if (self.bottom_image1.image == [UIImage imageNamed:@"clear"]) {
+        // suppose clear
+        [self.sudokuView supposeClear];
+    }
+}
+
+- (IBAction)bottomTap2:(id)sender {
+    if (self.bottom_image2.image == [UIImage imageNamed:@"notice"]) {
+        // notice
+        SSLog(@"notice");
+    }
+}
+
+- (IBAction)bottomTap3:(id)sender {
+    if (self.bottom_image3.image == [UIImage imageNamed:@"suppose"]) {
+        if ([self.bottom_label3.text isEqualToString:@"开启预设"]) {
+            // suppose open
+            [self statusChangeWithStatus:(LENSudokuStatusSuppose)];
+        } else if ([self.bottom_label3.text isEqualToString:@"关闭预设"]) {
+            // suppose close
+            [self statusChangeWithStatus:(LENSudokuStatusNone)];
+        }
+    }
+}
+
+- (IBAction)bottomTap4:(id)sender {
+    if (self.bottom_image4.image == [UIImage imageNamed:@"mark"]) {
+        // to into
+        [self statusChangeWithStatus:(LENSudokuStatusNone)];
+    } else if (self.bottom_image4.image == [UIImage imageNamed:@"into"]) {
+        // to mark
+        [self statusChangeWithStatus:(LENSudokuStatusMark)];
+    }
 }
 
 # pragma mark -- status change
 - (void)statusChangeWithStatus:(LENSudokuStatus)status{
-    if (self.status == LENSudokuStatusNone && status == LENSudokuStatusSuppose) {
-        self.supposeButton.selected = YES;
-        self.clearButton.hidden = NO;
-        [self.sudokuView supposeShow:YES];
-        self.panButton.hidden = YES;
-        [self.numbersView normalEnableAll];
+    if (self.status == LENSudokuStatusNone) {
+        if (status == LENSudokuStatusSuppose) {
+            // none -> suppose
+            [self clearButtonWithStatus:0];
+            [self noticeButtonWithStatus:-1];
+            [self supposeButtonWithStatus:1];
+            [self markButtonWithStatus:-1];
+            [self.sudokuView supposeShow:YES];
+            [self.numbersView normalEnableAll];
+        }
+        else if (status == LENSudokuStatusMark) {
+            // none -> mark
+            [self markButtonWithStatus:0];
+            self.numbersViewEditing = YES;
+            [self.numbersView beEditing:self.numbersViewEditing sudokuViewStatus:self.sudokuView.status sudokuSingle:self.sudokuView.currentSingle];
+        }
     }
-    else if (self.status == LENSudokuStatusSuppose && status == LENSudokuStatusNone) {
-        self.supposeButton.selected = NO;
-        self.clearButton.hidden = YES;
-        [self.sudokuView supposeShow:NO];
-        self.panButton.hidden = NO;
-        [self.numbersView recovery];
+    else if (self.status == LENSudokuStatusMark) {
+        if (status == LENSudokuStatusSuppose) {
+            // mark -> suppose
+            [self clearButtonWithStatus:0];
+            [self noticeButtonWithStatus:-1];
+            [self supposeButtonWithStatus:1];
+            [self markButtonWithStatus:-1];
+            [self.sudokuView supposeShow:YES];
+            [self.numbersView normalEnableAll];
+        }
+        else if (status == LENSudokuStatusNone) {
+            // mark -> none
+            [self markButtonWithStatus:1];
+            self.numbersViewEditing = NO;
+            [self.numbersView beEditing:self.numbersViewEditing sudokuViewStatus:self.sudokuView.status sudokuSingle:self.sudokuView.currentSingle];
+        }
+    }
+    else if (self.status == LENSudokuStatusSuppose) {
+        if (status == LENSudokuStatusNone) {
+            // suppose -> none
+            [self clearButtonWithStatus:-1];
+            [self noticeButtonWithStatus:0];
+            [self supposeButtonWithStatus:0];
+            [self markButtonWithStatus:1];
+            [self.sudokuView supposeShow:NO];
+            [self.numbersView recovery];
+        }
     }
     self.status = status;
 }

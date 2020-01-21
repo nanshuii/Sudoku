@@ -18,6 +18,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic, assign) BOOL timerHidden; // 计时器隐藏
 
+@property (nonatomic, assign) BOOL supposeCloseMark; // 预设时候关闭mark，相当于背景色不为clearColor
+
 @end
 
 NS_ASSUME_NONNULL_END

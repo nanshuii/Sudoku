@@ -31,6 +31,9 @@
 #undef UIColorFromHexA
 #define UIColorFromHexA(hexValue,a) ([UIColor colorWithRed:((float)((hexValue & 0xFF0000) >> 16))/255.0 green:((float)((hexValue & 0x00FF00) >> 8))/255.0 blue:((float)(hexValue & 0x0000FF))/255.0 alpha:(a)])
 
+#define Color_1296DB UIColorFromHex(0x1296DB)
+#define Color_CDCDCD UIColorFromHex(0xCDCDCD)
+
 # pragma mark -- 字体
 #undef FONTWITHNAME
 #define FONTWITHNAME(fontName,fontSize)    ([UIFont fontWithName:fontName size:fontSize])
