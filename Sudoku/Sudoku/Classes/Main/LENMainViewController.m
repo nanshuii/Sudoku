@@ -9,6 +9,7 @@
 #import "LENMainViewController.h"
 #import "LENSudokuViewController.h"
 #import "LENSettingViewController.h"
+#import "LENRecordsViewController.h"
 
 @interface LENMainViewController ()
 
@@ -47,12 +48,32 @@
 
 # pragma mark -- record
 - (IBAction)toRecord:(id)sender {
-    
+    LENRecordsViewController *vc = [LENRecordsViewController new];
+    [self.navigationController pushViewController:vc animated:YES];
 }
 
 
 # pragma mark -- new game
 - (IBAction)gameNew:(UIButton *)sender {
+    LENSudokuModel *model = [LENHandle currentSudokuRead];
+    if (model) {
+        UIAlertController *alert = [UIAlertController alertControllerWithTitle:nil message:@"当前有游戏未完成，创建新游戏则丢失上次游戏进入" preferredStyle:(UIAlertControllerStyleAlert)];
+        [alert addAction:[UIAlertAction actionWithTitle:@"创建新游戏" style:(UIAlertActionStyleDefault) handler:^(UIAlertAction * _Nonnull action) {
+            [LENHandle sudokuInsertToSudokusWithSudoku:model status:1];
+            [LENHandle currentSudokuSave:nil];
+            self.gamaContinueButton.hidden = YES;
+            [self gameNewAlert];
+        }]];
+        [alert addAction:[UIAlertAction actionWithTitle:@"取消" style:(UIAlertActionStyleCancel) handler:^(UIAlertAction * _Nonnull action) {
+            
+        }]];
+        [self presentViewController:alert animated:YES completion:nil];
+    } else {
+        [self gameNewAlert];
+    }
+}
+
+- (void)gameNewAlert{
     NSArray *titles = @[@"难度一", @"难度二", @"难度三", @"难度四", @"难度五", @"难度六", @"难度七"];
     UIAlertController *alert = [UIAlertController alertControllerWithTitle:nil message:nil preferredStyle:(UIAlertControllerStyleActionSheet)];
     for (int i = 0; i < titles.count; i++) {

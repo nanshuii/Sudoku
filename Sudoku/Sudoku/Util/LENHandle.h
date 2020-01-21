@@ -16,15 +16,26 @@ NS_ASSUME_NONNULL_BEGIN
 # pragma mark -- sudoku创建
 /// sudoku创建
 /// @param type type description
-/// @param style style description
 + (LENSudokuModel *)sudoKuCreateWithType:(LENSudokuType)type;
 
 /// 当前sudoku存储
 /// @param model model description
-+ (void)currentSudokuSave:(LENSudokuModel *)model;
++ (void)currentSudokuSave:(nullable LENSudokuModel *)model;
 
 /// 当前sudoku读取
 + (LENSudokuModel *)currentSudokuRead;
+
+/// 存入一个新的sudoku进sudokus
+/// @param sudoku sudoku description
+/// @param status status description
++ (void)sudokuInsertToSudokusWithSudoku:(LENSudokuModel *)sudoku status:(int)status;
+
+/// sudokus读取，返回一个Dictionary NSArray
++ (NSArray *)sudokusRead;
+
+# pragma mark -- sudokus read
+/// sudokuModels读取，返回一个LENSudokuModel NSMutableArray
++ (NSMutableArray *)sudokuModelsRead;
 
 /// 默认配置保存
 /// @param model model description

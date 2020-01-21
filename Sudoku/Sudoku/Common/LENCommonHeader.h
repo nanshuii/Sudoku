@@ -9,6 +9,9 @@
 #ifndef LENCommonHeader_h
 #define LENCommonHeader_h
 
+# pragma mark -- sqlite
+#define SQLITENAME @"sudoku.sqlite"
+
 # pragma mark -- 屏幕高宽
 #define kFullScreenWidth           ([UIScreen mainScreen].bounds.size.width)
 #define kFullScreenHeight          ([UIScreen mainScreen].bounds.size.height)
@@ -54,6 +57,7 @@
 
 # pragma mark -- default key
 #define LENCurrentSudokuKey @"LENCurrentSudokuKey"
+#define LENSudokusKey @"LENSudokusKey"
 #define LENDefaultConfigureKey @"LENDefaultConfigureKey"
 
 # pragma mark -- notification name

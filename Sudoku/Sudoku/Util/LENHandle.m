@@ -18,7 +18,11 @@
     model.singles = [self sudokuSinglesCreateWithType:type];
     model.time = 0;
     model.errorTimes = 0;
+    model.status = 0;
     model.numbers = [self sudokuFillInNumbersCreateWithSoduku:model];
+    NSDate *date = [NSDate new];
+    NSInteger startTime = [date timeIntervalSince1970];
+    model.startTime = startTime;
     return model;
 }
 
@@ -459,7 +463,7 @@
 }
 
 # pragma mark -- 当前sudoku存储
-+ (void)currentSudokuSave:(LENSudokuModel *)model{
++ (void)currentSudokuSave:(nullable LENSudokuModel *)model{
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     if (model == nil) {
         [defaults removeObjectForKey:LENCurrentSudokuKey];
@@ -493,6 +497,50 @@
         return nil;
     }
 }
+
+# pragma mark -- 存入一个新的sudoku进sudokus
++ (void)sudokuInsertToSudokusWithSudoku:(LENSudokuModel *)sudoku status:(int)status{
+    // status 1 end 2 finish
+    NSDate *date = [NSDate new];
+    NSInteger endTime = [date timeIntervalSince1970];
+    sudoku.endTime = endTime;
+    sudoku.status = status;
+    sudoku.singles = [NSMutableArray array];
+    NSDictionary *dict = [sudoku mj_keyValues];
+    NSArray *array = [self sudokusRead];
+    NSMutableArray *sudokus = [NSMutableArray arrayWithArray:array];
+    [sudokus insertObject:dict atIndex:0];
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    [defaults setValue:sudokus forKey:LENSudokusKey];
+    [defaults synchronize];
+}
+
+# pragma mark -- sudokus read
++ (NSArray *)sudokusRead{
+    NSArray *sudokus = [NSArray array];
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    if ([defaults valueForKey:LENSudokusKey]) {
+        sudokus = [defaults valueForKey:LENSudokusKey];
+    }
+    return sudokus;
+}
+
+# pragma mark -- sudokus read
++ (NSMutableArray *)sudokuModelsRead{
+    NSMutableArray *sudokus = [NSMutableArray array];
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    if ([defaults valueForKey:LENSudokusKey]) {
+        NSArray *array = [defaults valueForKey:LENSudokusKey];
+        // 读取的数值没有singles
+        for (NSDictionary *dict in array) {
+            LENSudokuModel *sudoku = [LENSudokuModel mj_objectWithKeyValues:dict];
+            [sudokus addObject:sudoku];
+        }
+    }
+    return sudokus;
+}
+
+
 
 # pragma mark -- 获取sudoku中已经全部填入的数字的数量
 + (NSMutableArray *)sudokuFillInNumbersCreateWithSoduku:(LENSudokuModel *)sudoku{
@@ -563,6 +611,7 @@
 + (NSInteger)indexWithSection:(NSInteger)section row:(NSInteger)row{
     return section * 9 + row;
 }
+
 
 
 @end

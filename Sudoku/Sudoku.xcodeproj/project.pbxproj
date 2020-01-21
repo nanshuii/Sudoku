@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		50733EB323D72E8C00A550CB /* LENSettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 50733EB123D72E8C00A550CB /* LENSettingViewController.m */; };
 		50733EB423D72E8C00A550CB /* LENSettingViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 50733EB223D72E8C00A550CB /* LENSettingViewController.xib */; };
+		50733EBB23D744F600A550CB /* LENRecordsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 50733EB923D744F600A550CB /* LENRecordsViewController.m */; };
+		50733EBC23D744F600A550CB /* LENRecordsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 50733EBA23D744F600A550CB /* LENRecordsViewController.xib */; };
 		50766E2B23D2DE2D00DACDA6 /* LENSudokuStyleModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 50766E2A23D2DE2D00DACDA6 /* LENSudokuStyleModel.m */; };
 		50766E2E23D2E15D00DACDA6 /* LENStyleHandle.m in Sources */ = {isa = PBXBuildFile; fileRef = 50766E2D23D2E15D00DACDA6 /* LENStyleHandle.m */; };
 		50766E3123D34CE500DACDA6 /* LENDefaultConfigModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 50766E3023D34CE500DACDA6 /* LENDefaultConfigModel.m */; };
@@ -60,6 +62,9 @@
 		50733EB023D72E8C00A550CB /* LENSettingViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LENSettingViewController.h; sourceTree = "<group>"; };
 		50733EB123D72E8C00A550CB /* LENSettingViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LENSettingViewController.m; sourceTree = "<group>"; };
 		50733EB223D72E8C00A550CB /* LENSettingViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LENSettingViewController.xib; sourceTree = "<group>"; };
+		50733EB823D744F600A550CB /* LENRecordsViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LENRecordsViewController.h; sourceTree = "<group>"; };
+		50733EB923D744F600A550CB /* LENRecordsViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LENRecordsViewController.m; sourceTree = "<group>"; };
+		50733EBA23D744F600A550CB /* LENRecordsViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LENRecordsViewController.xib; sourceTree = "<group>"; };
 		50766E2923D2DE2D00DACDA6 /* LENSudokuStyleModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LENSudokuStyleModel.h; sourceTree = "<group>"; };
 		50766E2A23D2DE2D00DACDA6 /* LENSudokuStyleModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LENSudokuStyleModel.m; sourceTree = "<group>"; };
 		50766E2C23D2E15D00DACDA6 /* LENStyleHandle.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LENStyleHandle.h; sourceTree = "<group>"; };
@@ -260,6 +265,9 @@
 				50733EB023D72E8C00A550CB /* LENSettingViewController.h */,
 				50733EB123D72E8C00A550CB /* LENSettingViewController.m */,
 				50733EB223D72E8C00A550CB /* LENSettingViewController.xib */,
+				50733EB823D744F600A550CB /* LENRecordsViewController.h */,
+				50733EB923D744F600A550CB /* LENRecordsViewController.m */,
+				50733EBA23D744F600A550CB /* LENRecordsViewController.xib */,
 			);
 			path = Main;
 			sourceTree = "<group>";
@@ -415,6 +423,7 @@
 				D3EA342123C30A6F00FD9D7B /* Assets.xcassets in Resources */,
 				D3EA341F23C30A6F00FD9D7B /* Main.storyboard in Resources */,
 				D3EA345623C30B4300FD9D7B /* LENMainViewController.xib in Resources */,
+				50733EBC23D744F600A550CB /* LENRecordsViewController.xib in Resources */,
 				D3EA345023C30B2400FD9D7B /* LENBaseViewController.xib in Resources */,
 				D3EA346123C3108800FD9D7B /* LENSudokuViewController.xib in Resources */,
 			);
@@ -499,6 +508,7 @@
 				D3EA346023C3108800FD9D7B /* LENSudokuViewController.m in Sources */,
 				D3EA346823C3139700FD9D7B /* LENSudokuView.m in Sources */,
 				50766E2E23D2E15D00DACDA6 /* LENStyleHandle.m in Sources */,
+				50733EBB23D744F600A550CB /* LENRecordsViewController.m in Sources */,
 				D3EA341623C30A6F00FD9D7B /* AppDelegate.m in Sources */,
 				50766E3423D4555700DACDA6 /* LENSudokuSupposeView.m in Sources */,
 				50733EB323D72E8C00A550CB /* LENSettingViewController.m in Sources */,

@@ -12,6 +12,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface LENSudokuModel : NSObject
 
+@property (nonatomic, assign) NSInteger s_id;
+
 @property (nonatomic, assign) LENSudokuType type; // 难度
 
 @property (nonatomic, strong) NSMutableArray *singles;
@@ -21,6 +23,12 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, assign) NSInteger errorTimes; // 错误次数
 
 @property (nonatomic, strong) NSMutableArray *numbers; // 已经填入的所有数字数量集合 1-9排列
+
+@property (nonatomic, assign) NSInteger status; // 0 new 1 end 2 finish
+
+@property (nonatomic, assign) NSInteger startTime;
+
+@property (nonatomic, assign) NSInteger endTime;
 
 
 @end
