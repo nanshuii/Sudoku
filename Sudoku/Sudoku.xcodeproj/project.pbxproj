@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		50733EB323D72E8C00A550CB /* LENSettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 50733EB123D72E8C00A550CB /* LENSettingViewController.m */; };
+		50733EB423D72E8C00A550CB /* LENSettingViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 50733EB223D72E8C00A550CB /* LENSettingViewController.xib */; };
 		50766E2B23D2DE2D00DACDA6 /* LENSudokuStyleModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 50766E2A23D2DE2D00DACDA6 /* LENSudokuStyleModel.m */; };
 		50766E2E23D2E15D00DACDA6 /* LENStyleHandle.m in Sources */ = {isa = PBXBuildFile; fileRef = 50766E2D23D2E15D00DACDA6 /* LENStyleHandle.m */; };
 		50766E3123D34CE500DACDA6 /* LENDefaultConfigModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 50766E3023D34CE500DACDA6 /* LENDefaultConfigModel.m */; };
@@ -55,6 +57,9 @@
 
 /* Begin PBXFileReference section */
 		3C57E7F0187B3D1095A87E0D /* Pods-Sudoku.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Sudoku.release.xcconfig"; path = "Pods/Target Support Files/Pods-Sudoku/Pods-Sudoku.release.xcconfig"; sourceTree = "<group>"; };
+		50733EB023D72E8C00A550CB /* LENSettingViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LENSettingViewController.h; sourceTree = "<group>"; };
+		50733EB123D72E8C00A550CB /* LENSettingViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LENSettingViewController.m; sourceTree = "<group>"; };
+		50733EB223D72E8C00A550CB /* LENSettingViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LENSettingViewController.xib; sourceTree = "<group>"; };
 		50766E2923D2DE2D00DACDA6 /* LENSudokuStyleModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LENSudokuStyleModel.h; sourceTree = "<group>"; };
 		50766E2A23D2DE2D00DACDA6 /* LENSudokuStyleModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LENSudokuStyleModel.m; sourceTree = "<group>"; };
 		50766E2C23D2E15D00DACDA6 /* LENStyleHandle.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LENStyleHandle.h; sourceTree = "<group>"; };
@@ -252,6 +257,9 @@
 				D3EA345D23C3108800FD9D7B /* LENSudokuViewController.h */,
 				D3EA345E23C3108800FD9D7B /* LENSudokuViewController.m */,
 				D3EA345F23C3108800FD9D7B /* LENSudokuViewController.xib */,
+				50733EB023D72E8C00A550CB /* LENSettingViewController.h */,
+				50733EB123D72E8C00A550CB /* LENSettingViewController.m */,
+				50733EB223D72E8C00A550CB /* LENSettingViewController.xib */,
 			);
 			path = Main;
 			sourceTree = "<group>";
@@ -402,6 +410,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				50733EB423D72E8C00A550CB /* LENSettingViewController.xib in Resources */,
 				D3EA342423C30A6F00FD9D7B /* LaunchScreen.storyboard in Resources */,
 				D3EA342123C30A6F00FD9D7B /* Assets.xcassets in Resources */,
 				D3EA341F23C30A6F00FD9D7B /* Main.storyboard in Resources */,
@@ -492,6 +501,7 @@
 				50766E2E23D2E15D00DACDA6 /* LENStyleHandle.m in Sources */,
 				D3EA341623C30A6F00FD9D7B /* AppDelegate.m in Sources */,
 				50766E3423D4555700DACDA6 /* LENSudokuSupposeView.m in Sources */,
+				50733EB323D72E8C00A550CB /* LENSettingViewController.m in Sources */,
 				D3EA345523C30B4300FD9D7B /* LENMainViewController.m in Sources */,
 				D3EA342723C30A6F00FD9D7B /* main.m in Sources */,
 				D3EA346423C310BD00FD9D7B /* LENSudokuModel.m in Sources */,

@@ -14,6 +14,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic, strong) LENSudokuModel *model;
 
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *top;
+
 @property (weak, nonatomic) IBOutlet UIView *contentView;
 
 @property (weak, nonatomic) IBOutlet UIView *bottomView;

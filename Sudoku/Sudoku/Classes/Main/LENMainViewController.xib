@@ -4,7 +4,6 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15704"/>
-        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -12,6 +11,7 @@
             <connections>
                 <outlet property="gamaContinueButton" destination="uMZ-jt-6Re" id="1c6-qa-DGg"/>
                 <outlet property="gameNewButton" destination="y6z-kg-Rak" id="jhf-mB-Jqo"/>
+                <outlet property="top" destination="kI1-nZ-iPv" id="ARc-Zb-gwL"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -21,7 +21,7 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="y6z-kg-Rak">
-                    <rect key="frame" x="38" y="778" width="338" height="44"/>
+                    <rect key="frame" x="38" y="812" width="338" height="44"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="44" id="r6K-jP-Jh9"/>
                     </constraints>
@@ -32,7 +32,7 @@
                     </connections>
                 </button>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uMZ-jt-6Re">
-                    <rect key="frame" x="38" y="714" width="338" height="44"/>
+                    <rect key="frame" x="38" y="748" width="338" height="44"/>
                     <color key="backgroundColor" systemColor="linkColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="44" id="aR4-LU-5kf"/>
@@ -45,18 +45,39 @@
                         <action selector="continueGame:" destination="-1" eventType="touchUpInside" id="9lI-wz-LuZ"/>
                     </connections>
                 </button>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9oJ-CY-Xvf">
+                    <rect key="frame" x="364" y="44" width="30" height="30"/>
+                    <state key="normal" image="setting"/>
+                    <connections>
+                        <action selector="toSetting:" destination="-1" eventType="touchUpInside" id="Z86-N1-KNB"/>
+                    </connections>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wqh-T4-ADT">
+                    <rect key="frame" x="314" y="44" width="30" height="30"/>
+                    <state key="normal" image="record"/>
+                    <connections>
+                        <action selector="toRecord:" destination="-1" eventType="touchUpInside" id="xka-BH-TU3"/>
+                    </connections>
+                </button>
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
+                <constraint firstItem="wqh-T4-ADT" firstAttribute="centerY" secondItem="9oJ-CY-Xvf" secondAttribute="centerY" id="0zc-SR-jUt"/>
                 <constraint firstItem="uMZ-jt-6Re" firstAttribute="trailing" secondItem="y6z-kg-Rak" secondAttribute="trailing" id="8wR-TQ-UPg"/>
                 <constraint firstItem="uMZ-jt-6Re" firstAttribute="leading" secondItem="y6z-kg-Rak" secondAttribute="leading" id="9Tq-Jh-Hnp"/>
-                <constraint firstItem="y6z-kg-Rak" firstAttribute="leading" secondItem="Q5M-cg-NOt" secondAttribute="leading" constant="38" id="DXw-6P-2AE"/>
-                <constraint firstItem="Q5M-cg-NOt" firstAttribute="bottom" secondItem="y6z-kg-Rak" secondAttribute="bottom" constant="40" id="Jgc-ad-FAV"/>
-                <constraint firstItem="Q5M-cg-NOt" firstAttribute="trailing" secondItem="y6z-kg-Rak" secondAttribute="trailing" constant="38" id="iwB-Bn-hi5"/>
+                <constraint firstItem="9oJ-CY-Xvf" firstAttribute="leading" secondItem="wqh-T4-ADT" secondAttribute="trailing" constant="20" id="BkF-a1-IY4"/>
+                <constraint firstItem="y6z-kg-Rak" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="38" id="DXw-6P-2AE"/>
+                <constraint firstAttribute="bottom" secondItem="y6z-kg-Rak" secondAttribute="bottom" constant="40" id="Jgc-ad-FAV"/>
+                <constraint firstAttribute="trailing" secondItem="9oJ-CY-Xvf" secondAttribute="trailing" constant="20" id="f8E-C6-Yxt"/>
+                <constraint firstAttribute="trailing" secondItem="y6z-kg-Rak" secondAttribute="trailing" constant="38" id="iwB-Bn-hi5"/>
+                <constraint firstItem="9oJ-CY-Xvf" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="44" id="kI1-nZ-iPv"/>
                 <constraint firstItem="y6z-kg-Rak" firstAttribute="top" secondItem="uMZ-jt-6Re" secondAttribute="bottom" constant="20" id="vUF-r8-SdH"/>
             </constraints>
-            <viewLayoutGuide key="safeArea" id="Q5M-cg-NOt"/>
             <point key="canvasLocation" x="139" y="154"/>
         </view>
     </objects>
+    <resources>
+        <image name="record" width="30" height="30"/>
+        <image name="setting" width="30" height="30"/>
+    </resources>
 </document>

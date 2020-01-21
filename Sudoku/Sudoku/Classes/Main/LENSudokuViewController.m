@@ -61,6 +61,7 @@
 
 # pragma mark -- configureUI
 - (void)configureUI{
+    self.top.constant = kStatusBarHeight + 16;
     self.view.backgroundColor = [UIColor groupTableViewBackgroundColor];
     self.timeLabel.text = [self timeString];
     self.errorLabel.text = [self errorString];
@@ -98,6 +99,11 @@
         [weakSelf tapNumber:number isEditing:isEditing];
     }];
     [self.numberView addSubview:self.numbersView];
+}
+
+# pragma mark -- back
+- (IBAction)back:(id)sender {
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 # pragma mark -- 点击数字

@@ -33,6 +33,7 @@
 
 #define Color_1296DB UIColorFromHex(0x1296DB)
 #define Color_CDCDCD UIColorFromHex(0xCDCDCD)
+#define Color_F9F9F9 UIColorFromHex(0xF9F9F9)
 
 # pragma mark -- 字体
 #undef FONTWITHNAME
@@ -45,6 +46,11 @@
 #define FONTBOLD(fontSize)            ([UIFont boldSystemFontOfSize:fontSize])
 #define NORMALFONTNAME              @"PingFangSC-Regular"
 #define SEMIBOLDFONTNAME            @"PingFangSC-Semibold"
+
+# pragma mark -- 机型相关
+#define Is_Iphone (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone)
+#define Is_Iphone_X (Is_Iphone && kFullScreenHeight >= 812.0)
+#define kStatusBarHeight (Is_Iphone_X ? 44.f : 20.f)
 
 # pragma mark -- default key
 #define LENCurrentSudokuKey @"LENCurrentSudokuKey"

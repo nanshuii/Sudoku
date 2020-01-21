@@ -8,6 +8,7 @@
 
 #import "LENMainViewController.h"
 #import "LENSudokuViewController.h"
+#import "LENSettingViewController.h"
 
 @interface LENMainViewController ()
 
@@ -23,6 +24,7 @@
 
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
+    self.navigationController.navigationBarHidden = YES;
     LENSudokuModel *model = [LENHandle currentSudokuRead];
     if (model) {
         self.gamaContinueButton.hidden = NO;
@@ -36,6 +38,18 @@
     self.gameNewButton.layer.cornerRadius = 22;
     self.gamaContinueButton.layer.cornerRadius = 22;
 }
+
+# pragma mark -- setting
+- (IBAction)toSetting:(id)sender {
+    LENSettingViewController *vc = [LENSettingViewController new];
+    [self.navigationController pushViewController:vc animated:YES];
+}
+
+# pragma mark -- record
+- (IBAction)toRecord:(id)sender {
+    
+}
+
 
 # pragma mark -- new game
 - (IBAction)gameNew:(UIButton *)sender {

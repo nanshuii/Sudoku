@@ -1,10 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="15702" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="15702" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15704"/>
-        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -27,6 +26,7 @@
                 <outlet property="errorLabel" destination="Mp2-in-pZf" id="5Ou-96-Sfw"/>
                 <outlet property="numberView" destination="YWI-fs-5Vd" id="Fjk-Iv-h8e"/>
                 <outlet property="timeLabel" destination="0vJ-GC-arU" id="dO7-jV-db5"/>
+                <outlet property="top" destination="7ay-GZ-3hT" id="JFp-u0-VfE"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -35,8 +35,15 @@
             <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ncU-mT-Akm">
+                    <rect key="frame" x="0.0" y="-40" width="414" height="128"/>
+                    <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="128" id="3cM-Am-WaS"/>
+                    </constraints>
+                </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9sT-cU-O3K">
-                    <rect key="frame" x="0.0" y="62" width="414" height="40"/>
+                    <rect key="frame" x="0.0" y="88" width="414" height="40"/>
                     <subviews>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="00:00" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0vJ-GC-arU">
                             <rect key="frame" x="184" y="14.5" width="46" height="20.5"/>
@@ -50,24 +57,33 @@
                             <nil key="textColor"/>
                             <nil key="highlightedColor"/>
                         </label>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PNo-TL-yOf">
+                            <rect key="frame" x="20" y="14" width="20" height="22"/>
+                            <state key="normal" image="close"/>
+                            <connections>
+                                <action selector="back:" destination="-1" eventType="touchUpInside" id="EFp-yW-vmv"/>
+                            </connections>
+                        </button>
                     </subviews>
                     <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                     <constraints>
                         <constraint firstAttribute="trailing" secondItem="Mp2-in-pZf" secondAttribute="trailing" constant="20" id="BKm-C4-yfl"/>
                         <constraint firstItem="0vJ-GC-arU" firstAttribute="centerX" secondItem="9sT-cU-O3K" secondAttribute="centerX" id="DKd-PA-Psf"/>
                         <constraint firstItem="Mp2-in-pZf" firstAttribute="centerY" secondItem="0vJ-GC-arU" secondAttribute="centerY" id="X5A-Hu-r6X"/>
+                        <constraint firstItem="PNo-TL-yOf" firstAttribute="leading" secondItem="9sT-cU-O3K" secondAttribute="leading" constant="20" id="Xqb-D2-CbE"/>
                         <constraint firstAttribute="height" constant="40" id="cxU-Wg-6ep"/>
+                        <constraint firstItem="PNo-TL-yOf" firstAttribute="centerY" secondItem="0vJ-GC-arU" secondAttribute="centerY" id="xcQ-JT-JBk"/>
                     </constraints>
                 </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Afn-AV-Ir8">
-                    <rect key="frame" x="0.0" y="102" width="414" height="414"/>
+                    <rect key="frame" x="0.0" y="128" width="414" height="414"/>
                     <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="414" id="jq2-Sh-VPk"/>
                     </constraints>
                 </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6Ez-SY-x1c">
-                    <rect key="frame" x="0.0" y="526" width="414" height="85"/>
+                    <rect key="frame" x="0.0" y="552" width="414" height="85"/>
                     <subviews>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="euH-jj-K9K">
                             <rect key="frame" x="0.0" y="5" width="414" height="80"/>
@@ -204,7 +220,7 @@
                     </constraints>
                 </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="YWI-fs-5Vd">
-                    <rect key="frame" x="0.0" y="612" width="414" height="44"/>
+                    <rect key="frame" x="0.0" y="638" width="414" height="44"/>
                     <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="44" id="IbZ-So-Lsn"/>
@@ -213,21 +229,23 @@
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
-                <constraint firstItem="9sT-cU-O3K" firstAttribute="top" secondItem="Q5M-cg-NOt" secondAttribute="top" constant="18" id="7ay-GZ-3hT"/>
+                <constraint firstItem="ncU-mT-Akm" firstAttribute="leading" secondItem="9sT-cU-O3K" secondAttribute="leading" id="0jL-sY-ovN"/>
+                <constraint firstItem="9sT-cU-O3K" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="88" id="7ay-GZ-3hT"/>
                 <constraint firstItem="Afn-AV-Ir8" firstAttribute="top" secondItem="9sT-cU-O3K" secondAttribute="bottom" id="BEm-Nw-jNg"/>
                 <constraint firstItem="6Ez-SY-x1c" firstAttribute="trailing" secondItem="Afn-AV-Ir8" secondAttribute="trailing" id="C5e-jF-8WV"/>
                 <constraint firstItem="YWI-fs-5Vd" firstAttribute="trailing" secondItem="6Ez-SY-x1c" secondAttribute="trailing" id="FcZ-xd-G0R"/>
-                <constraint firstItem="Q5M-cg-NOt" firstAttribute="trailing" secondItem="Afn-AV-Ir8" secondAttribute="trailing" id="KXq-fH-sqm"/>
+                <constraint firstAttribute="trailing" secondItem="Afn-AV-Ir8" secondAttribute="trailing" id="KXq-fH-sqm"/>
                 <constraint firstItem="6Ez-SY-x1c" firstAttribute="top" secondItem="Afn-AV-Ir8" secondAttribute="bottom" constant="10" id="Ngp-HU-GH5"/>
-                <constraint firstItem="Q5M-cg-NOt" firstAttribute="trailing" secondItem="9sT-cU-O3K" secondAttribute="trailing" id="Pzq-mu-XOX"/>
-                <constraint firstItem="9sT-cU-O3K" firstAttribute="leading" secondItem="Q5M-cg-NOt" secondAttribute="leading" id="apM-49-VK6"/>
-                <constraint firstItem="Afn-AV-Ir8" firstAttribute="leading" secondItem="Q5M-cg-NOt" secondAttribute="leading" id="crT-qu-dDq"/>
+                <constraint firstAttribute="trailing" secondItem="9sT-cU-O3K" secondAttribute="trailing" id="Pzq-mu-XOX"/>
+                <constraint firstItem="ncU-mT-Akm" firstAttribute="trailing" secondItem="9sT-cU-O3K" secondAttribute="trailing" id="UX5-ec-t57"/>
+                <constraint firstItem="9sT-cU-O3K" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="apM-49-VK6"/>
+                <constraint firstItem="Afn-AV-Ir8" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="crT-qu-dDq"/>
                 <constraint firstItem="6Ez-SY-x1c" firstAttribute="leading" secondItem="Afn-AV-Ir8" secondAttribute="leading" id="g2i-LE-DVw"/>
                 <constraint firstItem="YWI-fs-5Vd" firstAttribute="leading" secondItem="6Ez-SY-x1c" secondAttribute="leading" id="jur-K9-VWS"/>
                 <constraint firstItem="Afn-AV-Ir8" firstAttribute="top" secondItem="0vJ-GC-arU" secondAttribute="bottom" constant="5" id="nfj-xw-dto"/>
                 <constraint firstItem="YWI-fs-5Vd" firstAttribute="top" secondItem="6Ez-SY-x1c" secondAttribute="bottom" constant="1" id="q37-1b-6oZ"/>
+                <constraint firstItem="9sT-cU-O3K" firstAttribute="top" secondItem="ncU-mT-Akm" secondAttribute="bottom" id="vWg-RD-YSE"/>
             </constraints>
-            <viewLayoutGuide key="safeArea" id="Q5M-cg-NOt"/>
             <point key="canvasLocation" x="137.68115942028987" y="151.33928571428569"/>
         </view>
         <tapGestureRecognizer id="Gph-43-DUg">
@@ -252,6 +270,7 @@
         </tapGestureRecognizer>
     </objects>
     <resources>
+        <image name="close" width="20" height="19.5"/>
         <image name="mark" width="40" height="40"/>
     </resources>
 </document>
