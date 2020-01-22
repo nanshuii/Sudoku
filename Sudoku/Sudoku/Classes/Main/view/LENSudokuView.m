@@ -361,6 +361,9 @@
         if ([self checkAll]) {
             SSLog(@"全部正确");
             [self singleAnimationStart];
+            if (self.finishBlock) {
+                self.finishBlock(YES);
+            }
             return;
         }
         NSMutableArray *animationIndexs = [NSMutableArray array];

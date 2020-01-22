@@ -257,6 +257,7 @@
             [self.doneRecords addObject:doneTempArray];
         }
     }
+    
 }
 
 # pragma mark -- segment change

@@ -15,6 +15,8 @@ typedef void(^InToBlock)(BOOL error,  NSMutableArray * _Nullable numbers, BOOL m
 
 typedef void(^TapSudokuViewBlock)(LENSudokuViewStatus status, LENSudokuSingleModel * _Nullable currentSingle);
 
+typedef void(^FinishBlock)(BOOL finish);
+
 @interface LENSudokuView : UIView
 
 @property (nonatomic, strong) LENSudokuModel *sudoku;
@@ -26,6 +28,8 @@ typedef void(^TapSudokuViewBlock)(LENSudokuViewStatus status, LENSudokuSingleMod
 @property (nonatomic, copy) InToBlock inToBlock;
 
 @property (nonatomic, copy) TapSudokuViewBlock tapBlock;
+
+@property (nonatomic, copy) FinishBlock finishBlock;
 
 /// 初始化
 /// @param frame frame description

@@ -1,21 +1,19 @@
 //
-//  LENMainViewController.m
+//  LENSudokuFinishViewController.m
 //  Sudoku
 //
-//  Created by 林南水 on 2020/1/6.
+//  Created by 戴十三 on 2020/1/23.
 //  Copyright © 2020 ledon. All rights reserved.
 //
 
-#import "LENMainViewController.h"
+#import "LENSudokuFinishViewController.h"
 #import "LENSudokuViewController.h"
-#import "LENSettingViewController.h"
-#import "LENRecordsViewController.h"
 
-@interface LENMainViewController ()
+@interface LENSudokuFinishViewController ()
 
 @end
 
-@implementation LENMainViewController
+@implementation LENSudokuFinishViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -23,62 +21,48 @@
     [self configureUI];
 }
 
-- (void)viewWillAppear:(BOOL)animated{
-    [super viewWillAppear:animated];
-    self.navigationController.navigationBarHidden = YES;
-    LENSudokuModel *model = [LENHandle currentSudokuRead];
-    if (model) {
-        self.gamaContinueButton.hidden = NO;
-    } else {
-        self.gamaContinueButton.hidden = YES;
-    }
-}
-
-# pragma mark -- configureUI
 - (void)configureUI{
-//    self.view.backgroundColor = UIColorFromHex(0xF9F9F9);
     self.gameNewButton.layer.cornerRadius = 22;
-    self.gameNewButton.layer.borderColor = Color_1296DB.CGColor;
-    self.gameNewButton.layer.borderWidth = 1;
-    self.gamaContinueButton.layer.cornerRadius = 22;
-}
-
-# pragma mark -- setting
-- (IBAction)toSetting:(id)sender {
-    LENSettingViewController *vc = [LENSettingViewController new];
-    [self.navigationController pushViewController:vc animated:YES];
-}
-
-# pragma mark -- record
-- (IBAction)toRecord:(id)sender {
-    LENRecordsViewController *vc = [LENRecordsViewController new];
-    [self.navigationController pushViewController:vc animated:YES];
-}
-
-
-# pragma mark -- new game
-- (IBAction)gameNew:(UIButton *)sender {
-    LENSudokuModel *model = [LENHandle currentSudokuRead];
-    if (model) {
-        UIAlertController *alert = [UIAlertController alertControllerWithTitle:nil message:@"当前有游戏未完成，创建新游戏则丢失上次游戏进入" preferredStyle:(UIAlertControllerStyleAlert)];
-        [alert addAction:[UIAlertAction actionWithTitle:@"创建新游戏" style:(UIAlertActionStyleDefault) handler:^(UIAlertAction * _Nonnull action) {
-            [LENHandle sudokuInsertToSudokusWithSudoku:model status:1];
-            [LENHandle currentSudokuSave:nil];
-            self.gamaContinueButton.hidden = YES;
-            [self gameNewAlert];
-        }]];
-        [alert addAction:[UIAlertAction actionWithTitle:@"取消" style:(UIAlertActionStyleCancel) handler:^(UIAlertAction * _Nonnull action) {
-            
-        }]];
-        [self presentViewController:alert animated:YES completion:nil];
+    self.homeButton.layer.cornerRadius = 22;
+    self.typeLabel.text = [LENHandle typeStringWithType:self.sudoku.type];
+     NSString *timerString = [self timerStringWithTime:self.sudoku.time];
+       timerString = [NSString stringWithFormat:@"耗时:%@", timerString];
+    self.timeLabel.text = timerString;
+    NSInteger errorTimes = self.sudoku.errorTimes;
+    if (errorTimes == 0) {
+        self.errorLabel.text = @"完美";
     } else {
-        [self gameNewAlert];
+        self.errorLabel.text = [NSString stringWithFormat:@"错误 %li次", errorTimes];
     }
+    [self performSelector:@selector(delay) withObject:nil afterDelay:1.0];
 }
 
-- (void)gameNewAlert{
+- (NSString *)timerStringWithTime:(NSInteger)time{
+    NSInteger hour = time / 3600;
+    NSInteger mins = time - hour * 3600;
+    NSInteger min = mins / 60;
+    NSInteger sec = mins - min * 60;
+    NSString *string = [NSString stringWithFormat:@"%02ld分%02ld秒", (long)min, (long)sec];
+    if (hour > 0) {
+        string = [NSString stringWithFormat:@"%02ld时%@", (long)hour, string];
+    }
+    return string;
+}
+
+- (void)delay{
+    self.recordLabel.text = @"（记录保存成功）";
+}
+
+# pragma mark -- 新游戏
+- (IBAction)gameNewButtonAction:(id)sender {
     NSArray *titles = @[@"难度一", @"难度二", @"难度三", @"难度四", @"难度五", @"难度六", @"难度七"];
     UIAlertController *alert = [UIAlertController alertControllerWithTitle:nil message:nil preferredStyle:(UIAlertControllerStyleActionSheet)];
+    [alert addAction:[UIAlertAction actionWithTitle:@"上次难度" style:(UIAlertActionStyleDestructive) handler:^(UIAlertAction * _Nonnull action) {
+        LENSudokuViewController *vc = [LENSudokuViewController new];
+        LENSudokuModel *model = [LENHandle sudoKuCreateWithType:self.sudoku.type];
+        vc.model = model;
+        [self.navigationController pushViewController:vc animated:YES];
+    }]];
     for (int i = 0; i < titles.count; i++) {
         UIAlertAction *action = [UIAlertAction actionWithTitle:titles[i] style:(UIAlertActionStyleDefault) handler:^(UIAlertAction * _Nonnull action) {
             LENSudokuType type = LENSudokuTypeOne;
@@ -121,13 +105,12 @@
     [self presentViewController:alert animated:YES completion:nil];
 }
 
-# pragma mark -- continue game
-- (IBAction)continueGame:(UIButton *)sender {
-    LENSudokuModel *model = [LENHandle currentSudokuRead];
-    LENSudokuViewController *vc = [LENSudokuViewController new];
-    vc.model = model;
-    [self.navigationController pushViewController:vc animated:YES];
+# pragma mark -- home button
+- (IBAction)homeButtonAction:(id)sender {
+    [self.navigationController popToRootViewControllerAnimated:YES];
 }
+
+
 
 /*
 #pragma mark - Navigation

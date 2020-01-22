@@ -9,6 +9,7 @@
 #import "LENSudokuViewController.h"
 #import "LENSudokuView.h"
 #import "LENSudokuNumberView.h"
+#import "LENSudokuFinishViewController.h"
 
 @interface LENSudokuViewController ()
 
@@ -48,9 +49,7 @@
 
 - (void)viewWillDisappear:(BOOL)animated{
     [super viewWillDisappear:animated];
-    self.sudokuView.sudoku.time = self.time;
-    [LENHandle currentSudokuSave:self.sudokuView.sudoku];
-    [self timerClose];
+    
 }
 
 # pragma mark -- notifications
@@ -82,6 +81,9 @@
     [self.sudokuView setTapBlock:^(LENSudokuViewStatus status, LENSudokuSingleModel * _Nullable currentSingle) {
         [weakSelf.numbersView beEditing:weakSelf.numbersViewEditing sudokuViewStatus:status sudokuSingle:currentSingle];
     }];
+    [self.sudokuView setFinishBlock:^(BOOL finish) {
+        [weakSelf finish];
+    }];
     [self.contentView addSubview:self.sudokuView];
     [self.sudokuView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.mas_equalTo(self.contentView.mas_top).offset(margin);
@@ -103,7 +105,11 @@
 
 # pragma mark -- back
 - (IBAction)back:(id)sender {
-    [self.navigationController popViewControllerAnimated:YES];
+//    [self.navigationController popViewControllerAnimated:YES];
+    self.sudokuView.sudoku.time = self.time;
+    [LENHandle currentSudokuSave:self.sudokuView.sudoku];
+    [self timerClose];
+    [self.navigationController popToRootViewControllerAnimated:YES];
 }
 
 # pragma mark -- 点击数字
@@ -369,6 +375,17 @@
         }
     }
     self.status = status;
+}
+
+# pragma mark -- 完成
+- (void)finish{
+    self.sudokuView.sudoku.time = self.time;
+    [LENHandle sudokuInsertToSudokusWithSudoku:self.sudokuView.sudoku status:2];
+    [LENHandle currentSudokuSave:nil];
+    [self timerClose];
+    LENSudokuFinishViewController *vc = [LENSudokuFinishViewController new];
+    vc.sudoku = self.sudokuView.sudoku;
+    [self.navigationController pushViewController:vc animated:YES];
 }
 
 /*

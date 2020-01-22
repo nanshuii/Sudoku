@@ -220,7 +220,7 @@
                     </constraints>
                 </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="YWI-fs-5Vd">
-                    <rect key="frame" x="0.0" y="638" width="414" height="44"/>
+                    <rect key="frame" x="0.0" y="637" width="414" height="44"/>
                     <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="44" id="IbZ-So-Lsn"/>
@@ -243,7 +243,7 @@
                 <constraint firstItem="6Ez-SY-x1c" firstAttribute="leading" secondItem="Afn-AV-Ir8" secondAttribute="leading" id="g2i-LE-DVw"/>
                 <constraint firstItem="YWI-fs-5Vd" firstAttribute="leading" secondItem="6Ez-SY-x1c" secondAttribute="leading" id="jur-K9-VWS"/>
                 <constraint firstItem="Afn-AV-Ir8" firstAttribute="top" secondItem="0vJ-GC-arU" secondAttribute="bottom" constant="5" id="nfj-xw-dto"/>
-                <constraint firstItem="YWI-fs-5Vd" firstAttribute="top" secondItem="6Ez-SY-x1c" secondAttribute="bottom" constant="1" id="q37-1b-6oZ"/>
+                <constraint firstItem="YWI-fs-5Vd" firstAttribute="top" secondItem="6Ez-SY-x1c" secondAttribute="bottom" id="q37-1b-6oZ"/>
                 <constraint firstItem="9sT-cU-O3K" firstAttribute="top" secondItem="ncU-mT-Akm" secondAttribute="bottom" id="vWg-RD-YSE"/>
             </constraints>
             <point key="canvasLocation" x="137.68115942028987" y="151.33928571428569"/>

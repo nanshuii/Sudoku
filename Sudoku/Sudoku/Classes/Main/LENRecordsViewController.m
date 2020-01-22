@@ -223,13 +223,15 @@
             NSString *end_ymd = endTimeDates[0];
             if ([end_ymd isEqualToString:last_ymd]) {
                 // 在上一个数组里面
-            } {
+            }
+            else {
                 // 进入下一个数组
                 if ([last_ymd isEqualToString:@""]) {
                     
                 } else {
-                    [temp removeAllObjects];
                     [self.recordsMonth addObject:temp];
+                    temp = [NSMutableArray array];
+//                    [temp removeAllObjects];
                 }
                 last_ymd = end_ymd;
                 [self.months addObject:end_d];
@@ -318,6 +320,8 @@
     [self.typesFinishMonth addObject:@(month_finish_type5)];
     [self.typesFinishMonth addObject:@(month_finish_type6)];
     [self.typesFinishMonth addObject:@(month_finish_type7)];
+    
+    
 }
 
 # pragma mark -- 详细数据

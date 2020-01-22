@@ -467,7 +467,8 @@
 + (void)currentSudokuSave:(nullable LENSudokuModel *)model{
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     if (model == nil) {
-        [defaults removeObjectForKey:LENCurrentSudokuKey];
+//        [defaults removeObjectForKey:LENCurrentSudokuKey];
+        [defaults setValue:@"" forKey:LENCurrentSudokuKey];
     } else {
         NSMutableArray *singles = [NSMutableArray array];
         for (LENSudokuSingleModel *single in model.singles) {
@@ -485,6 +486,9 @@
 + (LENSudokuModel *)currentSudokuRead{
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     if ([defaults valueForKey:LENCurrentSudokuKey]) {
+        if ([[defaults valueForKey:LENCurrentSudokuKey] isKindOfClass:[NSString class]]) {
+            return nil;
+        }
         NSDictionary *dict = [defaults valueForKey:LENCurrentSudokuKey];
         LENSudokuModel *model = [LENSudokuModel mj_objectWithKeyValues:dict];
         NSMutableArray *singles = [NSMutableArray array];

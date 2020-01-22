@@ -37,6 +37,7 @@
     NSString *timeString = [NSString stringWithFormat:@"%@ %@", sudoku.endTimeString_hms, statusString];
     self.timeLabel.text = timeString;
     NSString *timerString = [self timerStringWithTime:sudoku.time];
+    timerString = [NSString stringWithFormat:@"耗时:%@", timerString];
     self.timerLabel.text = timerString;
     NSInteger errorTimes = sudoku.errorTimes;
     if (errorTimes == 0) {

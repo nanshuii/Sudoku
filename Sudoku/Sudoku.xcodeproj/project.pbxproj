@@ -12,6 +12,8 @@
 		5037CDA223D890C500F42848 /* LENBaseTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5037CDA123D890C500F42848 /* LENBaseTableViewCell.m */; };
 		5037CDA623D8910F00F42848 /* LENRecordsDetailTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5037CDA423D8910F00F42848 /* LENRecordsDetailTableViewCell.m */; };
 		5037CDA723D8910F00F42848 /* LENRecordsDetailTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5037CDA523D8910F00F42848 /* LENRecordsDetailTableViewCell.xib */; };
+		5037CDAB23D8AB3800F42848 /* LENSudokuFinishViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5037CDA923D8AB3800F42848 /* LENSudokuFinishViewController.m */; };
+		5037CDAC23D8AB3800F42848 /* LENSudokuFinishViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5037CDAA23D8AB3800F42848 /* LENSudokuFinishViewController.xib */; };
 		50733EB323D72E8C00A550CB /* LENSettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 50733EB123D72E8C00A550CB /* LENSettingViewController.m */; };
 		50733EB423D72E8C00A550CB /* LENSettingViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 50733EB223D72E8C00A550CB /* LENSettingViewController.xib */; };
 		50733EBB23D744F600A550CB /* LENRecordsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 50733EB923D744F600A550CB /* LENRecordsViewController.m */; };
@@ -72,6 +74,9 @@
 		5037CDA323D8910F00F42848 /* LENRecordsDetailTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LENRecordsDetailTableViewCell.h; sourceTree = "<group>"; };
 		5037CDA423D8910F00F42848 /* LENRecordsDetailTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LENRecordsDetailTableViewCell.m; sourceTree = "<group>"; };
 		5037CDA523D8910F00F42848 /* LENRecordsDetailTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LENRecordsDetailTableViewCell.xib; sourceTree = "<group>"; };
+		5037CDA823D8AB3800F42848 /* LENSudokuFinishViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LENSudokuFinishViewController.h; sourceTree = "<group>"; };
+		5037CDA923D8AB3800F42848 /* LENSudokuFinishViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LENSudokuFinishViewController.m; sourceTree = "<group>"; };
+		5037CDAA23D8AB3800F42848 /* LENSudokuFinishViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LENSudokuFinishViewController.xib; sourceTree = "<group>"; };
 		50733EB023D72E8C00A550CB /* LENSettingViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LENSettingViewController.h; sourceTree = "<group>"; };
 		50733EB123D72E8C00A550CB /* LENSettingViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LENSettingViewController.m; sourceTree = "<group>"; };
 		50733EB223D72E8C00A550CB /* LENSettingViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LENSettingViewController.xib; sourceTree = "<group>"; };
@@ -284,6 +289,9 @@
 				5037CD9B23D8677B00F42848 /* LENRecordsDetailViewController.h */,
 				5037CD9C23D8677B00F42848 /* LENRecordsDetailViewController.m */,
 				5037CD9D23D8677B00F42848 /* LENRecordsDetailViewController.xib */,
+				5037CDA823D8AB3800F42848 /* LENSudokuFinishViewController.h */,
+				5037CDA923D8AB3800F42848 /* LENSudokuFinishViewController.m */,
+				5037CDAA23D8AB3800F42848 /* LENSudokuFinishViewController.xib */,
 			);
 			path = Main;
 			sourceTree = "<group>";
@@ -443,6 +451,7 @@
 				5037CD9F23D8677B00F42848 /* LENRecordsDetailViewController.xib in Resources */,
 				D3EA342423C30A6F00FD9D7B /* LaunchScreen.storyboard in Resources */,
 				D3EA342123C30A6F00FD9D7B /* Assets.xcassets in Resources */,
+				5037CDAC23D8AB3800F42848 /* LENSudokuFinishViewController.xib in Resources */,
 				D3EA341F23C30A6F00FD9D7B /* Main.storyboard in Resources */,
 				D3EA345623C30B4300FD9D7B /* LENMainViewController.xib in Resources */,
 				50733EBC23D744F600A550CB /* LENRecordsViewController.xib in Resources */,
@@ -542,6 +551,7 @@
 				D3EA342723C30A6F00FD9D7B /* main.m in Sources */,
 				D3EA346423C310BD00FD9D7B /* LENSudokuModel.m in Sources */,
 				D3EA346F23C31ECF00FD9D7B /* LENSudokuSingleView.m in Sources */,
+				5037CDAB23D8AB3800F42848 /* LENSudokuFinishViewController.m in Sources */,
 				50766E3123D34CE500DACDA6 /* LENDefaultConfigModel.m in Sources */,
 				5094AF0C23CC88AA001E8569 /* LENSudokuNumberView.m in Sources */,
 				D3EA344F23C30B2400FD9D7B /* LENBaseViewController.m in Sources */,
