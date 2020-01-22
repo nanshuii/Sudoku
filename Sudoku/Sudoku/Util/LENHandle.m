@@ -23,6 +23,7 @@
     NSDate *date = [NSDate new];
     NSInteger startTime = [date timeIntervalSince1970];
     model.startTime = startTime;
+    model.startTimeString = [self YMDHMSStringWithTimestamp:startTime];
     return model;
 }
 
@@ -504,6 +505,7 @@
     NSDate *date = [NSDate new];
     NSInteger endTime = [date timeIntervalSince1970];
     sudoku.endTime = endTime;
+    sudoku.endTimeString = [self YMDHMSStringWithTimestamp:endTime];
     sudoku.status = status;
     sudoku.singles = [NSMutableArray array];
     NSDictionary *dict = [sudoku mj_keyValues];
@@ -612,6 +614,76 @@
     return section * 9 + row;
 }
 
+# pragma mark -- 难度string
++ (NSString *)typeStringWithType:(LENSudokuType)type{
+    NSString *string = @"难度一";
+    switch (type) {
+        case LENSudokuTypeOne:
+            string = @"难度一";
+            break;
+        case LENSudokuTypeTwo:
+            string = @"难度二";
+            break;
+        case LENSudokuTypeThree:
+            string = @"难度三";
+            break;
+        case LENSudokuTypeFour:
+            string = @"难度四";
+            break;
+        case LENSudokuTypeFive:
+            string = @"难度五";
+            break;
+        case LENSudokuTypeSix:
+            string = @"难度六";
+            break;
+        case LENSudokuTypeSeven:
+            string = @"难度七";
+            break;
+        case LENSudokuTypeEight:
+            string = @"难度八";
+            break;
+        case LENSudokuTypeNine:
+            string = @"难度九";
+            break;
+        case LENSudokuTypeTen:
+            string = @"难度十";
+            break;
+        default:
+            break;
+    }
+    return string;
+}
+
+# pragma mark -- timestamp to YMD
++ (NSString *)YMDHMSStringWithTimestamp:(NSInteger)timestamp{
+    NSDate *date = [NSDate dateWithTimeIntervalSince1970:timestamp];
+    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+    [formatter setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
+    NSTimeZone *zone = [NSTimeZone systemTimeZone];
+    formatter.timeZone = [NSTimeZone timeZoneWithName:zone.name];
+    NSString *string = [formatter stringFromDate: date];
+    return string;
+}
+
+# pragma mark -- yyyy-MM-dd HH:mm:ss to [yyyy-MM-dd, HH:mm:ss, yyyy-MM, d]
++ (NSMutableArray *)dateArrayWithDateString:(NSString *)dateString{
+    NSMutableArray *dates = [NSMutableArray array];
+    NSArray *array = [dateString componentsSeparatedByString:@" "];
+    NSString *ymd = array[0];
+    NSString *hms = array[1];
+    // yyyy-MM-dd
+    [dates addObject:ymd];
+    // HH:mm:ss
+    [dates addObject:hms];
+    // yyyy-MM
+    NSArray *array1 = [ymd componentsSeparatedByString:@"-"];
+    NSString *ym = [NSString stringWithFormat:@"%@-%@", array1[0], array1[1]];
+    [dates addObject:ym];
+    // d
+    NSString *d = array1[2];
+    [dates addObject:d];
+    return dates;
+}
 
 
 @end

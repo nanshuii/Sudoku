@@ -30,6 +30,15 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic, assign) NSInteger endTime;
 
+@property (nonatomic, copy) NSString *startTimeString;
+
+@property (nonatomic, copy) NSString *endTimeString;
+
+// 临时调用的数据
+@property (nonatomic, copy) NSString *endTimeString_hms;
+
+@property (nonatomic, copy) NSString *endTimeString_d;
+
 
 @end
 

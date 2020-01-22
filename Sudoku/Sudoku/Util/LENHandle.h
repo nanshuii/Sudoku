@@ -57,6 +57,18 @@ NS_ASSUME_NONNULL_BEGIN
 /// @param row row description
 + (NSInteger)indexWithSection:(NSInteger)section row:(NSInteger)row;
 
+/// 难度string
+/// @param type type description
++ (NSString *)typeStringWithType:(LENSudokuType)type;
+
+/// timestamp to YMDHS
+/// @param timestamp timestamp description
++ (NSString *)YMDHMSStringWithTimestamp:(NSInteger)timestamp;
+
+/// yyyy-MM-dd HH:mm:ss to [yyyy-MM-dd, HH:mm:ss, yyyy-MM, d]
+/// @param dateString dateString description
++ (NSMutableArray *)dateArrayWithDateString:(NSString *)dateString;
+
 @end
 
 NS_ASSUME_NONNULL_END
