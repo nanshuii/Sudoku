@@ -152,6 +152,7 @@
     SSLog(@"self.status = %li", self.status);
     self.currentSingle = single;
     // 格子里什么都没有填入的状态
+
     if (single.status == LENSudokuSingleStatusNone) {
         if (self.status == LENSudokuViewStatusNone) {
             // 进入到准备填入数字或者填入标记的状态
@@ -165,6 +166,7 @@
             // 准备填入数字或者填入标记的状态 点击相同格子或者不同格子
             NSInteger index_t = [self.highLights[0] integerValue]; // 上一次高亮的格子
             NSInteger currenIndex = [LENHandle indexWithSection:single.section row:single.row]; // 这次点击的格子
+            
             if (index_t == currenIndex) {
                 // 相同格子不做处理
                 return;

@@ -98,6 +98,7 @@
     NSMutableArray *numbers = [LENHandle sodukuFillInNumberAllWithNumbers:self.model.numbers];
     self.numbersView = [[LENSudokuNumberView alloc] initWithFrame:CGRectMake(0, 0, kFullScreenWidth, 44) style:[LENHandle defaultConfigureRead].style normalHiddens:numbers];
     [self.numbersView setTapNumberBlock:^(int number, BOOL isEditing) {
+        SSLog(@"number = %i isEditing = %i", number, isEditing);
         [weakSelf tapNumber:number isEditing:isEditing];
     }];
     [self.numberView addSubview:self.numbersView];
@@ -114,7 +115,7 @@
 
 # pragma mark -- 点击数字
 - (void)tapNumber:(int)number isEditing:(BOOL)isEditing{
-    if (self.status == LENSudokuStatusNone) {
+    if (self.status == LENSudokuStatusNone || self.status == LENSudokuStatusMark) {
         [self.sudokuView intoNumber:number mark:self.numbersView.isEditing callback:^(BOOL error, NSMutableArray * _Nullable numbers, BOOL mark, int markNumber, BOOL markAdd) {
             if (mark) {
                 [self.numbersView markAdd:markAdd number:markNumber];
@@ -329,6 +330,7 @@
 
 # pragma mark -- status change
 - (void)statusChangeWithStatus:(LENSudokuStatus)status{
+    
     if (self.status == LENSudokuStatusNone) {
         if (status == LENSudokuStatusSuppose) {
             // none -> suppose

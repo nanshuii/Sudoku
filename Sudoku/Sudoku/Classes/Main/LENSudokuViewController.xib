@@ -246,7 +246,7 @@
                 <constraint firstItem="YWI-fs-5Vd" firstAttribute="top" secondItem="6Ez-SY-x1c" secondAttribute="bottom" id="q37-1b-6oZ"/>
                 <constraint firstItem="9sT-cU-O3K" firstAttribute="top" secondItem="ncU-mT-Akm" secondAttribute="bottom" id="vWg-RD-YSE"/>
             </constraints>
-            <point key="canvasLocation" x="137.68115942028987" y="151.33928571428569"/>
+            <point key="canvasLocation" x="137.68115942028987" y="150.66964285714286"/>
         </view>
         <tapGestureRecognizer id="Gph-43-DUg">
             <connections>

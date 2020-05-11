@@ -77,6 +77,7 @@
 		5037CDA823D8AB3800F42848 /* LENSudokuFinishViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LENSudokuFinishViewController.h; sourceTree = "<group>"; };
 		5037CDA923D8AB3800F42848 /* LENSudokuFinishViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LENSudokuFinishViewController.m; sourceTree = "<group>"; };
 		5037CDAA23D8AB3800F42848 /* LENSudokuFinishViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LENSudokuFinishViewController.xib; sourceTree = "<group>"; };
+		5037CDAD23D8C5A900F42848 /* iAd.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = iAd.framework; path = System/Library/Frameworks/iAd.framework; sourceTree = SDKROOT; };
 		50733EB023D72E8C00A550CB /* LENSettingViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LENSettingViewController.h; sourceTree = "<group>"; };
 		50733EB123D72E8C00A550CB /* LENSettingViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LENSettingViewController.m; sourceTree = "<group>"; };
 		50733EB223D72E8C00A550CB /* LENSettingViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LENSettingViewController.xib; sourceTree = "<group>"; };
@@ -178,6 +179,7 @@
 		43BF7FFF18896F55EAD445BD /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				5037CDAD23D8C5A900F42848 /* iAd.framework */,
 				58B0A736D4304DA4A575D681 /* libPods-Sudoku.a */,
 			);
 			name = Frameworks;
