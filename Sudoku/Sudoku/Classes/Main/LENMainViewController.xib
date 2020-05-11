@@ -60,25 +60,43 @@
                         <action selector="toRecord:" destination="-1" eventType="touchUpInside" id="xka-BH-TU3"/>
                     </connections>
                 </button>
+                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="sudoku" translatesAutoresizingMaskIntoConstraints="NO" id="mrm-zP-bTQ">
+                    <rect key="frame" x="88.5" y="183" width="237" height="228"/>
+                    <constraints>
+                        <constraint firstAttribute="width" secondItem="mrm-zP-bTQ" secondAttribute="height" multiplier="79:76" id="IOV-l9-WIO"/>
+                    </constraints>
+                </imageView>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Sudoku" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rx7-20-F5m">
+                    <rect key="frame" x="123" y="94" width="168" height="60"/>
+                    <fontDescription key="fontDescription" type="system" weight="medium" pointSize="50"/>
+                    <color key="textColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
                 <constraint firstItem="wqh-T4-ADT" firstAttribute="centerY" secondItem="9oJ-CY-Xvf" secondAttribute="centerY" id="0zc-SR-jUt"/>
+                <constraint firstItem="mrm-zP-bTQ" firstAttribute="width" secondItem="i5M-Pr-FkT" secondAttribute="height" multiplier="237:896" id="8P0-Ig-nXJ"/>
                 <constraint firstItem="uMZ-jt-6Re" firstAttribute="trailing" secondItem="y6z-kg-Rak" secondAttribute="trailing" id="8wR-TQ-UPg"/>
                 <constraint firstItem="uMZ-jt-6Re" firstAttribute="leading" secondItem="y6z-kg-Rak" secondAttribute="leading" id="9Tq-Jh-Hnp"/>
                 <constraint firstItem="9oJ-CY-Xvf" firstAttribute="leading" secondItem="wqh-T4-ADT" secondAttribute="trailing" constant="20" id="BkF-a1-IY4"/>
                 <constraint firstItem="y6z-kg-Rak" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="38" id="DXw-6P-2AE"/>
                 <constraint firstAttribute="bottom" secondItem="y6z-kg-Rak" secondAttribute="bottom" constant="40" id="Jgc-ad-FAV"/>
+                <constraint firstItem="rx7-20-F5m" firstAttribute="top" secondItem="wqh-T4-ADT" secondAttribute="bottom" constant="20" id="Ope-65-WT1"/>
+                <constraint firstItem="mrm-zP-bTQ" firstAttribute="top" secondItem="rx7-20-F5m" secondAttribute="bottom" constant="29" id="VCo-QT-gJ0"/>
+                <constraint firstItem="mrm-zP-bTQ" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="cLx-xO-gcl"/>
                 <constraint firstAttribute="trailing" secondItem="9oJ-CY-Xvf" secondAttribute="trailing" constant="20" id="f8E-C6-Yxt"/>
                 <constraint firstAttribute="trailing" secondItem="y6z-kg-Rak" secondAttribute="trailing" constant="38" id="iwB-Bn-hi5"/>
                 <constraint firstItem="9oJ-CY-Xvf" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="44" id="kI1-nZ-iPv"/>
+                <constraint firstItem="rx7-20-F5m" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="rVy-Tk-soe"/>
                 <constraint firstItem="y6z-kg-Rak" firstAttribute="top" secondItem="uMZ-jt-6Re" secondAttribute="bottom" constant="20" id="vUF-r8-SdH"/>
             </constraints>
-            <point key="canvasLocation" x="139" y="154"/>
+            <point key="canvasLocation" x="137.68115942028987" y="153.34821428571428"/>
         </view>
     </objects>
     <resources>
         <image name="record" width="30" height="30"/>
         <image name="setting" width="30" height="30"/>
+        <image name="sudoku" width="237.5" height="228"/>
     </resources>
 </document>
