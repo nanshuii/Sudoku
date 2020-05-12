@@ -8,7 +8,6 @@
 
 #import "AppDelegate.h"
 #import "LENMainViewController.h"
-#import <iAd/iAd.h>
 
 @interface AppDelegate ()
 
@@ -19,14 +18,6 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
-    if ([[ADClient sharedClient] respondsToSelector:@selector(requestAttributionDetailsWithBlock:)]) {
-        SSLog(@"iOS 10 call exists");
-        [[ADClient sharedClient] requestAttributionDetailsWithBlock:^(NSDictionary *attributionDetails, NSError *error) {
-            // Look inside of the returned dictionary for all attribution details
-            SSLog(@"Attribution Dictionary: %@", attributionDetails);
-            SSLog(@"error = %@", error.description);
-        }];
-    }
     [self setRootViewController];
     return YES;
 }
