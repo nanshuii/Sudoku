@@ -728,7 +728,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 2;
+				CURRENT_PROJECT_VERSION = 4;
 				DEVELOPMENT_TEAM = FBPYVNBPCC;
 				GCC_PREFIX_HEADER = /Users/ledon/Documents/programming/Sudoku_ios/Sudoku/Sudoku/Common/PrefixHeader.pch;
 				INFOPLIST_FILE = Sudoku/Info.plist;
@@ -740,7 +740,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.ledon.Sudoku;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -751,7 +751,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 2;
+				CURRENT_PROJECT_VERSION = 4;
 				DEVELOPMENT_TEAM = FBPYVNBPCC;
 				GCC_PREFIX_HEADER = /Users/ledon/Documents/programming/Sudoku_ios/Sudoku/Sudoku/Common/PrefixHeader.pch;
 				INFOPLIST_FILE = Sudoku/Info.plist;
@@ -763,7 +763,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.ledon.Sudoku;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};
